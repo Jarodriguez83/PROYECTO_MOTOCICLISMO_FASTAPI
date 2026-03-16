@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GP COLOMBIA | REGISTRO</title>
+    <link rel="shortcut icon" href="https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/LOGO_GP.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL0xPR09fR1AuanBnIiwiaWF0IjoxNzczNDMwNjcyLCJleHAiOjE3NzYwMjI2NzJ9.rGW5gWAV-TiyZc_YoVGOFQQL4-XKS8xqxPCz2iA2ceM" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="left-section">
+        <!-- IMAGEN PRINCIPAL -->
+        <img 
+        src="https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/PUBLI_GP.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL1BVQkxJX0dQLmpwZWciLCJpYXQiOjE3NzM0Mjc5OTYsImV4cCI6MTc3NjAxOTk5Nn0.YyLvprGXi-XB-qva1hfchtiLrLrP7Ao2o5csCBvOL7M"
+        alt="IMAGEN GP COLOMBIA"
+        class="main-image">
+
+    </div>
+    <!-- SECCIÓN DERECHA -->
+    <div class="right-section">
+        <h1 class="title">GP COLOMBIA</h1>
+        <p class="description">
+            Campeonato nacional de motociclismo donde los mejores pilotos 
+            compiten por la gloria en las pistas de Colombia.
+        </p>
+        <form action="/register" method="POST" class="form">
+            <div class="form-group">
+                <label>NOMBRE COMPLETO</label>
+                <input type="text" name="full_name" required>
+            </div>
+
+            <div class="form-group">
+                <label>TIPO DE DOCUMENTO</label>
+                <select name="document_type" required>
+                    <option value="">SELECCIONE UNA OPCIÓN:</option>
+                    <option value="cc">C.C (CÉDULA DE CIUDADANÍA)</option>
+                    <option value="ce">C.E (CÉDULA DE EXTRANJERÍA)</option>
+                    <option value="passport">PASAPORTE</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>NÚMERO DE DOCUMENTO</label>
+                <input type="text" name="document_number" required>
+            </div>
+
+            <div class="form-group">
+                <label>FECHA DE NACIMIENTO</label>
+                <input type="date" name="birth_date" required>
+            </div>
+
+            <div class="form-group">
+                <label>CIUDAD DONDE VIVE</label>
+                <input type="text" name="city" required>
+            </div>
+
+            <div class="form-group">
+                <label>TELÉFONO</label>
+                <input type="text" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label>CORREO ELECTRÓNICO</label>
+                <input type="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label>NOMBRE DEL EQUIPO O LA ESCUDERÍA</label>
+                <input type="text" name="team">
+            </div>
+
+            <div class="form-group">
+                <label>¿TIENE EXPERIENCIA EN CARRERAS?</label>
+                <select name="experience" required>
+                    <option value="">SELECCIONE UNA OPCIÓN: </option>
+                    <option value="si">SÍ </option>
+                    <option value="no">NO</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>MARCA DE LA MOTO</label>
+                <input type="text" name="motorcycle_brand" required>
+            </div>
+
+            <div class="form-group">
+                <label>MODELO DE LA MOTO</label>
+                <input type="text" name="motorcycle_model" required>
+            </div>
+
+            <div class="form-group">
+                <label>CILINDRAJE (CC) DE LA MOTOCICLETA</label>
+                <input type="number" name="engine_cc" required>
+            </div>
+
+            <div class="form-group">
+                <label>NÚMERO DEL COMPETIDOR</label>
+                <input type="number" name="competitor_number" required>
+            </div>
+
+            <div class="terms-box">
+                <h3>TÉRMINOS Y CONDICIONES</h3>
+                <p>
+                    El participante declara que la información suministrada es verídica,
+                    acepta las normas del campeonato GP Colombia y asume la responsabilidad
+                    de cumplir las reglas deportivas y de seguridad establecidas por los organizadores.
+                </p>
+
+                <div class="terms-check">
+                    <input type="checkbox" name="terms" required>
+                    <label>ACEPTO LOS TÉRMINOS Y CONDICIONES</label>
+                </div>
+
+            </div>
+
+            <button type="submit" class="submit-btn">
+                REGISTRARME
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

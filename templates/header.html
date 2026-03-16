@@ -1,0 +1,31 @@
+<!-- HEADER DE GP COLOMBIA - INTEGRACIÓN CON JINJA2-->
+ <head>
+    <link rel="stylesheet" href="/static/css/header_styles.css">
+ </head>
+<header class="encabezado-principal">
+    <div class="contenedor-encabezado">
+        <div class="logo-proyecto">
+            <span class="logo-principal">GP</span>
+            <span class="logo-secundario">COLOMBIA</span>
+        </div>
+        <!-- BOTON HAMBURGUESA -->
+        <div class="boton-menu-movil" id="botonMenu">
+            <span class="linea-menu"></span>
+            <span class="linea-menu"></span>
+            <span class="linea-menu"></span>
+        </div>
+        <!-- MENU -->
+        <nav class="menu-navegacion" id="menuPrincipal">
+            <a href="/" class="enlace-menu activo">HOME</a>
+            <a href="/mecanica" class="enlace-menu">MECÁNICA</a>
+            <a href="/customizacion" class="enlace-menu">CUSTOMIZACIÓN</a>
+            <a href="/seguros" class="enlace-menu">SEGUROS</a>
+            <a href="/carreras" class="enlace-menu">CARRERAS</a>
+
+        </nav>
+        <script src="{{ url_for('static', path='js/header.js') }}"></script>
+    </div>
+
+</header>
+
+<!--         <script src="{{ url_for('static', path='js/header.js') }}"></script> -->
