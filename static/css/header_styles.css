@@ -1,0 +1,134 @@
+/* CONFIGURACION GENERAL HEADER */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html, body{
+width:100%;
+overflow-x:hidden;
+min-height: 100vh;
+margin: 0;
+}
+.encabezado-principal{
+    width:100%;
+    background:#0b0b0b;
+    border-bottom:3px solid red;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+/* CONTENEDOR */
+.contenedor-encabezado{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 40px;
+}
+
+/* LOGO */
+.logo-proyecto{
+    display:flex;
+    flex-direction:column;
+    line-height:1;
+    cursor:pointer;
+    justify-content: center;
+    padding-left: 10%;
+}
+
+.logo-principal{
+    font-size:50px;
+    font-weight:900;
+    color:white;
+    letter-spacing:3px;
+}
+
+.logo-principal:hover{
+    -webkit-text-stroke: 1px red;
+}
+
+.logo-secundario{
+    font-size:20px;
+    color:red;
+    letter-spacing:4px;
+    font-weight:700;
+}
+
+.logo-secundario:hover{
+    color: white;
+}
+
+/* MENU */
+.menu-navegacion{
+    display:flex;
+    gap:14px;
+}
+
+.enlace-menu{
+    text-decoration:none;
+    color:white;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:2px;
+    padding:10px 16px;
+    border:2px solid transparent;
+    transition:0.3s;
+}
+/* HOVER */
+.enlace-menu:hover{
+    background:red;
+    border:2px solid red;
+    border-radius: 2rem;
+}
+
+.activo{
+    background:red;
+    border-radius: 2rem;
+}
+
+/* BOTON HAMBURGUESA */
+.boton-menu-movil{
+    display:none;
+    flex-direction:column;
+    cursor:pointer;
+}
+
+.linea-menu{
+    width:28px;
+    height:3px;
+    background:white;
+    margin:4px 0;
+    transition:0.3s;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+.menu-navegacion{
+    position:absolute;
+    top:75px;
+    left:0;
+    width:100%;
+    background:#0b0b0b;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+    padding:20px 0;
+    display:none;
+}
+
+.menu-navegacion.activo{
+    display:flex;
+}
+
+.boton-menu-movil{
+    display:flex;
+}
+.logo-proyecto{
+    display:flex;
+    padding-left: 10%;
+    flex-direction:column;
+}
+}

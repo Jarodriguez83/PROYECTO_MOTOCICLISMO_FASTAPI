@@ -1,0 +1,454 @@
+/* SECCION PRESENTACION */
+.seccion-presentacion{
+    width:100%;
+    background:#0a0a0a;
+    padding:50px 40px;
+}
+/* CONTENEDOR PRINCIPAL */
+.contenedor-presentacion{
+    max-width:1300px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+}
+/* IMAGEN */
+.contenedor-imagen{
+    position:relative;
+    overflow:hidden;
+    border-radius:10px;
+}
+.imagen-presentacion{
+    width:100%;
+    height:auto;
+    display:block;
+    transition:transform 0.5s;
+}
+/* EFECTO HOVER IMAGEN */
+.contenedor-imagen:hover .imagen-presentacion{
+    transform:scale(1.05);
+}
+/* TEXTO */
+.contenedor-texto{
+    color:white;
+}
+/* TITULO */
+.titulo-presentacion{
+    font-size:36px;
+    letter-spacing:3px;
+    margin-bottom:10px;
+}
+/* LINEA ROJA */
+.linea-roja{
+    width:70%;
+    height:4px;
+    background:red;
+    margin-bottom:25px;
+}
+/* TEXTO */
+.texto-presentacion{
+    font-size:16px;
+    line-height:1.7;
+    color:#cccccc;
+    margin-bottom:15px;
+    text-align: justify;
+}
+/* RESPONSIVE */
+@media(max-width:900px){
+.contenedor-presentacion{
+grid-template-columns:1fr;
+gap:40px;
+}
+.titulo-presentacion{
+font-size:28px;
+text-align:center;
+}
+.contenedor-texto{
+text-align:center;
+}
+.linea-roja{
+margin:15px auto;
+}
+}
+
+
+/* SECCION CONSEJOS MOTOCICLISMO */
+.seccion-consejos-motociclismo{
+    width:100%;
+    padding:50px 20px;
+    background:linear-gradient(
+         white,
+        black
+    );
+}
+/* CONTENEDOR */
+.contenedor-cartas{
+    max-width:1300px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:30px;
+}
+/* CARTA */
+.carta-consejo{
+    background:#111;
+    border-radius:12px;
+    overflow:hidden;
+    transition:transform 0.3s, box-shadow 0.3s;
+    border:1px solid rgba(255,0,0,0.3);
+}
+/* EFECTO HOVER */
+.carta-consejo:hover{
+    transform:translateY(-10px);
+    box-shadow:0 15px 35px rgba(255,0,0,0.5);
+}
+/* IMAGEN */
+.imagen-carta{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    display:block;
+}
+/* CONTENIDO */
+.contenido-carta{
+    padding:20px;
+    
+}
+/* TEXTO */
+.texto-carta{
+    color:white;
+    font-size:10px;
+    line-height:1.6;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    text-align: justify;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+.contenedor-cartas{
+    grid-template-columns:repeat(2,1fr);
+}
+}
+@media(max-width:600px){
+.contenedor-cartas{
+    grid-template-columns:1fr;
+}
+}
+
+
+
+/* SECCION PILOTO DESTACADO */
+.seccion-piloto-destacado{
+    width:100%;
+    padding:50px 40px;
+    background:#000000;
+}
+/* CONTENEDOR PRINCIPAL */
+.contenedor-piloto{
+    max-width:1300px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+}
+
+/* IMAGEN */
+.contenedor-imagen-piloto{
+    position:relative;
+    overflow:hidden;
+    border-radius:12px;
+    max-height: 400px;
+}
+
+.imagen-piloto{
+    width:100%;
+    height:auto;
+    display:block;
+    transition:transform 0.5s;
+}
+/* EFECTO HOVER */
+.contenedor-imagen-piloto:hover .imagen-piloto{
+    transform:scale(1.05);
+}
+
+/* TEXTO */
+.contenedor-info-piloto{
+    color:white;
+}
+
+/* TITULO */
+.titulo-piloto{
+    font-size:34px;
+    letter-spacing:3px;
+    margin-bottom:10px;
+}
+
+/* LINEA ROJA */
+.linea-roja-piloto{
+    width: 90%;
+    height:4px;
+    background:red;
+    margin-bottom:20px;
+}
+
+/* NOMBRE */
+.nombre-piloto{
+    font-size:26px;
+    color:#ff3b3b;
+    margin-bottom:20px;
+}
+/* BIOGRAFIA */
+.biografia-piloto{
+    font-size:16px;
+    line-height:1.7;
+    color:#cfcfcf;
+    margin-bottom:25px;
+    text-align: justify;
+}
+
+/* MENSAJE */
+.mensaje-piloto{
+    font-style:italic;
+    font-size:17px;
+    border-left:4px solid red;
+    padding-left:20px;
+    color:white;
+    text-align: center;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+.contenedor-piloto{
+
+    grid-template-columns:1fr;
+    gap:40px;
+}
+.contenedor-info-piloto{
+    text-align:center;
+}
+.linea-roja-piloto{
+    margin:15px auto;
+}
+
+.mensaje-piloto{
+    border-left:none;
+    border-top:3px solid red;
+    padding-top:15px;
+    padding-left:0;
+}
+}
+
+
+/* SECCION AUTODROMO */
+.seccion-autodromo{
+    width:100%;
+    padding:50px 40px;
+    background:#000000;
+}
+
+/* CONTENEDOR */
+.contenedor-autodromo{
+    max-width:1300px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+}
+
+/* IMAGEN */
+
+.contenedor-imagen-autodromo{
+    overflow:hidden;
+    border-radius:12px;
+    position:relative;
+}
+
+.imagen-autodromo{
+    width:100%;
+    display:block;
+    transition:transform 0.5s;
+}
+
+.contenedor-imagen-autodromo:hover .imagen-autodromo{
+    transform:scale(1.05);
+}
+
+/* TEXTO */
+.contenedor-info-autodromo{
+    color:white;
+}
+
+.titulo-autodromo{
+    font-size:34px;
+    letter-spacing:3px;
+    margin-bottom:10px;
+}
+
+.linea-roja-autodromo{
+    width:70%;
+    height:4px;
+    background:red;
+    margin-bottom:25px;
+}
+
+.texto-autodromo{
+    font-size:16px;
+    line-height:1.7;
+    color:#cfcfcf;
+    margin-bottom:20px;
+    text-align: justify;
+}
+
+/* DATOS */
+.datos-autodromo{
+    margin-top:20px;
+}
+
+.dato-autodromo{
+    margin-bottom:10px;
+    font-size:15px;
+}
+
+.dato-autodromo span{
+    color:#ff3b3b;
+    font-weight:bold;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+.contenedor-autodromo{
+    grid-template-columns:1fr;
+    gap:40px;
+}
+
+.contenedor-info-autodromo{
+    text-align:center;
+}
+
+.linea-roja-autodromo{
+    margin:15px auto;
+}
+}
+
+
+/* SECCION REGISTRO */
+.seccion-registro{
+    width:100%;
+    padding:50px 20px;
+    background:#000000;
+}
+
+.contenedor-registro{
+    max-width:1100px;
+    margin:auto;
+    background:#111;
+    padding:50px;
+    border-radius:10px;
+    border:1px solid rgba(255,0,0,0.3);
+}
+
+/* TITULO */
+.titulo-registro{
+    text-align:center;
+    font-size:32px;
+    letter-spacing:3px;
+    color:white;
+}
+
+.linea-roja-registro{
+    width:80px;
+    height:4px;
+    background:red;
+    margin:15px auto 40px auto;
+}
+
+/* GRID DEL FORMULARIO */
+.grid-formulario{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+/* GRUPOS */
+.grupo-formulario{
+    display:flex;
+    flex-direction:column;
+}
+
+.grupo-formulario label{
+    color:white;
+    margin-bottom:6px;
+    font-size:14px;
+}
+
+.grupo-formulario input,
+.grupo-formulario select{
+    padding:10px;
+    border:none;
+    border-radius:4px;
+    background:#1b1b1b;
+    color:white;
+}
+
+/* EFECTO */
+.grupo-formulario input:focus,
+.grupo-formulario select:focus{
+    outline:none;
+    border:1px solid red;
+}
+
+/* TERMINOS */
+.contenedor-terminos{
+    margin-top:30px;
+    color:#ccc;
+}
+
+.contenedor-terminos h3{
+    color:white;
+    margin-bottom:10px;
+}
+
+.check-terminos{
+    margin-top:10px;
+    display:flex;
+    gap:10px;
+    align-items:center;
+    justify-content: center;
+}
+
+/* BOTON */
+.boton-registro{
+    margin-top:30px;
+    width:100%;
+    padding:14px;
+    background:red;
+    border:none;
+    color:white;
+    font-weight:bold;
+    letter-spacing:2px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.boton-registro:hover{
+    background:#ff2a2a;
+    transform:translateY(-2px);
+}
+
+/* RESPONSIVE */
+@media(max-width:800px){
+.grid-formulario{
+    grid-template-columns:1fr;
+}
+
+.contenedor-registro{
+    padding:30px;
+}  
+}

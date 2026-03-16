@@ -1,0 +1,153 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html, body{
+width:100%;
+overflow-x:hidden;
+}
+.pie-pagina-racing{
+    width:100%;
+    background:#0a0a0a;
+    padding:70px 30px;
+    position:relative;
+    overflow:hidden;
+}
+/* LINEAS RACING DECORATIVAS */
+.pie-pagina-racing::before{
+    content:"";
+    position:absolute;
+    width:120%;
+    height:3px;
+    background:red;
+    top:0;
+    left:-10%;
+}
+.pie-pagina-racing::after{
+    content:"";
+    position:absolute;
+    width:200%;
+    height:1px;
+    background:rgba(255,0,0,0.3);
+    bottom:0;
+    left:-50%;
+    transform:rotate(-2deg);
+}
+.contenedor-footer{
+    max-width:1300px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:50px;
+    align-items:center;
+}
+
+.titulo-footer{
+    color:white;
+    font-size:18px;
+    margin-bottom:20px;
+    letter-spacing:3px;
+    position:relative;
+    font-family: "Iosevka Charon Mono", monospace;
+}
+.titulo-footer::after{
+    content:"";
+    width:70%;
+    height:3px;
+    background:red;
+    justify-content: center;
+    display:block;
+    margin-top:6px;
+}
+
+.lista-footer{
+    list-style:none;
+}
+
+/* ENLACES */
+.enlace-footer{
+    text-decoration:none;    
+    color:white;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:10px 0;
+    font-size:14px;
+    transition:0.3s;
+}
+/* EFECTO HOVER */
+.enlace-footer:hover{
+    color:red;
+    transform:translateX(8px);
+}
+
+.centro-footer{
+    text-align:center;
+}
+/* LOGO */
+.logo-footer{
+    font-size:55px;
+    font-weight:900;
+    color:white;
+    letter-spacing:6px;
+    margin-bottom:10px;
+    text-shadow:0 0 20px red;
+}
+
+/* TEXTO */
+.texto-footer{
+    color:#ccc;
+    font-size:14px;
+    margin-bottom:25px;
+}
+
+/* REDES SOCIALES */
+.redes-sociales{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+}
+/* ICONOS */
+.icono-red{
+    width:50px;
+    height:50px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    font-size:20px;
+    color:white;
+    border:2px solid red;
+    transition:0.3s;
+}
+
+/* EFECTO HOVER */
+.icono-red:hover{
+    transform:scale(1.2);
+    background:red;
+    box-shadow:0 0 15px red;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .contenedor-footer{
+    grid-template-columns:1fr;
+    text-align:center;
+}
+
+.lista-footer{
+    padding:0;
+}
+
+.enlace-footer{
+    justify-content:center;
+}
+}
+
+.columna-footer{
+    justify-content: center;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Iosevka+Charon+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Roboto+Flex:opsz,wght,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,100..1000,96,468,79,-203,738,514,712&display=swap');
