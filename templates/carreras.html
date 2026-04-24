@@ -1,0 +1,329 @@
+<!-- prettier-ignore -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/LOGO_GP.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL0xPR09fR1AuanBnIiwiaWF0IjoxNzczNDMwNjcyLCJleHAiOjE3NzYwMjI2NzJ9.rGW5gWAV-TiyZc_YoVGOFQQL4-XKS8xqxPCz2iA2ceM" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/carreras_styles.css">
+    <title>GP COLOMBIA | CARRERAS - ADMINISTRADOR</title>
+</head>
+{% include 'header.html' %}
+<body>
+
+    <!-- HERO SECTION -->
+    <section class="hero-carreras">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge">PANEL DE CONTROL</div>
+            <h1 class="hero-titulo">GESTIÓN DE <span class="texto-rojo">COMPETIDORES</span></h1>
+            <div class="linea-hero"></div>
+            <p class="hero-subtitulo">Administración de pilotos registrados en el campeonato GP Colombia</p>
+        </div>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <span class="stat-numero" id="totalCompetidores">{{ competidores | length }}</span>
+                <span class="stat-label">PILOTOS REGISTRADOS</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-numero" id="totalMarcas">{{ marcas_unicas }}</span>
+                <span class="stat-label">MARCAS EN PISTA</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-numero" id="totalExperimentados">{{ con_experiencia }}</span>
+                <span class="stat-label">CON EXPERIENCIA</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- PANEL DE CONTROL -->
+    <section class="seccion-panel">
+        <div class="contenedor-panel">
+
+            <!-- BARRA DE HERRAMIENTAS -->
+            <div class="barra-herramientas">
+                <!-- BÚSQUEDA -->
+                <div class="bloque-busqueda">
+                    <div class="input-busqueda-wrapper">
+                        <i class="fa-solid fa-magnifying-glass icono-busqueda"></i>
+                        <input 
+                            type="text" 
+                            id="inputBusqueda" 
+                            class="input-busqueda" 
+                            placeholder="BUSCAR POR ID, TELÉFONO O Nº COMPETIDOR..."
+                            oninput="filtrarCompetidores()"
+                        >
+                        <button class="btn-limpiar" onclick="limpiarBusqueda()" title="Limpiar búsqueda">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- FILTROS -->
+                <div class="bloque-filtros">
+                    <div class="filtro-grupo">
+                        <label class="filtro-label"><i class="fa-solid fa-motorcycle"></i> MARCA</label>
+                        <select id="filtroCilindraje" class="select-filtro" onchange="filtrarCompetidores()">
+                            <option value="">TODAS LAS MARCAS</option>
+                            {% for marca in marcas_lista %}
+                            <option value="{{ marca }}">{{ marca }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="filtro-grupo">
+                        <label class="filtro-label"><i class="fa-solid fa-gauge-high"></i> CILINDRAJE</label>
+                        <select id="filtroCC" class="select-filtro" onchange="filtrarCompetidores()">
+                            <option value="">TODOS LOS CC</option>
+                            <option value="0-150">HASTA 150 CC</option>
+                            <option value="151-300">151 - 300 CC</option>
+                            <option value="301-600">301 - 600 CC</option>
+                            <option value="601-1000">601 - 1000 CC</option>
+                            <option value="1001-9999">MÁS DE 1000 CC</option>
+                        </select>
+                    </div>
+                    <div class="filtro-grupo">
+                        <label class="filtro-label"><i class="fa-solid fa-id-card"></i> DOCUMENTO</label>
+                        <select id="filtroDocumento" class="select-filtro" onchange="filtrarCompetidores()">
+                            <option value="">TODOS LOS TIPOS</option>
+                            <option value="cc">C.C</option>
+                            <option value="ce">C.E</option>
+                            <option value="passport">PASAPORTE</option>
+                        </select>
+                    </div>
+                    <div class="filtro-grupo">
+                        <label class="filtro-label"><i class="fa-solid fa-trophy"></i> EXPERIENCIA</label>
+                        <select id="filtroExperiencia" class="select-filtro" onchange="filtrarCompetidores()">
+                            <option value="">TODOS</option>
+                            <option value="si">CON EXPERIENCIA</option>
+                            <option value="no">SIN EXPERIENCIA</option>
+                        </select>
+                    </div>
+                    <button class="btn-reset-filtros" onclick="resetearFiltros()">
+                        <i class="fa-solid fa-rotate-left"></i> RESET
+                    </button>
+                </div>
+            </div>
+
+            <!-- CONTADOR DE RESULTADOS -->
+            <div class="barra-resultados">
+                <span class="resultado-texto">
+                    Mostrando <span id="contadorVisible" class="resultado-numero">{{ competidores | length }}</span> de 
+                    <span class="resultado-numero">{{ competidores | length }}</span> pilotos
+                </span>
+                <div class="ordenar-grupo">
+                    <span class="ordenar-label">ORDENAR POR:</span>
+                    <button class="btn-orden" onclick="ordenarPor('id')" id="orden-id">ID <i class="fa-solid fa-sort"></i></button>
+                    <button class="btn-orden" onclick="ordenarPor('nombre')" id="orden-nombre">NOMBRE <i class="fa-solid fa-sort"></i></button>
+                    <button class="btn-orden" onclick="ordenarPor('cilindraje')" id="orden-cilindraje">CC <i class="fa-solid fa-sort"></i></button>
+                    <button class="btn-orden" onclick="ordenarPor('numero')" id="orden-numero">Nº PILOTO <i class="fa-solid fa-sort"></i></button>
+                </div>
+            </div>
+
+            <!-- TABLA DE COMPETIDORES -->
+            <div class="contenedor-tabla">
+                {% if competidores %}
+                <table class="tabla-competidores" id="tablaCompetidores">
+                    <thead>
+                        <tr class="fila-encabezado">
+                            <th>ID</th>
+                            <th>Nº PILOTO</th>
+                            <th>NOMBRE COMPLETO</th>
+                            <th>DOCUMENTO</th>
+                            <th>CIUDAD</th>
+                            <th>TELÉFONO</th>
+                            <th>CORREO</th>
+                            <th>EQUIPO</th>
+                            <th>EXPERIENCIA</th>
+                            <th>MOTO</th>
+                            <th>MARCA</th>
+                            <th>CC</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpoTabla">
+                        {% for c in competidores %}
+                        <tr class="fila-competidor" 
+                            data-id="{{ c.id }}"
+                            data-nombre="{{ c.nombre_completo | lower }}"
+                            data-telefono="{{ c.telefono }}"
+                            data-numero="{{ c.numero_competidor }}"
+                            data-marca="{{ c.marca_motocicleta | lower }}"
+                            data-cc="{{ c.cilindraje_motor }}"
+                            data-documento="{{ c.tipo_documento }}"
+                            data-experiencia="{{ c.experiencia }}"
+                        >
+                            <td class="celda-id">#{{ c.id }}</td>
+                            <td>
+                                <span class="badge-numero">{{ c.numero_competidor }}</span>
+                            </td>
+                            <td class="celda-nombre">{{ c.nombre_completo }}</td>
+                            <td>
+                                <span class="badge-doc badge-{{ c.tipo_documento }}">
+                                    {{ c.tipo_documento | upper }}
+                                </span>
+                                <br><small class="texto-gris">{{ c.numero_documento }}</small>
+                            </td>
+                            <td>{{ c.ciudad }}</td>
+                            <td>{{ c.telefono }}</td>
+                            <td class="celda-email">{{ c.correo }}</td>
+                            <td>{{ c.equipo if c.equipo else '—' }}</td>
+                            <td>
+                                <span class="badge-experiencia badge-exp-{{ c.experiencia }}">
+                                    {% if c.experiencia == 'si' %}
+                                        <i class="fa-solid fa-check"></i> SÍ
+                                    {% else %}
+                                        <i class="fa-solid fa-xmark"></i> NO
+                                    {% endif %}
+                                </span>
+                            </td>
+                            <td>{{ c.modelo_motocicleta }}</td>
+                            <td>
+                                <span class="badge-marca">{{ c.marca_motocicleta | upper }}</span>
+                            </td>
+                            <td>
+                                <span class="badge-cc">{{ c.cilindraje_motor }} CC</span>
+                            </td>
+                            <td class="celda-acciones">
+                                <button 
+                                    class="btn-ver" 
+                                    onclick="verDetalle({{ c.id }})"
+                                    title="Ver detalles"
+                                >
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                                <button 
+                                    class="btn-eliminar" 
+                                    onclick="confirmarEliminar({{ c.id }}, '{{ c.nombre_completo }}')"
+                                    title="Eliminar competidor"
+                                >
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="estado-vacio">
+                    <i class="fa-solid fa-flag-checkered icono-vacio"></i>
+                    <h3>NO HAY COMPETIDORES REGISTRADOS</h3>
+                    <p>Aún no se han registrado pilotos para el campeonato GP Colombia.</p>
+                    <a href="/" class="btn-registrar">IR AL REGISTRO</a>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- ESTADO SIN RESULTADOS (oculto por defecto) -->
+            <div class="estado-sin-resultados" id="sinResultados" style="display:none;">
+                <i class="fa-solid fa-magnifying-glass icono-vacio"></i>
+                <h3>SIN RESULTADOS</h3>
+                <p>No se encontraron pilotos con los filtros aplicados.</p>
+                <button class="btn-registrar" onclick="resetearFiltros()">LIMPIAR FILTROS</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MODAL DETALLE COMPETIDOR -->
+    <div class="modal-overlay" id="modalOverlay" onclick="cerrarModal()">
+        <div class="modal-detalle" id="modalDetalle" onclick="event.stopPropagation()">
+            <button class="modal-cerrar" onclick="cerrarModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="modal-header">
+                <div class="modal-badge-numero" id="modalNumero">—</div>
+                <div class="modal-info-header">
+                    <h2 class="modal-nombre" id="modalNombre">—</h2>
+                    <span class="modal-equipo" id="modalEquipo">—</span>
+                </div>
+            </div>
+            <div class="modal-linea-roja"></div>
+            <div class="modal-body">
+                <div class="modal-seccion">
+                    <h4 class="modal-seccion-titulo"><i class="fa-solid fa-user"></i> DATOS PERSONALES</h4>
+                    <div class="modal-grid">
+                        <div class="modal-dato">
+                            <span class="modal-dato-label">ID</span>
+                            <span class="modal-dato-valor" id="modalId">—</span>
+                        </div>
+                        <div class="modal-dato">
+                            <span class="modal-dato-label">DOCUMENTO</span>
+                            <span class="modal-dato-valor" id="modalDocumento">—</span>
+                        </div>
+                        <div class="modal-dato">
+                            <span class="modal-dato-label">FECHA NACIMIENTO</span>
+                            <span class="modal-dato-valor" id="modalFecha">—</span>
+                        </div>
+                        <div class="modal-dato">
+                            <span class="modal-dato-label">CIUDAD</span>
+                            <span class="modal-dato-valor" id="modalCiudad">—</span>
+                        </div>
+                        <div class="modal-dato">
+                            <span class="modal-dato-label">TELÉFONO</span>
+                            <span class="modal-dato-valor" id="modalTelefono">—</span>
+                        </div>
+                        <div class="modal-dato">
+                            <span class="modal-dato-label">CORREO</span>
+                            <span class="modal-dato-valor" id="modalCorreo">—</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-seccion">
+                    <h4 class="modal-seccion-titulo"><i class="fa-solid fa-motorcycle"></i> MOTOCICLETA</h4>
+                    <div class="modal-grid">
+                        <div class="modal-dato">
+                            <span class="modal-dato-label">MARCA</span>
+                            <span class="modal-dato-valor" id="modalMarca">—</span>
+                        </div>
+                        <div class="modal-dato">
+                            <span class="modal-dato-label">MODELO</span>
+                            <span class="modal-dato-valor" id="modalModelo">—</span>
+                        </div>
+                        <div class="modal-dato">
+                            <span class="modal-dato-label">CILINDRAJE</span>
+                            <span class="modal-dato-valor" id="modalCC">—</span>
+                        </div>
+                        <div class="modal-dato">
+                            <span class="modal-dato-label">EXPERIENCIA</span>
+                            <span class="modal-dato-valor" id="modalExperiencia">—</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DATOS JSON PARA JAVASCRIPT -->
+    <script id="datosCompetidores" type="application/json">
+    [
+        {% for c in competidores %}
+        {
+            "id": {{ c.id }},
+            "nombre_completo": "{{ c.nombre_completo }}",
+            "tipo_documento": "{{ c.tipo_documento }}",
+            "numero_documento": "{{ c.numero_documento }}",
+            "fecha_nacimiento": "{{ c.fecha_nacimiento }}",
+            "ciudad": "{{ c.ciudad }}",
+            "telefono": "{{ c.telefono }}",
+            "correo": "{{ c.correo }}",
+            "equipo": "{{ c.equipo if c.equipo else '' }}",
+            "experiencia": "{{ c.experiencia }}",
+            "marca_motocicleta": "{{ c.marca_motocicleta }}",
+            "modelo_motocicleta": "{{ c.modelo_motocicleta }}",
+            "cilindraje_motor": {{ c.cilindraje_motor }},
+            "numero_competidor": {{ c.numero_competidor }}
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ]
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ url_for('static', path='js/carreras.js') }}"></script>
+
+</body>
+{% include 'footer.html' %}
+</html>
