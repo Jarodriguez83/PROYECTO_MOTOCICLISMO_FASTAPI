@@ -25,7 +25,6 @@ class Competidor(SQLModel, table=True):
 
     id: Optional[int] = Field(default=None, primary_key=True)
 
-
     # ============================================
     # INFORMACIÓN PERSONAL
     # ============================================
