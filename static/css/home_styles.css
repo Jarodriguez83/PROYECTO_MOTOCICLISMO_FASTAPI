@@ -20,6 +20,7 @@ body {
     width:100%;
     background:#0a0a0a;
     padding:50px 40px;
+    font-family: 'Rajdhani', sans-serif;
 }
 /* CONTENEDOR PRINCIPAL */
 .contenedor-presentacion{
@@ -53,7 +54,7 @@ body {
 }
 /* TITULO */
 .titulo-presentacion{
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: ''Rajdhani', sans-serif';
     font-size: clamp(32px, 4vw, 48px);
     letter-spacing: 4px;
     margin-bottom: 10px;
