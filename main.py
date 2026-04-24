@@ -3,6 +3,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from sqlmodel import Session, select
+from sqlalchemy import or_
 from database import create_db_and_tables, get_session
 from models import Competidor
 from datetime import datetime
@@ -86,6 +87,59 @@ def registrar_competidor(
 
 ):
     fecha_convertida = datetime.strptime(birth_date, "%Y-%m-%d").date()
+
+    # ==========================================
+    # VALIDACIONES DE DUPLICADOS
+    # ==========================================
+
+    # 1. Validación de Cédula/Documento
+    existe_cedula = session.exec(
+        select(Competidor.id).where(Competidor.numero_documento == document_number)
+    ).first()
+    if existe_cedula is not None:
+        return RedirectResponse(
+            url="/?error=cedula_existente",
+            status_code=303
+        )
+
+    # 2. Validación de Número de Competidor
+    existe_numero_competidor = session.exec(
+        select(Competidor.id).where(Competidor.numero_competidor == competitor_number)
+    ).first()
+    if existe_numero_competidor is not None:
+        return RedirectResponse(
+            url="/?error=numero_competidor_existente",
+            status_code=303
+        )
+
+    # 3. NUEVA: Validación de Nombre Completo
+    # Se recomienda usar .lower() o una comparación insensible a mayúsculas si tu DB lo permite
+    existe_nombre = session.exec(
+        select(Competidor.id).where(Competidor.nombre_completo == full_name)
+    ).first()
+    if existe_nombre is not None:
+        return RedirectResponse(
+            url="/?error=nombre_existente",
+            status_code=303
+        )
+
+    # (Opcional) Validación combinada final revisada
+    # Esto sirve como una última malla de seguridad antes de insertar
+    existe_alguno = session.exec(
+        select(Competidor.id).where(
+            or_(
+                Competidor.numero_documento == document_number,
+                Competidor.numero_competidor == competitor_number,
+                Competidor.nombre_completo == full_name
+            )
+        )
+    ).first()
+
+    if existe_alguno is not None:
+        return RedirectResponse(
+            url="/?error=registro_duplicado",
+            status_code=303
+        )
     # ==========================================
     # CREACIÓN DEL OBJETO COMPETIDOR
     # ==========================================
