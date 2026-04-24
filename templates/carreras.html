@@ -78,11 +78,13 @@
                         <label class="filtro-label"><i class="fa-solid fa-gauge-high"></i> CILINDRAJE</label>
                         <select id="filtroCC" class="select-filtro" onchange="filtrarCompetidores()">
                             <option value="">TODOS LOS CC</option>
-                            <option value="0-150">HASTA 150 CC</option>
-                            <option value="151-300">151 - 300 CC</option>
-                            <option value="301-600">301 - 600 CC</option>
-                            <option value="601-1000">601 - 1000 CC</option>
-                            <option value="1001-9999">MÁS DE 1000 CC</option>
+                            <option value="0-50">HASTA 50 CC</option>
+                            <option value="51-125">51 - 125 CC</option>
+                            <option value="126-250">126 - 250 CC</option>
+                            <option value="251-500">251 - 500 CC</option>
+                            <option value="501-800">501 - 800 CC</option>
+                            <option value="801-1000">801 - 1000 CC</option>
+                            <option value="1001 +">MÁS DE 1000 CC</option>
                         </select>
                     </div>
                     <div class="filtro-grupo">
@@ -111,8 +113,8 @@
             <!-- CONTADOR DE RESULTADOS -->
             <div class="barra-resultados">
                 <span class="resultado-texto">
-                    Mostrando <span id="contadorVisible" class="resultado-numero">{{ competidores | length }}</span> de 
-                    <span class="resultado-numero">{{ competidores | length }}</span> pilotos
+                    MOSTRANDO <span id="contadorVisible" class="resultado-numero">{{ competidores | length }}</span> DE 
+                    <span class="resultado-numero">{{ competidores | length }}</span> PILOTOS
                 </span>
                 <div class="ordenar-grupo">
                     <span class="ordenar-label">ORDENAR POR:</span>
@@ -212,7 +214,7 @@
                 <div class="estado-vacio">
                     <i class="fa-solid fa-flag-checkered icono-vacio"></i>
                     <h3>NO HAY COMPETIDORES REGISTRADOS</h3>
-                    <p>Aún no se han registrado pilotos para el campeonato GP Colombia.</p>
+                    <p>NO SE HAN REGISTRADO PILOTOS PARA EL GP COLOMBIA 2026.</p>
                     <a href="/" class="btn-registrar">IR AL REGISTRO</a>
                 </div>
                 {% endif %}
@@ -222,7 +224,7 @@
             <div class="estado-sin-resultados" id="sinResultados" style="display:none;">
                 <i class="fa-solid fa-magnifying-glass icono-vacio"></i>
                 <h3>SIN RESULTADOS</h3>
-                <p>No se encontraron pilotos con los filtros aplicados.</p>
+                <p>NO SE ENCONTRARON PILOTOS CON ESTOS FILTROS.</p>
                 <button class="btn-registrar" onclick="resetearFiltros()">LIMPIAR FILTROS</button>
             </div>
 

@@ -1,3 +1,20 @@
+/* RESET MÍNIMO */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background: #080808;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+.texto-rojo { color: #e10600; }
+.texto-gris { color: #888; font-size: 12px; }
+
 /* SECCION PRESENTACION */
 .seccion-presentacion{
     width:100%;
@@ -31,27 +48,29 @@
 }
 /* TEXTO */
 .contenedor-texto{
-    color:white;
+    color: white;
+    text-align: center;
 }
 /* TITULO */
 .titulo-presentacion{
-    font-size:36px;
-    letter-spacing:3px;
-    margin-bottom:10px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 4vw, 48px);
+    letter-spacing: 4px;
+    margin-bottom: 10px;
 }
 /* LINEA ROJA */
 .linea-roja{
-    width:70%;
-    height:4px;
-    background:red;
-    margin-bottom:25px;
+    width: 80px;
+    height: 3px;
+    background: #e10600;
+    margin: 0 auto 25px;
 }
 /* TEXTO */
 .texto-presentacion{
-    font-size:16px;
-    line-height:1.7;
-    color:#cccccc;
-    margin-bottom:15px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #cccccc;
+    margin-bottom: 15px;
     text-align: justify;
 }
 /* RESPONSIVE */
@@ -117,11 +136,11 @@ margin:15px auto;
 }
 /* TEXTO */
 .texto-carta{
-    color:white;
-    font-size:10px;
-    line-height:1.6;
-    letter-spacing:1px;
-    text-transform:uppercase;
+    color: white;
+    font-size: 10px;
+    line-height: 1.6;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     text-align: justify;
 }
 
@@ -177,46 +196,50 @@ margin:15px auto;
 
 /* TEXTO */
 .contenedor-info-piloto{
-    color:white;
+    color: white;
+    text-align: center;
 }
 
 /* TITULO */
 .titulo-piloto{
-    font-size:34px;
-    letter-spacing:3px;
-    margin-bottom:10px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 3vw, 42px);
+    letter-spacing: 4px;
+    margin-bottom: 10px;
 }
 
 /* LINEA ROJA */
 .linea-roja-piloto{
-    width: 90%;
-    height:4px;
-    background:red;
-    margin-bottom:20px;
+    width: 80px;
+    height: 3px;
+    background: #e10600;
+    margin-bottom: 20px;
 }
 
 /* NOMBRE */
 .nombre-piloto{
-    font-size:26px;
-    color:#ff3b3b;
-    margin-bottom:20px;
+    font-size: 24px;
+    color: #e10600;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
 }
 /* BIOGRAFIA */
 .biografia-piloto{
-    font-size:16px;
-    line-height:1.7;
-    color:#cfcfcf;
-    margin-bottom:25px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #cfcfcf;
+    margin-bottom: 25px;
     text-align: justify;
 }
 
 /* MENSAJE */
 .mensaje-piloto{
-    font-style:italic;
-    font-size:17px;
-    border-left:4px solid red;
-    padding-left:20px;
-    color:white;
+    font-style: italic;
+    font-size: 18px;
+    border-left: 3px solid #e10600;
+    padding-left: 20px;
+    color: white;
     text-align: center;
 }
 
@@ -281,27 +304,29 @@ margin:15px auto;
 
 /* TEXTO */
 .contenedor-info-autodromo{
-    color:white;
+    color: white;
+    text-align: center;
 }
 
 .titulo-autodromo{
-    font-size:34px;
-    letter-spacing:3px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 3vw, 42px);
+    letter-spacing: 4px;
     margin-bottom:10px;
 }
 
 .linea-roja-autodromo{
-    width:70%;
-    height:4px;
-    background:red;
+    width: 80px;
+    height: 3px;
+    background: #e10600;
     margin-bottom:25px;
 }
 
 .texto-autodromo{
-    font-size:16px;
-    line-height:1.7;
-    color:#cfcfcf;
-    margin-bottom:20px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #cfcfcf;
+    margin-bottom: 20px;
     text-align: justify;
 }
 
@@ -311,13 +336,13 @@ margin:15px auto;
 }
 
 .dato-autodromo{
-    margin-bottom:10px;
-    font-size:15px;
+    margin-bottom: 10px;
+    font-size: 15px;
 }
 
 .dato-autodromo span{
-    color:#ff3b3b;
-    font-weight:bold;
+    color: #e10600;
+    font-weight: 700;
 }
 
 /* RESPONSIVE */
@@ -357,16 +382,17 @@ margin:15px auto;
 /* TITULO */
 .titulo-registro{
     text-align:center;
-    font-size:32px;
-    letter-spacing:3px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 3vw, 42px);
+    letter-spacing: 4px;
     color:white;
 }
 
 .linea-roja-registro{
-    width:80px;
-    height:4px;
-    background:red;
-    margin:15px auto 40px auto;
+    width: 80px;
+    height: 3px;
+    background: #e10600;
+    margin: 15px auto 40px auto;
 }
 
 /* GRID DEL FORMULARIO */
@@ -383,36 +409,44 @@ margin:15px auto;
 }
 
 .grupo-formulario label{
-    color:white;
-    margin-bottom:6px;
-    font-size:14px;
+    color: white;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .grupo-formulario input,
 .grupo-formulario select{
-    padding:10px;
-    border:none;
-    border-radius:4px;
-    background:#1b1b1b;
-    color:white;
+    padding: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 0;
+    background: #1a1a1a;
+    color: white;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
 /* EFECTO */
 .grupo-formulario input:focus,
 .grupo-formulario select:focus{
     outline:none;
-    border:1px solid red;
+    border:1px solid #e10600;
 }
 
 /* TERMINOS */
 .contenedor-terminos{
-    margin-top:30px;
-    color:#ccc;
+    margin-top: 30px;
+    color: #ccc;
+    text-align: center;
 }
 
 .contenedor-terminos h3{
-    color:white;
-    margin-bottom:10px;
+    color: white;
+    margin-bottom: 10px;
+    font-size: 16px;
+    letter-spacing: 2px;
 }
 
 .check-terminos{
@@ -428,11 +462,13 @@ margin:15px auto;
     margin-top:30px;
     width:100%;
     padding:14px;
-    background:red;
+    background:#e10600;
     border:none;
     color:white;
-    font-weight:bold;
-    letter-spacing:2px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 2px;
     cursor:pointer;
     transition:0.3s;
 }

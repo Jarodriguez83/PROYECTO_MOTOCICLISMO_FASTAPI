@@ -275,7 +275,7 @@ function confirmarEliminar(id, nombre) {
 
 async function eliminarCompetidor(id, nombre) {
     try {
-        const respuesta = await fetch(`/competidores/${id}`, {
+        const respuesta = await fetch(`/eliminar_competidor/${id}`, {
             method: 'DELETE'
         });
 
