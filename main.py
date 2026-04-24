@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request, Form, Depends
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from sqlmodel import Session
+from sqlmodel import Session, select
 from database import create_db_and_tables, get_session
 from models import Competidor
 from datetime import datetime
@@ -30,6 +30,30 @@ def show_index(request: Request):
     return templates.TemplateResponse(
         "home.html",
         {"request": request}
+    )
+
+
+@app.get("/carreras", response_class=HTMLResponse)
+def show_carreras(request: Request, session: Session = Depends(get_session)):
+    # OBTENER TODOS LOS COMPETIDORES
+    competidores = session.exec(
+        select(Competidor).order_by(Competidor.id.desc())
+    ).all()
+
+    # OBTENER LISTAS ÚNICAS PARA FILTROS
+    marcas_lista = sorted(list(set([c.marca_motocicleta for c in competidores])))
+    marcas_unicas = len(marcas_lista)
+    con_experiencia = len([c for c in competidores if c.experiencia == 'si'])
+
+    return templates.TemplateResponse(
+        "carreras.html",
+        {
+            "request": request,
+            "competidores": competidores,
+            "marcas_lista": marcas_lista,
+            "marcas_unicas": marcas_unicas,
+            "con_experiencia": con_experiencia
+        }
     )
 
 @app.post("/register")
@@ -68,6 +92,7 @@ def registrar_competidor(
 
     nuevo_competidor = Competidor(
 
+        id = None,
         nombre_completo = full_name,
         tipo_documento = document_type,
         numero_documento = document_number,
@@ -106,3 +131,19 @@ def registrar_competidor(
         url="/?registro=exitoso",
         status_code=303
     )
+
+
+# ==========================================
+# ELIMINAR COMPETIDOR
+# ==========================================
+
+@app.delete("/eliminar_competidor/{competidor_id}")
+def eliminar_competidor(competidor_id: int, session: Session = Depends(get_session)):
+    competidor = session.get(Competidor, competidor_id)
+    if not competidor:
+        return {"error": "Competidor no encontrado"}, 404
+    
+    session.delete(competidor)
+    session.commit()
+    
+    return {"mensaje": "Competidor eliminado correctamente"}
