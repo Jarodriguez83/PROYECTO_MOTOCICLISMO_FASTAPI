@@ -190,14 +190,15 @@
                             <td class="celda-acciones">
                                 <button 
                                     class="btn-ver" 
-                                    onclick="verDetalle({{ c.id }})"
+                                    data-id="{{ c.id }}"
                                     title="Ver detalles"
                                 >
                                     <i class="fa-solid fa-eye"></i>
                                 </button>
                                 <button 
                                     class="btn-eliminar" 
-                                    onclick="confirmarEliminar({{ c.id }}, '{{ c.nombre_completo }}')"
+                                    data-id="{{ c.id }}"
+                                    data-nombre="{{ c.nombre_completo }}"
                                     title="Eliminar competidor"
                                 >
                                     <i class="fa-solid fa-trash"></i>

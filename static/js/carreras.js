@@ -224,6 +224,29 @@ document.addEventListener('keydown', function(e) {
 });
 
 // ============================================================
+// EVENT LISTENERS PARA BOTONES DE ACCIÓN
+// ============================================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Botones Ver detalle
+    document.querySelectorAll('.btn-ver').forEach(boton => {
+        boton.addEventListener('click', function() {
+            const id = parseInt(this.getAttribute('data-id'));
+            verDetalle(id);
+        });
+    });
+
+    // Botones Eliminar
+    document.querySelectorAll('.btn-eliminar').forEach(boton => {
+        boton.addEventListener('click', function() {
+            const id = parseInt(this.getAttribute('data-id'));
+            const nombre = this.getAttribute('data-nombre');
+            confirmarEliminar(id, nombre);
+        });
+    });
+});
+
+// ============================================================
 // ELIMINAR COMPETIDOR
 // ============================================================
 
