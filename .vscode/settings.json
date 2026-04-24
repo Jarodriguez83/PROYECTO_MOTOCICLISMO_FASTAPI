@@ -1,0 +1,10 @@
+{
+    "html": {
+        "suggest": {
+            "html5": true
+        }
+    },
+    "javascript": {
+        "validate": false
+    }
+}
