@@ -598,7 +598,7 @@ body {
 /* ============================================================
    MODAL DETALLE
    ============================================================ */
-.modal-overlay {
+   .modal-overlay {
     display: none;
     position: fixed;
     inset: 0;
@@ -753,33 +753,78 @@ body {
    en carreras_styles.css (desde el comentario de edición
    hasta el comentario de RESPONSIVE)
    ============================================================ */
+.modal-editar input,
+.modal-editar select,
+.modal-editar button {
+    font-family: 'Rajdhani', sans-serif;
+    box-sizing: border-box;
+}
+.modal-editar button {
+    appearance: none;
+    -webkit-appearance: none;
+}
 
-/* MODAL EDITAR - MISMO SISTEMA QUE .modal-detalle */
-.modal-editar {
+.modal-detalle.modal-editar {
+    width: 90%;
     max-width: 820px;
     max-height: 90vh;
     overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #e10600 #0a0a0a;
+    overflow-x: hidden;
+    padding-bottom: 24px;
 }
 
-.modal-editar::-webkit-scrollbar { width: 6px; }
-.modal-editar::-webkit-scrollbar-track { background: #0a0a0a; }
-.modal-editar::-webkit-scrollbar-thumb { background: #e10600; }
-.modal-editar::-webkit-scrollbar-thumb:hover { background: #ff2200; }
+.modal-editar input,
+.modal-editar select,
+.modal-editar button {
+    font-family: 'Rajdhani', sans-serif;
+    box-sizing: border-box;
+}
 
-/* FORM EDITAR */
+.modal-editar button {
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.modal-editar .editar-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    width: 100%;
+}
+
+.modal-editar .editar-input {
+    width: 100%;
+}
+/* MODAL EDITAR - MISMO SISTEMA QUE .modal-detalle */
+.modal-detalle.modal-editar {
+    width: 90%;
+    max-width: 820px;
+    max-height: 90vh;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    scrollbar-width: thin;
+    scrollbar-color: #e10600 #0a0a0a;
+
+    display: block;
+}
+
+.modal-editar .editar-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+}
+
+.modal-editar .editar-input {
+    width: 100%;
+    box-sizing: border-box;
+}/* FORM EDITAR */
 .form-editar {
     padding: 0 28px 28px;
 }
 
-/* GRID DE INPUTS — igual al .modal-grid */
-.editar-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin-top: 14px;
-}
 
 .editar-grupo {
     display: flex;
@@ -803,48 +848,6 @@ body {
 /* Asterisco requerido en rojo del sistema */
 .req {
     color: #e10600;
-}
-
-/* INPUT / SELECT — clon exacto de .input-busqueda y .select-filtro */
-.editar-input {
-    width: 100%;
-    padding: 10px 14px;
-    background: #1a1a1a;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 0;                        /* sin redondeo, estilo industrial */
-    color: white;
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    transition: border-color 0.2s;
-    outline: none;
-}
-
-.editar-input:focus {
-    border-color: #e10600;
-    background: #1f1f1f;
-}
-
-/* SELECT con flecha roja igual que .select-filtro */
-select.editar-input {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23e10600' stroke-width='2' fill='none'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    background-size: 10px;
-    padding-right: 32px;
-    cursor: pointer;
-}
-
-select.editar-input option {
-    background: #1a1a1a;
-}
-
-/* Estado inválido */
-.editar-input.input-invalido {
-    border-color: #e10600;
-    background: rgba(225, 6, 0, 0.05);
 }
 
 /* MENSAJES DE ERROR */
