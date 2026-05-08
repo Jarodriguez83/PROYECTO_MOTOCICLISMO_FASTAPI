@@ -46,7 +46,6 @@
 
             <!-- BARRA DE HERRAMIENTAS -->
             <div class="barra-herramientas">
-                <!-- BÚSQUEDA -->
                 <div class="bloque-busqueda">
                     <div class="input-busqueda-wrapper">
                         <i class="fa-solid fa-magnifying-glass icono-busqueda"></i>
@@ -63,7 +62,6 @@
                     </div>
                 </div>
 
-                <!-- FILTROS -->
                 <div class="bloque-filtros">
                     <div class="filtro-grupo">
                         <label class="filtro-label"><i class="fa-solid fa-motorcycle"></i> MARCA</label>
@@ -190,6 +188,7 @@
                                 <span class="badge-cc">{{ c.cilindraje_motor }} CC</span>
                             </td>
                             <td class="celda-acciones">
+                                <!-- BOTÓN VER DETALLES -->
                                 <button 
                                     class="btn-ver" 
                                     data-id="{{ c.id }}"
@@ -197,6 +196,15 @@
                                 >
                                     <i class="fa-solid fa-eye"></i>
                                 </button>
+                                <!-- BOTÓN EDITAR ← NUEVO -->
+                                <button 
+                                    class="btn-editar" 
+                                    data-id="{{ c.id }}"
+                                    title="Editar competidor"
+                                >
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                                <!-- BOTÓN ELIMINAR -->
                                 <button 
                                     class="btn-eliminar" 
                                     data-id="{{ c.id }}"
@@ -220,7 +228,7 @@
                 {% endif %}
             </div>
 
-            <!-- ESTADO SIN RESULTADOS (oculto por defecto) -->
+            <!-- ESTADO SIN RESULTADOS -->
             <div class="estado-sin-resultados" id="sinResultados" style="display:none;">
                 <i class="fa-solid fa-magnifying-glass icono-vacio"></i>
                 <h3>SIN RESULTADOS</h3>
@@ -231,7 +239,9 @@
         </div>
     </section>
 
-    <!-- MODAL DETALLE COMPETIDOR -->
+    <!-- ============================================
+         MODAL VER DETALLE COMPETIDOR
+         ============================================ -->
     <div class="modal-overlay" id="modalOverlay" onclick="cerrarModal()">
         <div class="modal-detalle" id="modalDetalle" onclick="event.stopPropagation()">
             <button class="modal-cerrar" onclick="cerrarModal()">
@@ -297,6 +307,137 @@
                     </div>
                 </div>
             </div>
+            <!-- BOTÓN EDITAR DESDE EL MODAL DE VER ← NUEVO -->
+            <button class="btn-editar-desde-detalle" id="btnEditarDesdeDetalle" data-id="">
+                <i class="fa-solid fa-pen-to-square"></i> EDITAR ESTE COMPETIDOR
+            </button>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MODAL EDITAR COMPETIDOR  ← NUEVO
+         ============================================ -->
+    <div class="modal-overlay" id="modalEditarOverlay" onclick="cerrarModalEditar()">
+        <div class="modal-detalle modal-editar" id="modalEditar" onclick="event.stopPropagation()">
+
+            <button class="modal-cerrar" onclick="cerrarModalEditar()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="modal-header">
+                <div class="modal-badge-numero" id="editarNumeroHeader">—</div>
+                <div class="modal-info-header">
+                    <h2 class="modal-nombre">EDITAR COMPETIDOR</h2>
+                    <span class="modal-equipo" id="editarNombreHeader">—</span>
+                </div>
+            </div>
+
+            <div class="modal-linea-roja"></div>
+
+            <form id="formEditar" class="form-editar">
+                <input type="hidden" id="editarId" name="id">
+
+                <!-- DATOS PERSONALES -->
+                <div class="modal-seccion">
+                    <h4 class="modal-seccion-titulo"><i class="fa-solid fa-user"></i> DATOS PERSONALES</h4>
+                    <div class="editar-grid">
+                        <div class="editar-grupo">
+                            <label class="editar-label">NOMBRE COMPLETO <span class="req">*</span></label>
+                            <input type="text" id="editarNombre" name="full_name" class="editar-input" required>
+                            <span class="editar-error" id="errNombre"></span>
+                        </div>
+                        <div class="editar-grupo">
+                            <label class="editar-label">TIPO DE DOCUMENTO <span class="req">*</span></label>
+                            <select id="editarTipoDoc" name="document_type" class="editar-input" required>
+                                <option value="cc">C.C - CÉDULA DE CIUDADANÍA</option>
+                                <option value="ce">C.E - CÉDULA DE EXTRANJERÍA</option>
+                                <option value="passport">PASAPORTE</option>
+                            </select>
+                            <span class="editar-error" id="errTipoDoc"></span>
+                        </div>
+                        <div class="editar-grupo">
+                            <label class="editar-label">NÚMERO DE DOCUMENTO <span class="req">*</span></label>
+                            <input type="text" id="editarNumDoc" name="document_number" class="editar-input" required>
+                            <span class="editar-error" id="errNumDoc"></span>
+                        </div>
+                        <div class="editar-grupo">
+                            <label class="editar-label">FECHA DE NACIMIENTO <span class="req">*</span></label>
+                            <input type="date" id="editarFecha" name="birth_date" class="editar-input" required>
+                            <span class="editar-error" id="errFecha"></span>
+                        </div>
+                        <div class="editar-grupo">
+                            <label class="editar-label">CIUDAD <span class="req">*</span></label>
+                            <input type="text" id="editarCiudad" name="city" class="editar-input" required>
+                            <span class="editar-error" id="errCiudad"></span>
+                        </div>
+                        <div class="editar-grupo">
+                            <label class="editar-label">TELÉFONO <span class="req">*</span></label>
+                            <input type="text" id="editarTelefono" name="phone" class="editar-input" required>
+                            <span class="editar-error" id="errTelefono"></span>
+                        </div>
+                        <div class="editar-grupo editar-grupo-full">
+                            <label class="editar-label">CORREO ELECTRÓNICO <span class="req">*</span></label>
+                            <input type="email" id="editarCorreo" name="email" class="editar-input" required>
+                            <span class="editar-error" id="errCorreo"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COMPETENCIA -->
+                <div class="modal-seccion">
+                    <h4 class="modal-seccion-titulo"><i class="fa-solid fa-flag-checkered"></i> COMPETENCIA</h4>
+                    <div class="editar-grid">
+                        <div class="editar-grupo">
+                            <label class="editar-label">EQUIPO / ESCUDERÍA</label>
+                            <input type="text" id="editarEquipo" name="team" class="editar-input">
+                        </div>
+                        <div class="editar-grupo">
+                            <label class="editar-label">EXPERIENCIA EN CARRERAS <span class="req">*</span></label>
+                            <select id="editarExperiencia" name="experience" class="editar-input" required>
+                                <option value="si">SÍ</option>
+                                <option value="no">NO</option>
+                            </select>
+                        </div>
+                        <div class="editar-grupo">
+                            <label class="editar-label">NÚMERO DE COMPETIDOR <span class="req">*</span></label>
+                            <input type="number" id="editarNumComp" name="competitor_number" class="editar-input" min="1" required>
+                            <span class="editar-error" id="errNumComp"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MOTOCICLETA -->
+                <div class="modal-seccion">
+                    <h4 class="modal-seccion-titulo"><i class="fa-solid fa-motorcycle"></i> MOTOCICLETA</h4>
+                    <div class="editar-grid">
+                        <div class="editar-grupo">
+                            <label class="editar-label">MARCA <span class="req">*</span></label>
+                            <input type="text" id="editarMarca" name="motorcycle_brand" class="editar-input" required>
+                            <span class="editar-error" id="errMarca"></span>
+                        </div>
+                        <div class="editar-grupo">
+                            <label class="editar-label">MODELO <span class="req">*</span></label>
+                            <input type="text" id="editarModelo" name="motorcycle_model" class="editar-input" required>
+                            <span class="editar-error" id="errModelo"></span>
+                        </div>
+                        <div class="editar-grupo">
+                            <label class="editar-label">CILINDRAJE (CC) <span class="req">*</span></label>
+                            <input type="number" id="editarCC" name="engine_cc" class="editar-input" min="1" required>
+                            <span class="editar-error" id="errCC"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BOTONES -->
+                <div class="editar-acciones">
+                    <button type="button" class="btn-cancelar-editar" onclick="cerrarModalEditar()">
+                        <i class="fa-solid fa-xmark"></i> CANCELAR
+                    </button>
+                    <button type="button" class="btn-guardar-editar" onclick="confirmarActualizacion()">
+                        <i class="fa-solid fa-floppy-disk"></i> GUARDAR CAMBIOS
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 

@@ -747,7 +747,263 @@ body {
     letter-spacing: 0.5px;
     word-break: break-all;
 }
+/* ============================================================
+   ESTILOS MODAL EDITAR COMPETIDOR
+   REEMPLAZA el bloque anterior de estilos de edición
+   en carreras_styles.css (desde el comentario de edición
+   hasta el comentario de RESPONSIVE)
+   ============================================================ */
 
+/* MODAL EDITAR - MISMO SISTEMA QUE .modal-detalle */
+.modal-editar {
+    max-width: 820px;
+    max-height: 90vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #e10600 #0a0a0a;
+}
+
+.modal-editar::-webkit-scrollbar { width: 6px; }
+.modal-editar::-webkit-scrollbar-track { background: #0a0a0a; }
+.modal-editar::-webkit-scrollbar-thumb { background: #e10600; }
+.modal-editar::-webkit-scrollbar-thumb:hover { background: #ff2200; }
+
+/* FORM EDITAR */
+.form-editar {
+    padding: 0 28px 28px;
+}
+
+/* GRID DE INPUTS — igual al .modal-grid */
+.editar-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 14px;
+}
+
+.editar-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.editar-grupo-full {
+    grid-column: 1 / -1;
+}
+
+/* LABEL — mismo sistema que .filtro-label */
+.editar-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #888;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* Asterisco requerido en rojo del sistema */
+.req {
+    color: #e10600;
+}
+
+/* INPUT / SELECT — clon exacto de .input-busqueda y .select-filtro */
+.editar-input {
+    width: 100%;
+    padding: 10px 14px;
+    background: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0;                        /* sin redondeo, estilo industrial */
+    color: white;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: border-color 0.2s;
+    outline: none;
+}
+
+.editar-input:focus {
+    border-color: #e10600;
+    background: #1f1f1f;
+}
+
+/* SELECT con flecha roja igual que .select-filtro */
+select.editar-input {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23e10600' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 10px;
+    padding-right: 32px;
+    cursor: pointer;
+}
+
+select.editar-input option {
+    background: #1a1a1a;
+}
+
+/* Estado inválido */
+.editar-input.input-invalido {
+    border-color: #e10600;
+    background: rgba(225, 6, 0, 0.05);
+}
+
+/* MENSAJES DE ERROR */
+.editar-error {
+    font-size: 11px;
+    color: #e10600;
+    letter-spacing: 1px;
+    font-weight: 700;
+    min-height: 14px;
+    text-transform: uppercase;
+}
+
+/* ============================================================
+   BOTÓN EDITAR EN TABLA
+   Mismo sistema visual que .btn-ver y .btn-eliminar
+   (cuadrado, sin border-radius, bordes finos)
+   ============================================================ */
+.btn-editar {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(225, 6, 0, 0.07);
+    border: 1px solid rgba(225, 6, 0, 0.25);
+    color: #e10600;
+    border-radius: 0;                        /* cuadrado como los demás botones */
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s;
+}
+
+.btn-editar:hover {
+    background: #e10600;
+    color: white;
+    border-color: #e10600;
+}
+
+/* ============================================================
+   BOTÓN "EDITAR ESTE COMPETIDOR" DENTRO DEL MODAL VER
+   Estilo coherente con .btn-reset-filtros y .btn-registrar
+   ============================================================ */
+.btn-editar-desde-detalle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: calc(100% - 56px);              /* respeta el padding de 28px */
+    margin: 0 28px 28px;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid rgba(225, 6, 0, 0.5);
+    color: #e10600;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 0;
+    transition: all 0.2s;
+}
+
+.btn-editar-desde-detalle:hover {
+    background: #e10600;
+    color: white;
+    border-color: #e10600;
+}
+
+/* ============================================================
+   BOTONES ACCIONES DEL FORM (CANCELAR / GUARDAR)
+   Mismo sistema que .btn-reset-filtros / .btn-registrar
+   ============================================================ */
+.editar-acciones {
+    display: flex;
+    gap: 12px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.btn-cancelar-editar {
+    flex: 1;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #888;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 0;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-cancelar-editar:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    color: white;
+}
+
+.btn-guardar-editar {
+    flex: 2;
+    padding: 12px;
+    background: #e10600;
+    border: none;
+    color: white;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 0;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-guardar-editar:hover {
+    background: #ff2200;
+}
+
+.btn-guardar-editar:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* ============================================================
+   RESPONSIVE MODAL EDITAR
+   ============================================================ */
+@media (max-width: 900px) {
+    .editar-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .modal-editar {
+        max-height: 94vh;
+    }
+    .form-editar {
+        padding: 0 16px 20px;
+    }
+    .btn-editar-desde-detalle {
+        width: calc(100% - 32px);
+        margin: 0 16px 20px;
+    }
+    .editar-acciones {
+        flex-direction: column;
+    }
+}
 /* ============================================================
    RESPONSIVE
    ============================================================ */
@@ -788,3 +1044,5 @@ body {
 ::-webkit-scrollbar-track { background: #0a0a0a; }
 ::-webkit-scrollbar-thumb { background: #e10600; }
 ::-webkit-scrollbar-thumb:hover { background: #ff2200; }
+
+

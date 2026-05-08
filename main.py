@@ -1,9 +1,10 @@
-from fastapi import FastAPI, Request, Form, Depends
+from fastapi import FastAPI, HTTPException, Request, Form, Depends
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from sqlmodel import Session, select
 from sqlalchemy import or_
+from starlette.responses import JSONResponse
 from database import create_db_and_tables, get_session
 from models import Competidor
 from datetime import datetime
@@ -201,3 +202,55 @@ def eliminar_competidor(competidor_id: int, session: Session = Depends(get_sessi
     session.commit()
     
     return {"mensaje": "Competidor eliminado correctamente"}
+
+
+# =============================================
+# ACTUALIZAR COMPETIDOR  ← NUEVO ENDPOINT
+# =============================================
+@app.put("/competidor/{competidor_id}")
+def actualizar_competidor(
+    competidor_id: int,
+    full_name: str = Form(...),
+    document_type: str = Form(...),
+    document_number: str = Form(...),
+    birth_date: str = Form(...),
+    city: str = Form(...),
+    phone: str = Form(...),
+    email: str = Form(...),
+    team: str = Form(None),
+    experience: str = Form(...),
+    motorcycle_brand: str = Form(...),
+    motorcycle_model: str = Form(...),
+    engine_cc: int = Form(...),
+    competitor_number: int = Form(...),
+    session: Session = Depends(get_session)
+):
+    # BUSCAR COMPETIDOR
+    competidor = session.get(Competidor, competidor_id)
+    if not competidor:
+        raise HTTPException(status_code=404, detail="Competidor no encontrado")
+ 
+    # CONVERTIR FECHA
+    fecha_convertida = datetime.strptime(birth_date, "%Y-%m-%d").date()
+ 
+    # ACTUALIZAR CAMPOS
+    competidor.nombre_completo    = full_name
+    competidor.tipo_documento     = document_type
+    competidor.numero_documento   = document_number
+    competidor.fecha_nacimiento   = fecha_convertida
+    competidor.ciudad             = city
+    competidor.telefono           = phone
+    competidor.correo             = email
+    competidor.equipo             = team
+    competidor.experiencia        = experience
+    competidor.marca_motocicleta  = motorcycle_brand
+    competidor.modelo_motocicleta = motorcycle_model
+    competidor.cilindraje_motor   = engine_cc
+    competidor.numero_competidor  = competitor_number
+ 
+    session.add(competidor)
+    session.commit()
+    session.refresh(competidor)
+ 
+    return JSONResponse(content={"success": True, "message": "Competidor actualizado correctamente"})
+ 
