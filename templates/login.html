@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GP COLOMBIA | INICIAR SESIÓN</title>
+    <link rel="shortcut icon" href="https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/LOGO_GP.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL0xPR09fR1AuanBnIiwiaWF0IjoxNzczNDMwNjcyLCJleHAiOjE3NzYwMjI2NzJ9.rGW5gWAV-TiyZc_YoVGOFQQL4-XKS8xqxPCz2iA2ceM" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #080808;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* FONDO DECORATIVO */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background:
+                repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,0.012) 60px, rgba(255,255,255,0.012) 61px),
+                repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255,255,255,0.012) 60px, rgba(255,255,255,0.012) 61px),
+                #080808;
+            z-index: 0;
+        }
+
+        .bg-stripe {
+            position: fixed;
+            top: 0; left: -10%;
+            width: 120%; height: 4px;
+            background: linear-gradient(90deg, transparent, #e10600 20%, #e10600 80%, transparent);
+            z-index: 1;
+        }
+
+        .bg-glow {
+            position: fixed;
+            bottom: -200px; left: 50%;
+            transform: translateX(-50%);
+            width: 600px; height: 400px;
+            background: radial-gradient(ellipse, rgba(225,6,0,0.12) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        /* TARJETA PRINCIPAL */
+        .login-card {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 440px;
+            padding: 0 20px;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* LOGO */
+        .logo-wrap {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .logo-gp {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 72px;
+            line-height: 1;
+            color: #fff;
+            letter-spacing: 6px;
+            text-shadow: 0 0 40px rgba(225,6,0,0.4);
+        }
+
+        .logo-sub {
+            color: #e10600;
+            font-size: 14px;
+            letter-spacing: 8px;
+            font-weight: 700;
+        }
+
+        /* FORMULARIO */
+        .card-body {
+            background: #0f0f0f;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-top: 3px solid #e10600;
+            padding: 36px 32px;
+        }
+
+        .card-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 26px;
+            letter-spacing: 4px;
+            margin-bottom: 6px;
+        }
+
+        .card-subtitle {
+            font-size: 13px;
+            color: #666;
+            letter-spacing: 1px;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 18px;
+        }
+
+        .form-label {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #888;
+            font-weight: 700;
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #444;
+            font-size: 14px;
+            pointer-events: none;
+            transition: color 0.2s;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 12px 12px 40px;
+            background: #1a1a1a;
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: #e10600;
+            background: #1f1f1f;
+        }
+
+        .form-input:focus + .input-icon,
+        .input-wrap:focus-within .input-icon {
+            color: #e10600;
+        }
+
+        /* Toggle contraseña */
+        .toggle-pass {
+            position: absolute;
+            right: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #555;
+            cursor: pointer;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        .toggle-pass:hover { color: #e10600; }
+
+        /* BOTÓN SUBMIT */
+        .btn-submit {
+            width: 100%;
+            padding: 13px;
+            background: #e10600;
+            border: none;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+            margin-top: 8px;
+            clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+        }
+
+        .btn-submit:hover {
+            background: #ff2200;
+            transform: translateY(-1px);
+        }
+
+        /* LINKS */
+        .card-footer {
+            margin-top: 22px;
+            text-align: center;
+            font-size: 13px;
+            color: #555;
+            letter-spacing: 0.5px;
+        }
+
+        .card-footer a {
+            color: #e10600;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.2s;
+        }
+
+        .card-footer a:hover { color: #ff4422; }
+
+        .divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            margin: 20px 0;
+        }
+
+        /* ALERTA DE ERROR */
+        .alerta-error {
+            background: rgba(225,6,0,0.1);
+            border: 1px solid rgba(225,6,0,0.4);
+            border-left: 3px solid #e10600;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            color: #ff8888;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* ALERTA ÉXITO */
+        .alerta-exito {
+            background: rgba(0,200,80,0.08);
+            border: 1px solid rgba(0,200,80,0.3);
+            border-left: 3px solid #00c850;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #44dd88;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* BADGE ADMIN */
+        .admin-link-wrap {
+            text-align: center;
+            margin-top: 28px;
+        }
+
+        .admin-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #444;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.2s;
+            padding: 8px 16px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .admin-link:hover {
+            color: #888;
+            border-color: rgba(255,255,255,0.15);
+        }
+
+        @media (max-width: 480px) {
+            .card-body { padding: 28px 20px; }
+            .logo-gp   { font-size: 56px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-stripe"></div>
+    <div class="bg-glow"></div>
+
+    <div class="login-card">
+
+        <!-- LOGO -->
+        <div class="logo-wrap">
+            <div class="logo-gp">GP'C</div>
+            <div class="logo-sub">COLOMBIA</div>
+        </div>
+
+        <!-- FORMULARIO -->
+        <div class="card-body">
+            <h1 class="card-title">INICIAR SESIÓN</h1>
+            <p class="card-subtitle">ACCEDE A TU CUENTA DE PILOTO</p>
+
+            <!-- ALERTA DE ERROR -->
+            {% if request.query_params.get('error') == 'credenciales_invalidas' %}
+            <div class="alerta-error">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                CORREO O CONTRASEÑA INCORRECTOS. INTENTA NUEVAMENTE.
+            </div>
+            {% endif %}
+
+            {% if request.query_params.get('error') == 'cuenta_inactiva' %}
+            <div class="alerta-error">
+                <i class="fa-solid fa-ban"></i>
+                TU CUENTA ESTÁ INACTIVA. CONTACTA AL ADMINISTRADOR.
+            </div>
+            {% endif %}
+
+            <!-- ALERTA ÉXITO DE REGISTRO -->
+            {% if request.query_params.get('registro') == 'exitoso' %}
+            <div class="alerta-exito">
+                <i class="fa-solid fa-circle-check"></i>
+                REGISTRO EXITOSO. YA PUEDES INICIAR SESIÓN.
+            </div>
+            {% endif %}
+
+            <form action="/login" method="POST">
+
+                <div class="form-group">
+                    <label class="form-label">CORREO ELECTRÓNICO</label>
+                    <div class="input-wrap">
+                        <input
+                            type="email"
+                            name="email"
+                            class="form-input"
+                            placeholder="tucorreo@ejemplo.com"
+                            required
+                            autocomplete="email"
+                        >
+                        <i class="fa-solid fa-envelope input-icon"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">CONTRASEÑA</label>
+                    <div class="input-wrap">
+                        <input
+                            type="password"
+                            name="password"
+                            id="inputPass"
+                            class="form-input"
+                            placeholder="••••••••"
+                            required
+                            autocomplete="current-password"
+                        >
+                        <i class="fa-solid fa-lock input-icon"></i>
+                        <button type="button" class="toggle-pass" onclick="togglePassword('inputPass', this)">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <i class="fa-solid fa-flag-checkered"></i> ENTRAR
+                </button>
+
+            </form>
+
+            <hr class="divider">
+
+            <div class="card-footer">
+                ¿AÚN NO TIENES CUENTA?
+                <a href="/#seccion-registro">REGÍSTRATE AQUÍ</a>
+            </div>
+        </div>
+
+        <!-- LINK ADMIN (discreto) -->
+        <div class="admin-link-wrap">
+            <a href="/admin/login" class="admin-link">
+                <i class="fa-solid fa-shield-halved"></i>
+                ACCESO ADMINISTRATIVO
+            </a>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function togglePassword(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const icon  = btn.querySelector("i");
+            if (input.type === "password") {
+                input.type = "text";
+                icon.className = "fa-solid fa-eye-slash";
+            } else {
+                input.type = "password";
+                icon.className = "fa-solid fa-eye";
+            }
+        }
+    </script>
+</body>
+</html>
