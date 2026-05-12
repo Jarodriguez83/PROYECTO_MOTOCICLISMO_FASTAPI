@@ -2,72 +2,65 @@
 # MODELOS DE BASE DE DATOS - GP COLOMBIA
 # ============================================
 
-# IMPORTACIÓN DE SQLMODEL Y TIPOS DE DATOS
 from sqlmodel import SQLModel, Field
 from typing import Optional
-from datetime import date
+from datetime import date, datetime
+
+
+# ============================================
+# MODELO DE USUARIO (CUENTA DE ACCESO)
+# ============================================
+
+class Usuario(SQLModel, table=True):
+    """
+    Representa la cuenta de acceso de un piloto registrado.
+    Se crea simultáneamente con el Competidor en el registro.
+    """
+    __tablename__ = "usuarios"
+
+    id: Optional[int] = Field(default=None, primary_key=True)
+
+    # Vinculación con el competidor
+    competidor_id: int = Field(foreign_key="competidores.id", unique=True)
+
+    # Credenciales
+    correo: str = Field(unique=True, index=True)
+    password_hash: str
+
+    # Metadata
+    activo: bool = Field(default=True)
+    creado_en: datetime = Field(default_factory=datetime.utcnow)
+    ultimo_acceso: Optional[datetime] = None
 
 
 # ============================================
 # MODELO DE COMPETIDOR
-# ESTE MODELO REPRESENTA LA TABLA DE REGISTROS
 # ============================================
 
 class Competidor(SQLModel, table=True):
 
-    # NOMBRE DE LA TABLA EN LA BASE DE DATOS
     __tablename__ = "competidores"
-
-
-    # ============================================
-    # IDENTIFICADOR PRINCIPAL
-    # ============================================
 
     id: Optional[int] = Field(default=None, primary_key=True)
 
-    # ============================================
-    # INFORMACIÓN PERSONAL
-    # ============================================
-
+    # ── INFORMACIÓN PERSONAL ──
     nombre_completo: str
-
     tipo_documento: str
-
     numero_documento: str
-
     fecha_nacimiento: date
-
     ciudad: str
-
     telefono: str
-
     correo: str
 
-
-    # ============================================
-    # INFORMACIÓN DE COMPETENCIA
-    # ============================================
-
+    # ── INFORMACIÓN DE COMPETENCIA ──
     equipo: Optional[str] = None
-
     experiencia: str
 
-
-    # ============================================
-    # INFORMACIÓN DE LA MOTOCICLETA
-    # ============================================
-
+    # ── INFORMACIÓN DE LA MOTOCICLETA ──
     marca_motocicleta: str
-
     modelo_motocicleta: str
-
     cilindraje_motor: int
-
     numero_competidor: int
 
-
-    # ============================================
-    # ACEPTACIÓN DE TÉRMINOS
-    # ============================================
-
+    # ── ACEPTACIÓN DE TÉRMINOS ──
     acepta_terminos: bool
