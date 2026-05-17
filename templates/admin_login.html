@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GP COLOMBIA | PANEL ADMINISTRATIVO</title>
+    <link rel="shortcut icon" href="https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/LOGO_GP.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL0xPR09fR1AuanBnIiwiaWF0IjoxNzczNDMwNjcyLCJleHAiOjE3NzYwMjI2NzJ9.rGW5gWAV-TiyZc_YoVGOFQQL4-XKS8xqxPCz2iA2ceM" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #050505;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* FONDO CON PATRÓN MÁS OSCURO */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background:
+                repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(255,255,255,0.008) 80px, rgba(255,255,255,0.008) 81px),
+                repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(255,255,255,0.008) 80px, rgba(255,255,255,0.008) 81px),
+                #050505;
+        }
+
+        /* BANDA DIAGONAL ROJA */
+        .bg-diagonal {
+            position: fixed;
+            top: -50%;
+            right: -10%;
+            width: 40%;
+            height: 200%;
+            background: rgba(225,6,0,0.04);
+            transform: rotate(-15deg);
+            pointer-events: none;
+        }
+
+        .bg-stripe-top {
+            position: fixed;
+            top: 0; left: -10%;
+            width: 120%; height: 3px;
+            background: linear-gradient(90deg, transparent, #e10600 20%, #e10600 80%, transparent);
+        }
+
+        .bg-stripe-bottom {
+            position: fixed;
+            bottom: 0; left: -10%;
+            width: 120%; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(225,6,0,0.3) 50%, transparent);
+        }
+
+        /* CONTENEDOR */
+        .admin-wrap {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 420px;
+            padding: 0 20px;
+            animation: fadeIn 0.35s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* BADGE ADMIN */
+        .admin-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 28px;
+        }
+
+        .badge-icon {
+            width: 48px; height: 48px;
+            background: rgba(225,6,0,0.15);
+            border: 1px solid rgba(225,6,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #e10600;
+        }
+
+        .badge-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .badge-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            letter-spacing: 4px;
+            line-height: 1;
+        }
+
+        .badge-subtitle {
+            font-size: 10px;
+            color: #e10600;
+            letter-spacing: 4px;
+            font-weight: 700;
+        }
+
+        /* CARD */
+        .card-body {
+            background: #0a0a0a;
+            border: 1px solid rgba(225,6,0,0.2);
+            border-top: 3px solid #e10600;
+            padding: 32px 28px;
+            position: relative;
+        }
+
+        /* Esquina decorativa */
+        .card-body::after {
+            content: '';
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 40px; height: 40px;
+            border-right: 2px solid rgba(225,6,0,0.3);
+            border-bottom: 2px solid rgba(225,6,0,0.3);
+        }
+
+        .card-title {
+            font-size: 13px;
+            letter-spacing: 3px;
+            color: #555;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-title i { color: #e10600; }
+
+        /* FORM */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: #555;
+            font-weight: 700;
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #333;
+            font-size: 13px;
+            pointer-events: none;
+            transition: color 0.2s;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 11px 40px;
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.06);
+            color: #ccc;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: rgba(225,6,0,0.6);
+            background: #151515;
+        }
+
+        .form-input:focus ~ .input-icon { color: #e10600; }
+
+        .input-wrap:focus-within .input-icon { color: #e10600; }
+
+        .toggle-pass {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #333;
+            cursor: pointer;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+        .toggle-pass:hover { color: #e10600; }
+
+        .btn-submit {
+            width: 100%;
+            padding: 13px;
+            background: #e10600;
+            border: none;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s;
+            clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+        }
+
+        .btn-submit:hover { background: #ff2200; }
+
+        /* ERROR */
+        .alerta-error {
+            background: rgba(225,6,0,0.08);
+            border-left: 2px solid #e10600;
+            padding: 10px 14px;
+            margin-bottom: 16px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #ff6666;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* AVISO SEGURIDAD */
+        .aviso-seguridad {
+            margin-top: 20px;
+            padding: 10px 14px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            font-size: 11px;
+            color: #333;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* VOLVER */
+        .back-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 24px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover { color: #666; }
+
+        @media (max-width: 480px) {
+            .card-body { padding: 24px 18px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-diagonal"></div>
+    <div class="bg-stripe-top"></div>
+    <div class="bg-stripe-bottom"></div>
+
+    <div class="admin-wrap">
+
+        <!-- BADGE ADMIN -->
+        <div class="admin-badge">
+            <div class="badge-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div class="badge-text">
+                <span class="badge-title">GP COLOMBIA</span>
+                <span class="badge-subtitle">PANEL ADMINISTRATIVO</span>
+            </div>
+        </div>
+
+        <!-- CARD -->
+        <div class="card-body">
+
+            <div class="card-title">
+                <i class="fa-solid fa-lock"></i>
+                ACCESO RESTRINGIDO — SOLO PERSONAL AUTORIZADO
+            </div>
+
+            {% if request.query_params.get('error') == 'credenciales_invalidas' %}
+            <div class="alerta-error">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                CREDENCIALES INCORRECTAS. ACCESO DENEGADO.
+            </div>
+            {% endif %}
+
+            <form action="/admin/login" method="POST">
+
+                <div class="form-group">
+                    <label class="form-label">USUARIO ADMINISTRADOR</label>
+                    <div class="input-wrap">
+                        <input
+                            type="text"
+                            name="username"
+                            class="form-input"
+                            placeholder="USUARIO"
+                            required
+                            autocomplete="off"
+                        >
+                        <i class="fa-solid fa-user input-icon"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">CONTRASEÑA</label>
+                    <div class="input-wrap">
+                        <input
+                            type="password"
+                            name="password"
+                            id="adminPass"
+                            class="form-input"
+                            placeholder="••••••••••••"
+                            required
+                            autocomplete="current-password"
+                        >
+                        <i class="fa-solid fa-key input-icon"></i>
+                        <button type="button" class="toggle-pass" onclick="togglePassword('adminPass', this)">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <i class="fa-solid fa-right-to-bracket"></i> INGRESAR AL PANEL
+                </button>
+
+            </form>
+
+            <div class="aviso-seguridad">
+                <i class="fa-solid fa-circle-info" style="color:#444"></i>
+                LAS SESIONES EXPIRAN AUTOMÁTICAMENTE DESPUÉS DE 8 HORAS.
+            </div>
+
+        </div>
+
+        <a href="/login" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i>
+            VOLVER AL ACCESO DE PILOTOS
+        </a>
+
+    </div>
+
+    <script>
+        function togglePassword(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const icon  = btn.querySelector("i");
+            if (input.type === "password") {
+                input.type = "text";
+                icon.className = "fa-solid fa-eye-slash";
+            } else {
+                input.type = "password";
+                icon.className = "fa-solid fa-eye";
+            }
+        }
+    </script>
+</body>
+</html>
