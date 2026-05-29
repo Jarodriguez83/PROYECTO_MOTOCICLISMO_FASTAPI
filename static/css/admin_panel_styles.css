@@ -1,0 +1,545 @@
+/* ============================================================
+   ADMIN PANEL STYLES — GP COLOMBIA
+   ============================================================ */
+
+:root {
+    --bg: #080808;
+    --surface: #0f0f0f;
+    --surface-strong: #111111;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.12);
+    --accent: #e10600;
+    --accent-soft: rgba(225,6,0,0.12);
+    --text: #f4f4f4;
+    --text-muted: #888;
+    --text-muted-strong: #aaa;
+    --danger: #ff2200;
+}
+
+/* ADMIN HEADER */
+.admin-header {
+    background: #0a0a0a;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 18px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.admin-header-inner {
+    max-width: 1500px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.admin-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-logo-gp {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--accent);
+    letter-spacing: 4px;
+}
+
+.admin-logo-right {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.admin-logo-col,
+.admin-logo-sub {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.admin-logo-col { color: #fff; }
+.admin-logo-sub { color: var(--text-muted); }
+
+.admin-nav {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.admin-nav-btn {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--text);
+    padding: 12px 18px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+}
+
+.admin-nav-btn i {
+    margin-right: 8px;
+}
+
+.admin-nav-btn:hover,
+.admin-nav-btn.activo {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+.admin-btn-logout {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.admin-btn-logout:hover {
+    background: rgba(225,6,0,0.12);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* HERO STATS */
+.admin-hero {
+    padding: 30px 20px 22px;
+    background:
+        linear-gradient(135deg, rgba(225,6,0,0.14) 0%, transparent 52%),
+        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,0.015) 60px, rgba(255,255,255,0.015) 61px),
+        #0a0a0a;
+    border-bottom: 3px solid var(--accent);
+}
+
+.admin-hero-inner {
+    max-width: 1500px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    align-items: stretch;
+}
+
+.admin-stat {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 120px;
+}
+
+.admin-stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(34px, 4vw, 48px);
+    color: var(--accent);
+    letter-spacing: 1px;
+    line-height: 1;
+}
+
+.admin-stat-lbl {
+    color: var(--text-muted);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.admin-stat-div {
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+    margin: 8px 0;
+}
+
+.admin-stat-cats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.cat-mini {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+.cat-mini-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: #fff;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    text-transform: uppercase;
+}
+
+.cat-mini-lbl {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.cat-color-novato     { background: #4ea3ff; }
+.cat-color-intermedio { background: #ffa800; }
+.cat-color-experto    { background: #e10600; }
+.cat-color-elite      { background: #d4af37; }
+
+/* SECTION PANELS */
+.admin-tab { display: none; }
+.admin-tab.activo { display: block; }
+
+.seccion-panel {
+    padding: 40px 20px 60px;
+    background: var(--bg);
+}
+
+.contenedor-panel {
+    max-width: 1500px;
+    margin: auto;
+}
+
+.barra-carreras-admin {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding: 20px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-left: 3px solid var(--accent);
+}
+
+.titulo-tab-carrera {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 3vw, 38px);
+    letter-spacing: 4px;
+    margin: 0;
+}
+
+.btn-nueva-carrera {
+    padding: 12px 20px;
+    background: var(--accent);
+    border: none;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    text-transform: uppercase;
+}
+
+.btn-nueva-carrera:hover {
+    background: #ff2200;
+}
+
+.grid-carreras-admin {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.card-carrera-admin {
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.card-carrera-admin:hover {
+    transform: translateY(-4px);
+    border-color: rgba(225,6,0,0.35);
+}
+
+.card-carrera-admin.carrera-inactiva {
+    opacity: 0.75;
+}
+
+.cca-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 16px;
+    align-items: center;
+    padding: 22px 22px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.cca-fecha {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 90px;
+    padding: 12px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+.cca-dia {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 34px;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.cca-mes {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.cca-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.badge-cat-admin {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 6px 12px;
+    text-transform: uppercase;
+    border-radius: 0;
+}
+
+.badge-cat-novato     { background: #4ea3ff; color: #000; }
+.badge-cat-intermedio { background: #ffa800; color: #000; }
+.badge-cat-experto    { background: #e10600; color: #fff; }
+.badge-cat-elite      { background: #d4af37; color: #000; }
+
+.cca-nombre {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+.cca-ubicacion {
+    color: var(--text-muted);
+    font-size: 13px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.cca-estado {
+    text-align: right;
+}
+
+.badge-estado {
+    display: inline-flex;
+    padding: 8px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.badge-activo {
+    color: #fff;
+    background: rgba(66, 210, 46, 0.15);
+    border: 1px solid rgba(66, 210, 46, 0.25);
+}
+
+.badge-inactivo {
+    color: #fff;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.cca-body {
+    padding: 20px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.cca-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 12px;
+}
+
+.cca-stat {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 16px 14px;
+    text-align: center;
+}
+
+.cca-stat-num {
+    display: block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--accent);
+}
+
+.cca-stat-lbl {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    margin-top: 6px;
+}
+
+.cca-desc {
+    font-size: 14px;
+    color: #ccc;
+    line-height: 1.7;
+}
+
+.cca-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 0 22px 22px;
+}
+
+.btn-toggle-carrera,
+.btn-eliminar-carrera {
+    flex: 1;
+    padding: 12px 18px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.03);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-toggle-carrera:hover,
+.btn-eliminar-carrera:hover {
+    background: rgba(225,6,0,0.18);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+.btn-activar,
+.btn-desactivar {
+    border-color: rgba(255,255,255,0.2);
+}
+
+/* UTILS GLOBALES */
+.rojo-txt {
+    color: var(--accent);
+}
+
+.texto-gris {
+    color: #888;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+    .admin-hero-inner,
+    .grid-carreras-admin {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-header-inner,
+    .cca-header {
+        grid-template-columns: 1fr;
+    }
+
+    .cca-estado {
+        text-align: left;
+    }
+}
+
+@media (max-width: 720px) {
+    .admin-header {
+        padding: 18px 14px;
+    }
+
+    .admin-nav,
+    .admin-header-inner {
+        justify-content: center;
+    }
+
+    .admin-logo-gp {
+        font-size: 30px;
+    }
+
+    .admin-hero {
+        padding: 24px 14px 20px;
+    }
+
+    .admin-stat {
+        padding: 18px 14px;
+    }
+
+    .barra-carreras-admin,
+    .cca-header,
+    .cca-body,
+    .cca-acciones {
+        padding: 16px;
+    }
+
+    .cca-header {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .cca-fecha {
+        min-width: auto;
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .cca-fecha span {
+        font-size: 18px;
+    }
+
+    .btn-toggle-carrera,
+    .btn-eliminar-carrera {
+        min-width: 100%;
+    }
+}
