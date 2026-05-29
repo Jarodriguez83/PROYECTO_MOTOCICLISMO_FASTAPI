@@ -1,0 +1,811 @@
+/* ============================================================
+   CARRERAS PÚBLICO — GP COLOMBIA 2026
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background: #080808;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+.rojo { color: #e10600; }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero-carreras-pub {
+    position: relative;
+    width: 100%;
+    min-height: 340px;
+    background:
+        linear-gradient(135deg, rgba(225,6,0,0.12) 0%, transparent 55%),
+        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,0.012) 60px, rgba(255,255,255,0.012) 61px),
+        repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255,255,255,0.012) 60px, rgba(255,255,255,0.012) 61px),
+        #0a0a0a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 70px 40px 50px;
+    border-bottom: 3px solid #e10600;
+    overflow: hidden;
+}
+
+.hero-carreras-pub::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -10%;
+    width: 120%; height: 4px;
+    background: linear-gradient(90deg, transparent, #e10600 20%, #e10600 80%, transparent);
+}
+
+.hero-pub-content {
+    text-align: center;
+    margin-bottom: 40px;
+    z-index: 1;
+}
+
+.hero-pub-badge {
+    display: inline-block;
+    background: #e10600;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    padding: 5px 20px;
+    margin-bottom: 18px;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+.hero-pub-titulo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 6vw, 72px);
+    letter-spacing: 5px;
+    line-height: 1;
+    margin-bottom: 16px;
+    text-shadow: 0 0 40px rgba(225,6,0,0.25);
+}
+
+.linea-hero-pub {
+    width: 80px;
+    height: 3px;
+    background: #e10600;
+    margin: 0 auto 16px;
+}
+
+.hero-pub-subtitulo {
+    font-size: 16px;
+    color: #aaa;
+    letter-spacing: 1px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* STATS */
+.hero-pub-stats {
+    display: flex;
+    align-items: center;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-top: 2px solid #e10600;
+    padding: 18px 50px;
+    z-index: 1;
+}
+
+.pub-stat {
+    text-align: center;
+    padding: 0 36px;
+}
+
+.pub-stat-num {
+    display: block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 44px;
+    color: #e10600;
+    line-height: 1;
+    text-shadow: 0 0 20px rgba(225,6,0,0.4);
+}
+
+.pub-stat-lbl {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #888;
+    margin-top: 4px;
+}
+
+.pub-stat-div {
+    width: 1px;
+    height: 50px;
+    background: rgba(255,255,255,0.08);
+}
+
+/* ============================================================
+   SECCIÓN CATEGORÍAS
+   ============================================================ */
+.seccion-categorias {
+    padding: 70px 20px;
+    background: #0a0a0a;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.contenedor-categorias {
+    max-width: 1300px;
+    margin: auto;
+}
+
+.titulo-seccion-cat {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    letter-spacing: 4px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.subtitulo-cat {
+    text-align: center;
+    color: #666;
+    font-size: 15px;
+    margin-bottom: 50px;
+    letter-spacing: 0.5px;
+}
+
+.grid-categorias {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.card-categoria {
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-top: 3px solid;
+    padding: 28px 22px;
+    position: relative;
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.card-categoria:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+}
+
+.card-novato     { border-top-color: #4ea3ff; }
+.card-intermedio { border-top-color: #ffa800; }
+.card-experto    { border-top-color: #e10600; }
+.card-elite      { border-top-color: #d4af37; }
+
+.cat-icono {
+    font-size: 36px;
+    margin-bottom: 14px;
+    display: block;
+}
+
+.cat-nombre {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+}
+
+.cat-req {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #555;
+    margin-bottom: 16px;
+    font-weight: 700;
+}
+
+.cat-lista {
+    list-style: none;
+    padding: 0;
+}
+
+.cat-lista li {
+    font-size: 13px;
+    color: #bbb;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    padding-left: 14px;
+    position: relative;
+}
+
+.cat-lista li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #e10600;
+    font-size: 11px;
+}
+
+.cat-badge-nivel {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #333;
+    background: rgba(255,255,255,0.04);
+    padding: 3px 8px;
+    border: 1px solid rgba(255,255,255,0.07);
+}
+
+/* ============================================================
+   SECCIÓN EVENTOS
+   ============================================================ */
+.seccion-eventos {
+    padding: 60px 20px;
+    background: #080808;
+}
+
+.contenedor-eventos {
+    max-width: 1300px;
+    margin: auto;
+}
+
+.barra-filtros-pub {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.titulo-eventos {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 3.5vw, 44px);
+    letter-spacing: 4px;
+}
+
+.filtros-pub-wrap {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-filtro-pub {
+    padding: 8px 18px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #888;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-filtro-pub:hover,
+.btn-filtro-pub.activo {
+    background: #e10600;
+    border-color: #e10600;
+    color: #fff;
+}
+
+/* ============================================================
+   GRID DE EVENTOS
+   ============================================================ */
+.grid-eventos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 24px;
+}
+
+.card-evento {
+    background: #0f0f0f;
+    border: 1px solid rgba(255,255,255,0.06);
+    overflow: hidden;
+    transition: transform 0.25s, border-color 0.25s;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-evento:hover {
+    transform: translateY(-4px);
+    border-color: rgba(225,6,0,0.35);
+}
+
+/* BANNER */
+.evento-banner {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    background: #1a1a1a;
+}
+
+.evento-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s;
+}
+
+.card-evento:hover .evento-img {
+    transform: scale(1.05);
+}
+
+.evento-img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    color: rgba(225,6,0,0.15);
+    background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.012) 10px,
+        rgba(255,255,255,0.012) 11px
+    );
+}
+
+/* BADGES SOBRE EL BANNER */
+.badge-cat-evento {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 4px 12px;
+    clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
+}
+
+.badge-cat-novato     { background: #4ea3ff; color: #000; }
+.badge-cat-intermedio { background: #ffa800; color: #000; }
+.badge-cat-experto    { background: #e10600; color: #fff; }
+.badge-cat-elite      { background: #d4af37; color: #000; }
+
+.badge-cupos {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0,0,0,0.75);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #eee;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    backdrop-filter: blur(4px);
+}
+
+.badge-lleno { background: rgba(225,6,0,0.8); color: #fff; border-color: #e10600; }
+.badge-pocos { background: rgba(255,168,0,0.8); color: #000; border-color: #ffa800; }
+
+/* CUERPO */
+.evento-cuerpo {
+    padding: 22px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.evento-fecha-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.evento-fecha-dia {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+    line-height: 1;
+    color: #e10600;
+}
+
+.evento-fecha-mes {
+    font-size: 12px;
+    color: #666;
+    letter-spacing: 2px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.evento-nombre {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    line-height: 1.2;
+}
+
+.evento-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.evento-meta span {
+    font-size: 12px;
+    color: #777;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.evento-meta i { color: #e10600; font-size: 11px; }
+
+.evento-descripcion {
+    font-size: 13px;
+    color: #888;
+    line-height: 1.6;
+}
+
+/* PUNTOS */
+.evento-puntos {
+    display: flex;
+    gap: 8px;
+}
+
+.punto-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 8px 4px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+.punto-pos { font-size: 16px; }
+
+.punto-val {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #888;
+}
+
+/* BARRA OCUPACIÓN */
+.evento-ocupacion {
+    margin-top: auto;
+}
+
+.ocup-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #555;
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+.ocup-barra {
+    height: 3px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.ocup-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #e10600, #ff4422);
+    border-radius: 2px;
+    transition: width 0.6s ease;
+}
+
+/* BOTÓN INSCRIPCIÓN */
+.btn-inscribirse {
+    width: 100%;
+    padding: 12px;
+    background: #e10600;
+    border: none;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+}
+
+.btn-inscribirse:hover { background: #ff2200; }
+
+.btn-lleno {
+    background: rgba(255,255,255,0.05) !important;
+    color: #444 !important;
+    cursor: not-allowed !important;
+    clip-path: none !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+/* ============================================================
+   ESTADO VACÍO
+   ============================================================ */
+.estado-sin-eventos {
+    text-align: center;
+    padding: 80px 20px;
+    color: #444;
+}
+
+.estado-sin-eventos i {
+    font-size: 60px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.estado-sin-eventos h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+}
+
+.estado-sin-eventos p {
+    font-size: 14px;
+    margin-bottom: 24px;
+}
+
+.btn-volver-home {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #e10600;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.btn-volver-home:hover { background: #ff2200; }
+
+/* ============================================================
+   MODAL INSCRIPCIÓN
+   ============================================================ */
+.modal-overlay-pub {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+}
+
+.modal-overlay-pub.activo {
+    display: flex;
+    animation: fadeInPub 0.2s ease;
+}
+
+@keyframes fadeInPub {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.modal-inscripcion {
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-top: 3px solid #e10600;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    animation: slideUpPub 0.25s ease;
+    padding-bottom: 32px;
+}
+
+@keyframes slideUpPub {
+    from { transform: translateY(20px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+}
+
+.modal-cerrar-pub {
+    position: absolute;
+    top: 14px; right: 14px;
+    background: rgba(255,255,255,0.06);
+    border: none;
+    color: #ccc;
+    width: 30px; height: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.modal-cerrar-pub:hover {
+    background: #e10600;
+    color: #fff;
+}
+
+.modal-inscripcion-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 24px 0;
+}
+
+.modal-inscripcion-badge {
+    width: 56px; height: 56px;
+    background: rgba(225,6,0,0.15);
+    border: 1px solid rgba(225,6,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #e10600;
+    flex-shrink: 0;
+}
+
+.modal-inscripcion-titulo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 4px;
+    line-height: 1;
+}
+
+.modal-inscripcion-nombre {
+    font-size: 13px;
+    color: #e10600;
+    letter-spacing: 1px;
+    display: block;
+    margin-top: 4px;
+}
+
+.modal-linea-roja-pub {
+    height: 2px;
+    background: linear-gradient(90deg, #e10600, transparent);
+    margin: 14px 8px;
+}
+
+/* BLOQUE AUTH */
+.bloque-auth {
+    padding: 16px 24px;
+    text-align: center;
+}
+
+.auth-icono {
+    font-size: 40px;
+    color: rgba(225,6,0,0.4);
+    margin-bottom: 14px;
+}
+
+.bloque-auth h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.bloque-auth p {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.auth-botones {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.btn-auth-login {
+    padding: 11px 24px;
+    background: #e10600;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    transition: background 0.2s;
+}
+
+.btn-auth-login:hover { background: #ff2200; }
+
+.btn-auth-registro {
+    padding: 11px 24px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #ccc;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    transition: all 0.2s;
+}
+
+.btn-auth-registro:hover {
+    border-color: rgba(255,255,255,0.4);
+    color: #fff;
+}
+
+.auth-info {
+    font-size: 11px;
+    color: #444;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+/* FORMULARIO CONFIRMACIÓN INSCRIPCIÓN */
+.inscripcion-info-carrera {
+    background: rgba(225,6,0,0.06);
+    border: 1px solid rgba(225,6,0,0.2);
+    padding: 16px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #ccc;
+    text-align: left;
+    letter-spacing: 0.5px;
+}
+
+.btn-confirmar-inscripcion {
+    width: 100%;
+    padding: 13px;
+    background: #e10600;
+    border: none;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-confirmar-inscripcion:hover { background: #ff2200; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1100px) {
+    .grid-categorias { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+    .hero-pub-stats { padding: 14px 20px; }
+    .pub-stat       { padding: 0 20px; }
+    .pub-stat-num   { font-size: 34px; }
+    .barra-filtros-pub { flex-direction: column; align-items: flex-start; }
+    .grid-eventos   { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+    .hero-pub-stats { flex-direction: column; gap: 14px; }
+    .pub-stat-div   { width: 50px; height: 1px; }
+    .grid-categorias { grid-template-columns: 1fr; }
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #e10600; }

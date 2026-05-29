@@ -14,6 +14,7 @@ margin: 0;
 background: #080808;
 color: #fff;
 }
+
 .encabezado-principal{
     width:100%;
     background:#0b0b0b;
@@ -68,6 +69,7 @@ color: #fff;
 .menu-navegacion{
     display:flex;
     gap:14px;
+    align-items:center;
 }
 
 .enlace-menu{
@@ -80,6 +82,7 @@ color: #fff;
     border:2px solid transparent;
     transition:0.3s;
 }
+
 /* HOVER */
 .enlace-menu:hover{
     background:red;
@@ -90,6 +93,23 @@ color: #fff;
 .activo{
     background:red;
     border-radius: 2rem;
+}
+
+/* BOTÓN MI CUENTA — destacado */
+.enlace-login {
+    background: transparent;
+    border: 2px solid rgba(225,6,0,0.6) !important;
+    border-radius: 2rem !important;
+    color: #e10600 !important;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.enlace-login:hover {
+    background: #e10600 !important;
+    color: white !important;
+    border-color: #e10600 !important;
 }
 
 /* BOTON HAMBURGUESA */
@@ -120,6 +140,7 @@ color: #fff;
     gap:20px;
     padding:20px 0;
     display:none;
+    border-bottom: 2px solid rgba(225,6,0,0.3);
 }
 
 .menu-navegacion.activo{
@@ -131,7 +152,7 @@ color: #fff;
 }
 .logo-proyecto{
     display:flex;
-    padding-left: 10%;
+    padding-left: 5%;
     flex-direction:column;
 }
 }

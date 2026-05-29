@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/LOGO_GP.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL0xPR09fR1AuanBnIiwiaWF0IjoxNzczNDMwNjcyLCJleHAiOjE3NzYwMjI2NzJ9.rGW5gWAV-TiyZc_YoVGOFQQL4-XKS8xqxPCz2iA2ceM" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/carreras_publico_styles.css">
+    <title>GP COLOMBIA | CARRERAS 2026</title>
+</head>
+{% include 'header.html' %}
+<body>
+
+         HERO
+    <section class="hero-carreras-pub">
+        <div class="hero-pub-content">
+            <div class="hero-pub-badge">TEMPORADA 2026</div>
+            <h1 class="hero-pub-titulo">
+                CALENDARIO DE <span class="rojo">COMPETENCIAS</span>
+            </h1>
+            <div class="linea-hero-pub"></div>
+            <p class="hero-pub-subtitulo">
+                Inscríbete en las carreras del año según tu categoría y demuestra tu talento en pista
+            </p>
+        </div>
+        <!-- STATS RÁPIDAS -->
+        <div class="hero-pub-stats">
+            <div class="pub-stat">
+                <span class="pub-stat-num">{{ carreras | length }}</span>
+                <span class="pub-stat-lbl">EVENTOS 2026</span>
+            </div>
+            <div class="pub-stat-div"></div>
+            <div class="pub-stat">
+                <span class="pub-stat-num">4</span>
+                <span class="pub-stat-lbl">CATEGORÍAS</span>
+            </div>
+            <div class="pub-stat-div"></div>
+            <div class="pub-stat">
+                <span class="pub-stat-num">{{ total_inscritos }}</span>
+                <span class="pub-stat-lbl">PILOTOS ACTIVOS</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SISTEMA DE CATEGORÍAS
+    ============================================================ -->
+    <section class="seccion-categorias">
+        <div class="contenedor-categorias">
+            <h2 class="titulo-seccion-cat">SISTEMA DE <span class="rojo">CATEGORÍAS</span></h2>
+            <p class="subtitulo-cat">Tu nivel determina en qué competencias puedes participar. Gana carreras para ascender.</p>
+            <div class="grid-categorias">
+                <!-- NOVATO -->
+                <div class="card-categoria card-novato">
+                    <div class="cat-icono">🏁</div>
+                    <div class="cat-nombre">NOVATO</div>
+                    <div class="cat-req">NIVEL DE ENTRADA</div>
+                    <ul class="cat-lista">
+                        <li>Acceso a todas las carreras de iniciación</li>
+                        <li>Entrena tu técnica y gana experiencia</li>
+                        <li>3 carreras completadas → sube a Intermedio</li>
+                    </ul>
+                    <div class="cat-badge-nivel">NIVEL 1</div>
+                </div>
+                <!-- INTERMEDIO -->
+                <div class="card-categoria card-intermedio">
+                    <div class="cat-icono">⚡</div>
+                    <div class="cat-nombre">INTERMEDIO</div>
+                    <div class="cat-req">3 CARRERAS COMPLETADAS</div>
+                    <ul class="cat-lista">
+                        <li>Acceso a circuitos de mayor dificultad</li>
+                        <li>Compite por puntos en tabla general</li>
+                        <li>5 carreras completadas → sube a Experto</li>
+                    </ul>
+                    <div class="cat-badge-nivel">NIVEL 2</div>
+                </div>
+                <!-- EXPERTO -->
+                <div class="card-categoria card-experto">
+                    <div class="cat-icono">🏆</div>
+                    <div class="cat-nombre">EXPERTO</div>
+                    <div class="cat-req">5 CARRERAS + INTERMEDIO</div>
+                    <ul class="cat-lista">
+                        <li>Acceso a circuitos premium nacionales</li>
+                        <li>Competencias con mayor dotación de puntos</li>
+                        <li>8 carreras completadas → sube a Élite</li>
+                    </ul>
+                    <div class="cat-badge-nivel">NIVEL 3</div>
+                </div>
+                <!-- ÉLITE -->
+                <div class="card-categoria card-elite">
+                    <div class="cat-icono">👑</div>
+                    <div class="cat-nombre">ÉLITE</div>
+                    <div class="cat-req">8 CARRERAS + EXPERTO</div>
+                    <ul class="cat-lista">
+                        <li>Competencias nacionales e internacionales</li>
+                        <li>Máxima dotación de puntos y premios</li>
+                        <li>Nivel máximo del campeonato GP Colombia</li>
+                    </ul>
+                    <div class="cat-badge-nivel">NIVEL 4</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         FILTROS
+    ============================================================ -->
+    <section class="seccion-eventos">
+        <div class="contenedor-eventos">
+
+            <div class="barra-filtros-pub">
+                <h2 class="titulo-eventos">PRÓXIMAS <span class="rojo">COMPETENCIAS</span></h2>
+                <div class="filtros-pub-wrap">
+                    <button class="btn-filtro-pub activo" onclick="filtrarEventos('todos', this)">TODAS</button>
+                    <button class="btn-filtro-pub" onclick="filtrarEventos('novato', this)">NOVATO</button>
+                    <button class="btn-filtro-pub" onclick="filtrarEventos('intermedio', this)">INTERMEDIO</button>
+                    <button class="btn-filtro-pub" onclick="filtrarEventos('experto', this)">EXPERTO</button>
+                    <button class="btn-filtro-pub" onclick="filtrarEventos('elite', this)">ÉLITE</button>
+                </div>
+            </div>
+
+            <!-- GRID DE EVENTOS -->
+            {% if carreras %}
+            <div class="grid-eventos" id="gridEventos">
+                {% for c in carreras %}
+                <article class="card-evento" data-categoria="{{ c.categoria_minima }}">
+
+                    <!-- BANNER IMAGEN -->
+                    <div class="evento-banner">
+                        {% if c.imagen_url %}
+                        <img src="{{ c.imagen_url }}" alt="{{ c.nombre }}" class="evento-img">
+                        {% else %}
+                        <div class="evento-img-placeholder">
+                            <i class="fa-solid fa-flag-checkered"></i>
+                        </div>
+                        {% endif %}
+                        <!-- BADGE CATEGORÍA -->
+                        <span class="badge-cat-evento badge-cat-{{ c.categoria_minima }}">
+                            {{ c.categoria_minima | upper }}
+                        </span>
+                        <!-- CUPOS -->
+                        {% set cupos_libres = c.cupos_totales - c.inscritos %}
+                        <span class="badge-cupos {% if cupos_libres == 0 %}badge-lleno{% elif cupos_libres <= 5 %}badge-pocos{% endif %}">
+                            {% if cupos_libres == 0 %}
+                                LLENO
+                            {% elif cupos_libres <= 5 %}
+                                ¡ÚLTIMOS {{ cupos_libres }} CUPOS!
+                            {% else %}
+                                {{ cupos_libres }} CUPOS
+                            {% endif %}
+                        </span>
+                    </div>
+
+                    <!-- CONTENIDO -->
+                    <div class="evento-cuerpo">
+                        <!-- FECHA -->
+                        <div class="evento-fecha-wrap">
+                            <div class="evento-fecha-dia">{{ c.fecha.strftime('%d') }}</div>
+                            <div class="evento-fecha-mes">{{ c.fecha.strftime('%b %Y') | upper }}</div>
+                        </div>
+
+                        <h3 class="evento-nombre">{{ c.nombre }}</h3>
+
+                        <div class="evento-meta">
+                            <span><i class="fa-solid fa-location-dot"></i> {{ c.ubicacion }}</span>
+                            {% if c.circuito %}
+                            <span><i class="fa-solid fa-road"></i> {{ c.circuito }}</span>
+                            {% endif %}
+                            {% if c.vueltas %}
+                            <span><i class="fa-solid fa-rotate"></i> {{ c.vueltas }} VUELTAS</span>
+                            {% endif %}
+                            {% if c.hora %}
+                            <span><i class="fa-solid fa-clock"></i> {{ c.hora }}</span>
+                            {% endif %}
+                        </div>
+
+                        <p class="evento-descripcion">{{ c.descripcion }}</p>
+
+                        <!-- PUNTOS -->
+                        <div class="evento-puntos">
+                            <div class="punto-item punto-oro">
+                                <span class="punto-pos">🥇</span>
+                                <span class="punto-val">{{ c.puntos_primer_lugar }} pts</span>
+                            </div>
+                            <div class="punto-item punto-plata">
+                                <span class="punto-pos">🥈</span>
+                                <span class="punto-val">{{ c.puntos_segundo_lugar }} pts</span>
+                            </div>
+                            <div class="punto-item punto-bronce">
+                                <span class="punto-pos">🥉</span>
+                                <span class="punto-val">{{ c.puntos_tercer_lugar }} pts</span>
+                            </div>
+                        </div>
+
+                        <!-- BARRA DE OCUPACIÓN -->
+                        <div class="evento-ocupacion">
+                            <div class="ocup-label">
+                                <span>INSCRITOS</span>
+                                <span>{{ c.inscritos }} / {{ c.cupos_totales }}</span>
+                            </div>
+                            <div class="ocup-barra">
+                                <div class="ocup-fill" style="width: {{ ((c.inscritos / c.cupos_totales) * 100) | int }}%"></div>
+                            </div>
+                        </div>
+
+                        <!-- BOTÓN INSCRIPCIÓN -->
+                        {% if cupos_libres > 0 %}
+                        <button
+                            class="btn-inscribirse"
+                            onclick="abrirModalInscripcion({{ c.id }}, '{{ c.nombre }}', '{{ c.categoria_minima }}')"
+                        >
+                            <i class="fa-solid fa-flag-checkered"></i> INSCRIBIRME EN ESTA CARRERA
+                        </button>
+                        {% else %}
+                        <button class="btn-inscribirse btn-lleno" disabled>
+                            <i class="fa-solid fa-ban"></i> CUPOS AGOTADOS
+                        </button>
+                        {% endif %}
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+
+            <!-- SIN RESULTADOS FILTRO -->
+            <div id="sinEventos" class="estado-sin-eventos" style="display:none;">
+                <i class="fa-solid fa-flag-checkered"></i>
+                <h3>NO HAY EVENTOS EN ESTA CATEGORÍA</h3>
+                <p>Próximamente se agregarán competencias para este nivel.</p>
+            </div>
+
+            {% else %}
+            <!-- ESTADO VACÍO -->
+            <div class="estado-sin-eventos">
+                <i class="fa-solid fa-flag-checkered"></i>
+                <h3>NO HAY EVENTOS PROGRAMADOS AÚN</h3>
+                <p>El equipo de GP Colombia está preparando el calendario 2026. ¡Vuelve pronto!</p>
+                <a href="/" class="btn-volver-home">VOLVER AL INICIO</a>
+            </div>
+            {% endif %}
+
+        </div>
+    </section>
+
+    <!-- ============================================================
+         MODAL INSCRIPCIÓN
+    ============================================================ -->
+    <div class="modal-overlay-pub" id="modalInscripcionOverlay" onclick="cerrarModalInscripcion()">
+        <div class="modal-inscripcion" onclick="event.stopPropagation()">
+            <button class="modal-cerrar-pub" onclick="cerrarModalInscripcion()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="modal-inscripcion-header">
+                <div class="modal-inscripcion-badge"><i class="fa-solid fa-flag-checkered"></i></div>
+                <div>
+                    <h2 class="modal-inscripcion-titulo">INSCRIPCIÓN</h2>
+                    <span class="modal-inscripcion-nombre" id="modalNombreCarrera">—</span>
+                </div>
+            </div>
+            <div class="modal-linea-roja-pub"></div>
+
+            <!-- MENSAJE PARA NO AUTENTICADOS -->
+            <div id="bloqueNoAuth" class="bloque-auth">
+                <div class="auth-icono"><i class="fa-solid fa-user-lock"></i></div>
+                <h3>DEBES INICIAR SESIÓN</h3>
+                <p>Para inscribirte en una carrera necesitas tener una cuenta activa en GP Colombia.</p>
+                <div class="auth-botones">
+                    <a href="/login" class="btn-auth-login">
+                        <i class="fa-solid fa-right-to-bracket"></i> INICIAR SESIÓN
+                    </a>
+                    <a href="/" class="btn-auth-registro">
+                        <i class="fa-solid fa-user-plus"></i> REGISTRARME
+                    </a>
+                </div>
+                <div class="auth-info">
+                    <i class="fa-solid fa-circle-info"></i>
+                    Tu categoría debe ser compatible con los requisitos de la carrera.
+                </div>
+            </div>
+
+            <!-- FORMULARIO PARA AUTENTICADOS (se mostraría si hay sesión) -->
+            <div id="bloqueAuth" class="bloque-auth" style="display:none;">
+                <form id="formInscripcion" action="/inscribirse" method="POST">
+                    <input type="hidden" name="carrera_id" id="inputCarreraId">
+                    <div class="inscripcion-info-carrera" id="inscripcionInfoCarrera"></div>
+                    <button type="submit" class="btn-confirmar-inscripcion">
+                        <i class="fa-solid fa-check"></i> CONFIRMAR INSCRIPCIÓN
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ url_for('static', path='js/carreras_publico.js') }}"></script>
+
+</body>
+{% include 'footer.html' %}
+</html>
