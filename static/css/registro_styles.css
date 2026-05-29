@@ -1,0 +1,333 @@
+/* ============================================================
+   REGISTRO DE PILOTOS — GP COLOMBIA 2026
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background: #080808;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+.rojo { color: #e10600; }
+
+/* ============================================================
+   HERO BANNER
+   ============================================================ */
+.hero-registro {
+    position: relative;
+    width: 100%;
+    min-height: 320px;
+    background:
+        linear-gradient(135deg, rgba(225,6,0,0.15) 0%, transparent 60%),
+        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,0.01) 60px, rgba(255,255,255,0.01) 61px),
+        repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255,255,255,0.01) 60px, rgba(255,255,255,0.01) 61px),
+        #0a0a0a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 70px 40px 50px;
+    border-bottom: 3px solid #e10600;
+    overflow: hidden;
+    text-align: center;
+}
+
+.hero-registro::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -10%;
+    width: 120%; height: 4px;
+    background: linear-gradient(90deg, transparent, #e10600 20%, #e10600 80%, transparent);
+}
+
+.hero-content {
+    z-index: 1;
+    max-width: 800px;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: #e10600;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    padding: 6px 22px;
+    margin-bottom: 20px;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+.hero-titulo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(38px, 6.5vw, 68px);
+    letter-spacing: 4px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    text-shadow: 0 0 35px rgba(225,6,0,0.3);
+}
+
+.linea-hero {
+    width: 100px;
+    height: 3px;
+    background: #e10600;
+    margin: 0 auto 20px;
+}
+
+.hero-subtitulo {
+    font-size: 16px;
+    color: #b0b0b0;
+    letter-spacing: 1px;
+    line-height: 1.6;
+}
+
+/* ============================================================
+   SECCION FORMULARIO
+   ============================================================ */
+.seccion-registro-form {
+    padding: 60px 20px;
+    background: #080808;
+}
+
+.contenedor-registro-form {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.formulario-registro {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* BLOQUE DE FORMULARIO */
+.bloque-form {
+    background: #0f0f0f;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-left: 4px solid #e10600;
+    padding: 30px;
+    border-radius: 4px;
+}
+
+.titulo-bloque {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.titulo-bloque i {
+    color: #e10600;
+    font-size: 18px;
+}
+
+.linea-bloque {
+    height: 1px;
+    background: rgba(255,255,255,0.06);
+    margin: 14px 0 24px;
+}
+
+/* GRID DE CAMPOS */
+.grid-campos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.grupo-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.grupo-campo label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #888;
+}
+
+.grupo-campo input,
+.grupo-campo select {
+    background: #161616;
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 12px 14px;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 2px;
+}
+
+.grupo-campo input:focus,
+.grupo-campo select:focus {
+    border-color: #e10600;
+    box-shadow: 0 0 8px rgba(225,6,0,0.15);
+}
+
+/* OJO CONTRASEÑA */
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 44px;
+}
+
+.btn-toggle-pass {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    font-size: 14px;
+    outline: none;
+    padding: 4px;
+    transition: color 0.2s ease;
+}
+
+.btn-toggle-pass:hover {
+    color: #e10600;
+}
+
+/* MENSAJE DE ERROR */
+.error-msg {
+    display: none;
+    font-size: 11px;
+    color: #e10600;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-top: 2px;
+}
+
+/* MEDIDOR DE FORTALEZA */
+.password-strength-bar {
+    height: 3px;
+    background: rgba(255,255,255,0.05);
+    margin-top: 6px;
+    transition: all 0.3s ease;
+    border-radius: 1px;
+}
+
+.password-strength-bar.debil { background: #e10600; width: 33%; }
+.password-strength-bar.media { background: #ffa800; width: 66%; }
+.password-strength-bar.fuerte { background: #00c850; width: 100%; }
+
+.strength-lbl {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-top: 4px;
+}
+
+.match-lbl {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-top: 4px;
+}
+
+/* ============================================================
+   TERMINOS Y CONDICIONES
+   ============================================================ */
+.terminos-bloque {
+    border-left-color: #8e44ad;
+}
+
+.terminos-scroll {
+    background: rgba(255,255,255,0.01);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 16px 20px;
+    height: 140px;
+    overflow-y: scroll;
+    font-size: 13px;
+    color: #aaa;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.terminos-scroll p {
+    margin-bottom: 8px;
+}
+
+.terminos-scroll ul {
+    padding-left: 18px;
+}
+
+.terminos-scroll li {
+    margin-bottom: 6px;
+}
+
+.check-terminos-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.check-terminos-wrap input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #e10600;
+    cursor: pointer;
+}
+
+.check-terminos-wrap label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+/* ============================================================
+   BOTON FINALIZAR
+   ============================================================ */
+.btn-crear-cuenta {
+    width: 100%;
+    padding: 16px;
+    background: #e10600;
+    border: none;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    box-shadow: 0 4px 15px rgba(225,6,0,0.25);
+    margin-top: 10px;
+}
+
+.btn-crear-cuenta:hover {
+    background: #ff2200;
+    box-shadow: 0 6px 20px rgba(225,6,0,0.4);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 800px) {
+    .grid-campos {
+        grid-template-columns: 1fr;
+    }
+    .bloque-form {
+        padding: 20px;
+    }
+}

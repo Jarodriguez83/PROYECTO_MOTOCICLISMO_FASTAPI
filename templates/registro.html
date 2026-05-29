@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/LOGO_GP.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL0xPR09fR1AuanBnIiwiaWF0IjoxNzczNDMwNjcyLCJleHAiOjE3NzYwMjI2NzJ9.rGW5gWAV-TiyZc_YoVGOFQQL4-XKS8xqxPCz2iA2ceM" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/registro_styles.css">
+    <title>GP COLOMBIA | REGISTRO DE PILOTOS</title>
+</head>
+{% include 'header.html' %}
+<body>
+
+    <!-- HERO / TITULO -->
+    <section class="hero-registro">
+        <div class="hero-content">
+            <div class="hero-badge">CAMPEONATO NACIONAL 2026</div>
+            <h1 class="hero-titulo">
+                REGISTRO DE <span class="rojo">PILOTOS</span>
+            </h1>
+            <div class="linea-hero"></div>
+            <p class="hero-subtitulo">
+                Crea tu cuenta oficial en GP Colombia. Al registrarte podrás gestionar tu perfil deportivo, inscribirte a carreras oficiales del calendario anual, acumular puntos de campeonato y ascender de categoría.
+            </p>
+        </div>
+    </section>
+
+    <!-- FORMULARIO DE REGISTRO -->
+    <section class="seccion-registro-form">
+        <div class="contenedor-registro-form">
+            <form action="/register" method="POST" class="formulario-registro" id="formRegistroPiloto">
+                
+                <!-- SECCION 1: DATOS PERSONALES -->
+                <div class="bloque-form">
+                    <h3 class="titulo-bloque"><i class="fa-solid fa-user-check"></i> DATOS PERSONALES</h3>
+                    <div class="linea-bloque"></div>
+                    <div class="grid-campos">
+                        <div class="grupo-campo">
+                            <label for="full_name">NOMBRE COMPLETO <span class="rojo">*</span></label>
+                            <input type="text" id="full_name" name="full_name" required placeholder="Nombres y Apellidos">
+                        </div>
+                        <div class="grupo-campo">
+                            <label for="document_type">TIPO DE DOCUMENTO <span class="rojo">*</span></label>
+                            <select id="document_type" name="document_type" required>
+                                <option value="">SELECCIONE TIPO</option>
+                                <option value="cc">C.C. (CÉDULA DE CIUDADANÍA)</option>
+                                <option value="ce">C.E. (CÉDULA DE EXTRANJERÍA)</option>
+                                <option value="passport">PASAPORTE</option>
+                            </select>
+                        </div>
+                        <div class="grupo-campo">
+                            <label for="document_number">NÚMERO DE DOCUMENTO <span class="rojo">*</span></label>
+                            <input type="text" id="document_number" name="document_number" required placeholder="Número de identificación">
+                        </div>
+                        <div class="grupo-campo">
+                            <label for="birth_date">FECHA DE NACIMIENTO <span class="rojo">*</span></label>
+                            <input type="date" id="birth_date" name="birth_date" required>
+                        </div>
+                        <div class="grupo-campo">
+                            <label for="city">CIUDAD DE RESIDENCIA <span class="rojo">*</span></label>
+                            <select id="city" name="city" required>
+                                <option value="">SELECCIONE CIUDAD</option>
+                                <option value="Bogotá">Bogotá D.C.</option>
+                                <option value="Medellín">Medellín</option>
+                                <option value="Cali">Cali</option>
+                                <option value="Barranquilla">Barranquilla</option>
+                                <option value="Cartagena">Cartagena</option>
+                                <option value="Cúcuta">Cúcuta</option>
+                                <option value="Bucaramanga">Bucaramanga</option>
+                                <option value="Pereira">Pereira</option>
+                                <option value="Ibagué">Ibagué</option>
+                                <option value="Santa Marta">Santa Marta</option>
+                            </select>
+                        </div>
+                        <div class="grupo-campo">
+                            <label for="phone">TELÉFONO DE CONTACTO (10 DÍGITOS) <span class="rojo">*</span></label>
+                            <input type="tel" id="phone" name="phone" required placeholder="Ej: 3001234567" pattern="[0-9]{10}">
+                            <span class="error-msg" id="phoneError">Debe tener exactamente 10 números</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCION 2: DATOS DEL COMPETIDOR -->
+                <div class="bloque-form">
+                    <h3 class="titulo-bloque"><i class="fa-solid fa-motorcycle"></i> FICHA DE COMPETIDOR</h3>
+                    <div class="linea-bloque"></div>
+                    <div class="grid-campos">
+                        <div class="grupo-campo">
+                            <label for="team">EQUIPO / ESCUDERÍA (OPCIONAL)</label>
+                            <input type="text" id="team" name="team" placeholder="Nombre de tu equipo">
+                        </div>
+                        <div class="grupo-campo">
+                            <label for="experience">¿TIENE EXPERIENCIA PREVIA EN CARRERAS? <span class="rojo">*</span></label>
+                            <select id="experience" name="experience" required>
+                                <option value="">SELECCIONE OPCIÓN</option>
+                                <option value="si">SÍ, HE COMPETIDO ANTES</option>
+                                <option value="no">NO, ES MI PRIMERA VEZ</option>
+                            </select>
+                        </div>
+                        <div class="grupo-campo">
+                            <label for="categoria">CATEGORÍA DE REGISTRO <span class="rojo">*</span></label>
+                            <select id="categoria" name="categoria" required>
+                                <option value="novato">NOVATO (Categoría de entrada)</option>
+                                <option value="intermedio">INTERMEDIO (Con experiencia en carreras)</option>
+                                <option value="experto">EXPERTO (Nivel nacional amateur)</option>
+                                <option value="elite">ÉLITE PROFESIONAL (Máximo rendimiento)</option>
+                            </select>
+                        </div>
+                        <div class="grupo-campo">
+                            <label for="motorcycle_brand">MARCA DE LA MOTOCICLETA <span class="rojo">*</span></label>
+                            <input type="text" id="motorcycle_brand" name="motorcycle_brand" required placeholder="Ej: Yamaha, Honda, Suzuki">
+                        </div>
+                        <div class="grupo-campo">
+                            <label for="motorcycle_model">MODELO DE LA MOTOCICLETA <span class="rojo">*</span></label>
+                            <input type="text" id="motorcycle_model" name="motorcycle_model" required placeholder="Ej: YZF-R3, CBR600RR">
+                        </div>
+                        <div class="grupo-campo">
+                            <label for="engine_cc">CILINDRAJE DE LA MOTO (CC) <span class="rojo">*</span></label>
+                            <input type="number" id="engine_cc" name="engine_cc" required placeholder="Ej: 321" min="50">
+                        </div>
+                        <div class="grupo-campo">
+                            <label for="competitor_number">NÚMERO DE PILOTO (DORSAL) <span class="rojo">*</span></label>
+                            <input type="number" id="competitor_number" name="competitor_number" required placeholder="Ej: 46" min="1" max="999">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCION 3: CREDENCIALES DE CUENTA -->
+                <div class="bloque-form">
+                    <h3 class="titulo-bloque"><i class="fa-solid fa-lock"></i> SEGURIDAD DE LA CUENTA</h3>
+                    <div class="linea-bloque"></div>
+                    <div class="grid-campos">
+                        <div class="grupo-campo">
+                            <label for="email">CORREO ELECTRÓNICO <span class="rojo">*</span></label>
+                            <input type="email" id="email" name="email" required placeholder="piloto@ejemplo.com">
+                        </div>
+                        <div class="grupo-campo">
+                            <label for="password">CONTRASEÑA (MIN 8 CARACTERES) <span class="rojo">*</span></label>
+                            <div class="password-wrapper">
+                                <input type="password" id="password" name="password" required placeholder="Crea tu clave segura" minlength="8">
+                                <button type="button" class="btn-toggle-pass" onclick="togglePassField('password', this)"><i class="fa-solid fa-eye"></i></button>
+                            </div>
+                            <div class="password-strength-bar" id="strengthBar"></div>
+                            <span class="strength-lbl" id="strengthText"></span>
+                        </div>
+                        <div class="grupo-campo">
+                            <label for="confirm_password">CONFIRMAR CONTRASEÑA <span class="rojo">*</span></label>
+                            <div class="password-wrapper">
+                                <input type="password" id="confirm_password" name="confirm_password" required placeholder="Repite tu contraseña">
+                                <button type="button" class="btn-toggle-pass" onclick="togglePassField('confirm_password', this)"><i class="fa-solid fa-eye"></i></button>
+                            </div>
+                            <span class="match-lbl" id="matchText"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCION 4: TERMINOS Y CONDICIONES -->
+                <div class="bloque-form terminos-bloque">
+                    <h3 class="titulo-bloque"><i class="fa-solid fa-file-contract"></i> TÉRMINOS Y CONDICIONES</h3>
+                    <div class="linea-bloque"></div>
+                    <div class="terminos-scroll">
+                        <p>
+                            Al registrarse en la plataforma GP Colombia, el participante declara y acepta que:
+                        </p>
+                        <ul>
+                            <li>Toda la información suministrada en este formulario es verídica y corresponde a su identidad y datos reales.</li>
+                            <li>La práctica del motociclismo de velocidad conlleva riesgos inherentes. GP Colombia y sus patrocinadores no se responsabilizan por accidentes ocurridos durante los entrenamientos o carreras libres, eximiendo de toda culpa a la organización.</li>
+                            <li>Es obligatorio cumplir a cabalidad con el reglamento deportivo de la Federación Colombiana de Motociclismo (Fedemoto) y las normas de seguridad del Autódromo de Tocancipá.</li>
+                            <li>El participante autoriza el tratamiento de sus datos personales para fines informativos del campeonato, inscripciones a carreras oficiales, y promociones patrocinadas de acuerdo a la Ley Habeas Data.</li>
+                        </ul>
+                    </div>
+                    <div class="check-terminos-wrap">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">ACEPTO TODOS LOS TÉRMINOS, REGLAS Y CONDICIONES DEL CAMPEONATO <span class="rojo">*</span></label>
+                    </div>
+                </div>
+
+                <!-- BOTON REGISTRO -->
+                <button type="submit" class="btn-crear-cuenta">
+                    <i class="fa-solid fa-flag-checkered"></i> FINALIZAR REGISTRO Y CREAR CUENTA
+                </button>
+
+            </form>
+        </div>
+    </section>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/static/js/registro.js"></script>
+
+</body>
+{% include 'footer.html' %}
+</html>

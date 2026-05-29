@@ -97,11 +97,8 @@ margin:15px auto;
 /* SECCION CONSEJOS MOTOCICLISMO */
 .seccion-consejos-motociclismo{
     width:100%;
-    padding:50px 20px;
-    background:linear-gradient(
-         white,
-        black
-    );
+    padding:60px 20px;
+    background: linear-gradient(180deg, #0a0a0a 0%, #080808 100%);
 }
 /* CONTENEDOR */
 .contenedor-cartas{
@@ -114,15 +111,16 @@ margin:15px auto;
 /* CARTA */
 .carta-consejo{
     background:#111;
-    border-radius:12px;
+    border-radius:6px;
     overflow:hidden;
-    transition:transform 0.3s, box-shadow 0.3s;
-    border:1px solid rgba(255,0,0,0.3);
+    transition:transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    border:1px solid rgba(255,255,255,0.06);
 }
 /* EFECTO HOVER */
 .carta-consejo:hover{
-    transform:translateY(-10px);
-    box-shadow:0 15px 35px rgba(255,0,0,0.5);
+    transform:translateY(-8px);
+    border-color: rgba(225,6,0,0.3);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.5), 0 0 12px rgba(225,6,0,0.15);
 }
 /* IMAGEN */
 .imagen-carta{
@@ -365,128 +363,91 @@ margin:15px auto;
 }
 
 
-/* SECCION REGISTRO */
-.seccion-registro{
-    width:100%;
-    padding:50px 20px;
-    background:#000000;
+/* SECCION CTA REGISTRO */
+.seccion-cta-registro {
+    width: 100%;
+    padding: 70px 20px;
+    background:
+        linear-gradient(135deg, rgba(225,6,0,0.08) 0%, transparent 60%),
+        #0a0a0a;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 3px solid #e10600;
 }
 
-.contenedor-registro{
-    max-width:1100px;
-    margin:auto;
-    background:#111;
-    padding:50px;
-    border-radius:10px;
-    border:1px solid rgba(255,0,0,0.3);
-}
-
-/* TITULO */
-.titulo-registro{
-    text-align:center;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(28px, 3vw, 42px);
-    letter-spacing: 4px;
-    color:white;
-}
-
-.linea-roja-registro{
-    width: 80px;
-    height: 3px;
-    background: #e10600;
-    margin: 15px auto 40px auto;
-}
-
-/* GRID DEL FORMULARIO */
-.grid-formulario{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-}
-
-/* GRUPOS */
-.grupo-formulario{
-    display:flex;
-    flex-direction:column;
-}
-
-.grupo-formulario label{
-    color: white;
-    margin-bottom: 6px;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.grupo-formulario input,
-.grupo-formulario select{
-    padding: 12px;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 0;
-    background: #1a1a1a;
-    color: white;
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 1px;
-}
-
-/* EFECTO */
-.grupo-formulario input:focus,
-.grupo-formulario select:focus{
-    outline:none;
-    border:1px solid #e10600;
-}
-
-/* TERMINOS */
-.contenedor-terminos{
-    margin-top: 30px;
-    color: #ccc;
+.contenedor-cta {
+    max-width: 800px;
+    margin: auto;
     text-align: center;
 }
 
-.contenedor-terminos h3{
-    color: white;
-    margin-bottom: 10px;
-    font-size: 16px;
-    letter-spacing: 2px;
+.titulo-cta {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 4.5vw, 48px);
+    letter-spacing: 4px;
+    margin-bottom: 12px;
 }
 
-.check-terminos{
-    margin-top:10px;
-    display:flex;
-    gap:10px;
-    align-items:center;
+.linea-roja-cta {
+    width: 80px;
+    height: 3px;
+    background: #e10600;
+    margin: 0 auto 20px;
+}
+
+.texto-cta {
+    font-size: 15px;
+    color: #bbb;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.botones-cta {
+    display: flex;
     justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
-/* BOTON */
-.boton-registro{
-    margin-top:30px;
-    width:100%;
-    padding:14px;
-    background:#e10600;
-    border:none;
-    color:white;
+.btn-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
     font-family: 'Rajdhani', sans-serif;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 13px;
     letter-spacing: 2px;
-    cursor:pointer;
-    transition:0.3s;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
 }
 
-.boton-registro:hover{
-    background:#ff2a2a;
-    transform:translateY(-2px);
+.btn-registro-cta {
+    background: #e10600;
+    color: #fff;
 }
 
-/* RESPONSIVE */
+.btn-registro-cta:hover {
+    background: #ff2200;
+    box-shadow: 0 0 15px rgba(225,6,0,0.45);
+    transform: translateY(-2px);
+}
+
+.btn-carreras-cta {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #ccc;
+}
+
+.btn-carreras-cta:hover {
+    border-color: rgba(255,255,255,0.4);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
 @media(max-width:800px){
-.grid-formulario{
-    grid-template-columns:1fr;
-}
-
-.contenedor-registro{
-    padding:30px;
-}  
+    .btn-cta {
+        width: 100%;
+        justify-content: center;
+    }
 }

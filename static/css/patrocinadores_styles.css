@@ -1,0 +1,330 @@
+/* ============================================================
+   PATROCINADORES — GP COLOMBIA 2026
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background: #080808;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+.rojo { color: #e10600; }
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+.hero-patrocinadores {
+    position: relative;
+    width: 100%;
+    min-height: 350px;
+    background:
+        linear-gradient(135deg, rgba(225,6,0,0.15) 0%, transparent 60%),
+        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,0.01) 60px, rgba(255,255,255,0.01) 61px),
+        repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255,255,255,0.01) 60px, rgba(255,255,255,0.01) 61px),
+        #0a0a0a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 40px 60px;
+    border-bottom: 3px solid #e10600;
+    overflow: hidden;
+    text-align: center;
+}
+
+.hero-patrocinadores::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -10%;
+    width: 120%; height: 4px;
+    background: linear-gradient(90deg, transparent, #e10600 20%, #e10600 80%, transparent);
+}
+
+.hero-content {
+    z-index: 1;
+    max-width: 800px;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: #e10600;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    padding: 6px 22px;
+    margin-bottom: 20px;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+.hero-titulo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(38px, 6.5vw, 68px);
+    letter-spacing: 4px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    text-shadow: 0 0 35px rgba(225,6,0,0.3);
+}
+
+.linea-hero {
+    width: 100px;
+    height: 3px;
+    background: #e10600;
+    margin: 0 auto 20px;
+}
+
+.hero-subtitulo {
+    font-size: 16px;
+    color: #b0b0b0;
+    letter-spacing: 1px;
+    line-height: 1.6;
+}
+
+/* ============================================================
+   SECCIÓN DE PATROCINADORES
+   ============================================================ */
+.seccion-patrocinadores {
+    padding: 70px 20px;
+    background: #080808;
+}
+
+.contenedor-patrocinadores {
+    max-width: 1300px;
+    margin: auto;
+}
+
+.intro-patrocinadores {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.titulo-seccion-pat {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 4.5vw, 52px);
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+}
+
+.subtitulo-pat {
+    color: #666;
+    font-size: 15px;
+    max-width: 700px;
+    margin: 0 auto;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+}
+
+/* GRID DE PATROCINADORES */
+.grid-patrocinadores {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+/* TARJETA INDIVIDUAL */
+.card-patrocinador {
+    background: #0f0f0f;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-top: 3px solid #e10600;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.card-patrocinador:hover {
+    transform: translateY(-8px);
+    border-color: rgba(225,6,0,0.5);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+}
+
+/* Asignar colores especiales a los tops de los patrocinadores segun rango */
+.patrocinador-oro { border-top-color: #d4af37; }
+.patrocinador-plata { border-top-color: #bdc3c7; }
+.patrocinador-bronce { border-top-color: #cd7f32; }
+.patrocinador-oficial { border-top-color: #e10600; }
+
+/* BANNER SUPERIOR DE LA TARJETA */
+.pat-banner {
+    position: relative;
+    height: 160px;
+    background: #111;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pat-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(15,15,15,1) 0%, rgba(15,15,15,0.4) 60%, transparent 100%);
+    z-index: 1;
+}
+
+.pat-img-moto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.card-patrocinador:hover .pat-img-moto {
+    transform: scale(1.08);
+    opacity: 0.75;
+}
+
+/* LOGO SOBRE EL BANNER */
+.pat-logo-wrapper {
+    position: absolute;
+    z-index: 2;
+    background: rgba(8, 8, 8, 0.9);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 10px 18px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 3px;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
+}
+
+.pat-logo-yamaha { color: #4ea3ff; }
+.pat-logo-honda { color: #e10600; }
+.pat-logo-suzuki { color: #2ecc71; }
+.pat-logo-kawasaki { color: #39ff14; }
+.pat-logo-ktm { color: #ff6600; }
+.pat-logo-ducati { color: #e10600; }
+.pat-logo-bmw { color: #00a8ff; }
+.pat-logo-bajaj { color: #f1c40f; }
+
+/* BADGES DE RANGO */
+.pat-rango-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 4px 10px;
+    z-index: 2;
+    background: #555;
+    color: #fff;
+    clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
+}
+
+.rango-oro { background: #d4af37; color: #000; }
+.rango-plata { background: #bdc3c7; color: #000; }
+.rango-bronce { background: #cd7f32; color: #fff; }
+.rango-oficial { background: #e10600; color: #fff; }
+
+/* CUERPO DEL CONTENIDO */
+.pat-cuerpo {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #0f0f0f;
+}
+
+.pat-eslogan {
+    font-size: 11px;
+    font-weight: 700;
+    color: #e10600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.pat-descripcion {
+    font-size: 13px;
+    color: #888;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.pat-info-evento {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 10px 12px;
+    font-size: 12px;
+    color: #bbb;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.pat-info-evento span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pat-info-evento i {
+    color: #e10600;
+    font-size: 11px;
+}
+
+/* BOTÓN DE ACCIÓN / ENLACE OFICIAL */
+.btn-pat-contacto {
+    width: 100%;
+    padding: 11px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #aaa;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.btn-pat-contacto:hover {
+    background: #e10600;
+    border-color: #e10600;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(225,6,0,0.35);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1200px) {
+    .grid-patrocinadores {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .grid-patrocinadores {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .hero-patrocinadores {
+        padding: 60px 20px 40px;
+    }
+}
+
+@media (max-width: 600px) {
+    .grid-patrocinadores {
+        grid-template-columns: 1fr;
+    }
+    .contenedor-patrocinadores {
+        padding: 0 10px;
+    }
+}

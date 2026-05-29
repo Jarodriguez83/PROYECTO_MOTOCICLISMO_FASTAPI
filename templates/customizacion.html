@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/LOGO_GP.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL0xPR09fR1AuanBnIiwiaWF0IjoxNzczNDMwNjcyLCJleHAiOjE3NzYwMjI2NzJ9.rGW5gWAV-TiyZc_YoVGOFQQL4-XKS8xqxPCz2iA2ceM" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/customizacion_styles.css">
+    <title>GP COLOMBIA | CUSTOMIZACIÓN</title>
+</head>
+{% include 'header.html' %}
+<body>
+
+    <!-- HERO SECTION -->
+    <section class="hero-customizacion">
+        <div class="hero-content">
+            <div class="hero-badge">CUSTOM & RACING GEAR</div>
+            <h1 class="hero-titulo">
+                CUSTOMIZACIÓN Y <span class="rojo">RENDIMIENTO</span>
+            </h1>
+            <div class="linea-hero"></div>
+            <p class="hero-subtitulo">
+                Equípate con lo mejor del mercado. Accesorios premium, modificaciones de alto rendimiento para tu motocicleta, indumentaria con homologación de carrera y anuncios de nuestros patrocinadores oficiales.
+            </p>
+        </div>
+        <!-- STATS RÁPIDAS -->
+        <div class="custom-stats">
+            <div class="stat-item">
+                <span class="stat-num">12+</span>
+                <span class="stat-lbl">MARCAS SOCIAS</span>
+            </div>
+            <div class="stat-div"></div>
+            <div class="stat-item">
+                <span class="stat-num">100%</span>
+                <span class="stat-lbl">HOMOLOGACIÓN FIM</span>
+            </div>
+            <div class="stat-div"></div>
+            <div class="stat-item">
+                <span class="stat-num">PRO</span>
+                <span class="stat-lbl">ASESORÍA TÉCNICA</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATÁLOGO -->
+    <section class="seccion-customizacion">
+        <div class="contenedor-customizacion">
+            
+            <div class="barra-filtros">
+                <h2 class="titulo-seccion">TIENDA Y <span class="rojo">PUBLICIDAD</span></h2>
+                <div class="filtros-wrap">
+                    <button class="btn-filtro activo" onclick="filtrarArticulos('todos', this)">TODOS</button>
+                    <button class="btn-filtro" onclick="filtrarArticulos('cascos', this)">CASCOS</button>
+                    <button class="btn-filtro" onclick="filtrarArticulos('trajes', this)">TRAJES & MONOTRAJES</button>
+                    <button class="btn-filtro" onclick="filtrarArticulos('guantes', this)">GUANTES & VISERAS</button>
+                    <button class="btn-filtro" onclick="filtrarArticulos('accesorios', this)">ACCESORIOS</button>
+                    <button class="btn-filtro" onclick="filtrarArticulos('modificaciones', this)">MODIFICACIONES</button>
+                    <button class="btn-filtro" onclick="filtrarArticulos('anuncios', this)">ANUNCIOS / ADS</button>
+                </div>
+            </div>
+
+            <!-- GRID DE ARTÍCULOS -->
+            <div class="grid-articulos" id="gridArticulos">
+                
+                <!-- CASCO AGV -->
+                <article class="card-articulo" data-categoria="cascos">
+                    <div class="articulo-banner">
+                        <img src="https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?fm=jpg&q=80&w=600&auto=format&fit=crop" alt="Casco AGV" class="articulo-img">
+                        <span class="badge-tipo badge-cascos">CASCO</span>
+                        <span class="badge-precio">$4.500.000 COP</span>
+                    </div>
+                    <div class="articulo-cuerpo">
+                        <span class="articulo-marca">AGV HELMETS</span>
+                        <h3 class="articulo-nombre">AGV PISTA GP RR CARBON</h3>
+                        <p class="articulo-descripcion">
+                            El casco de MotoGP por excelencia. Fabricado 100% en fibra de carbono, ligereza insuperable y el mayor campo de visión del mercado. Homologación FIM.
+                        </p>
+                        <div class="articulo-specs">
+                            <span class="spec-tag"><i class="fa-solid fa-feather"></i> 1350g</span>
+                            <span class="spec-tag"><i class="fa-solid fa-shield-halved"></i> Carbono 3K</span>
+                            <span class="spec-tag"><i class="fa-solid fa-circle-check"></i> FIM Approved</span>
+                        </div>
+                        <button class="btn-articulo-accion" onclick="abrirCotizador('AGV Pista GP RR Carbon', '$4.500.000 COP', 'https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?fm=jpg&q=80&w=600&auto=format&fit=crop')">
+                            <i class="fa-solid fa-cart-shopping"></i> ME INTERESA
+                        </button>
+                    </div>
+                </article>
+
+                <!-- CASCO SHOEI -->
+                <article class="card-articulo" data-categoria="cascos">
+                    <div class="articulo-banner">
+                        <img src="https://images.unsplash.com/photo-1618336753974-aae8e04506aa?fm=jpg&q=80&w=600&auto=format&fit=crop" alt="Casco Shoei" class="articulo-img">
+                        <span class="badge-tipo badge-cascos">CASCO</span>
+                        <span class="badge-precio">$3.200.000 COP</span>
+                    </div>
+                    <div class="articulo-cuerpo">
+                        <span class="articulo-marca">SHOEI HELMETS</span>
+                        <h3 class="articulo-nombre">SHOEI X-SPR PRO</h3>
+                        <p class="articulo-descripcion">
+                            Aerodinámica óptima diseñada para velocidades superiores a los 350 km/h. Sistema de ventilación avanzado en la zona de las mejillas para enfriamiento activo.
+                        </p>
+                        <div class="articulo-specs">
+                            <span class="spec-tag"><i class="fa-solid fa-wind"></i> Aero Wing</span>
+                            <span class="spec-tag"><i class="fa-solid fa-droplet"></i> Ventilado</span>
+                            <span class="spec-tag"><i class="fa-solid fa-shield"></i> AIM+ Shell</span>
+                        </div>
+                        <button class="btn-articulo-accion" onclick="abrirCotizador('Shoei X-SPR Pro', '$3.200.000 COP', 'https://images.unsplash.com/photo-1618336753974-aae8e04506aa?fm=jpg&q=80&w=600&auto=format&fit=crop')">
+                            <i class="fa-solid fa-cart-shopping"></i> ME INTERESA
+                        </button>
+                    </div>
+                </article>
+
+                <!-- MONOTRAJE ALPINESTARS -->
+                <article class="card-articulo" data-categoria="trajes">
+                    <div class="articulo-banner">
+                        <img src="https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/mono_alpinestars.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL21vbm9fYWxwaW5lc3RhcnMucG5nIiwiaWF0IjoxNzc3MDg5MDcwLCJleHAiOjE3Nzc2OTM4NzB9.mN1Tf2i0_Z0a9u3L4_xM_D8a2fL5mNf7U-2L3wH8gYw" alt="Monotraje Alpinestars" class="articulo-img" style="object-position: top;">
+                        <span class="badge-tipo badge-trajes">MONOTRAJE</span>
+                        <span class="badge-precio">$6.800.000 COP</span>
+                    </div>
+                    <div class="articulo-cuerpo">
+                        <span class="articulo-marca">ALPINESTARS</span>
+                        <h3 class="articulo-nombre">RACING ABSOLUTE V2</h3>
+                        <p class="articulo-descripcion">
+                            Mono de carreras profesional fabricado con cuero de canguro de primer nivel. Compatible con el sistema de Airbag Tech-Air® 10 para una protección total en pista.
+                        </p>
+                        <div class="articulo-specs">
+                            <span class="spec-tag"><i class="fa-solid fa-life-ring"></i> Tech-Air Ready</span>
+                            <span class="spec-tag"><i class="fa-solid fa-cow"></i> Piel Canguro</span>
+                            <span class="spec-tag"><i class="fa-solid fa-circle-check"></i> Grado MotoGP</span>
+                        </div>
+                        <button class="btn-articulo-accion" onclick="abrirCotizador('Alpinestars Racing Absolute V2', '$6.800.000 COP', 'https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/mono_alpinestars.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL21vbm9fYWxwaW5lc3RhcnMucG5nIiwiaWF0IjoxNzc3MDg5MDcwLCJleHAiOjE3Nzc2OTM4NzB9.mN1Tf2i0_Z0a9u3L4_xM_D8a2fL5mNf7U-2L3wH8gYw')">
+                            <i class="fa-solid fa-cart-shopping"></i> ME INTERESA
+                        </button>
+                    </div>
+                </article>
+
+                <!-- TRAJE DAINESE -->
+                <article class="card-articulo" data-categoria="trajes">
+                    <div class="articulo-banner">
+                        <img src="https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/traje_dainese.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL3RyYWplX2RhaW5lc2UucG5nIiwiaWF0IjoxNzc3MDg5MDg1LCJleHAiOjE3Nzc2OTM4ODV9.cO4Nf2i0_Z0a9u3L4_xM_D8a2fL5mNf7U-2L3wH8gYw" alt="Traje Dainese" class="articulo-img" style="object-position: top;">
+                        <span class="badge-tipo badge-trajes">TRAJE 2 PIEZAS</span>
+                        <span class="badge-precio">$5.500.000 COP</span>
+                    </div>
+                    <div class="articulo-cuerpo">
+                        <span class="articulo-marca">DAINESE</span>
+                        <h3 class="articulo-nombre">LAGUNA SECA 5 2PCS</h3>
+                        <p class="articulo-descripcion">
+                            Traje icónico de piel de vacuno de primera calidad. Excelente flexibilidad y libertad de movimiento gracias al sistema Tri-Axial integrado en la espalda.
+                        </p>
+                        <div class="articulo-specs">
+                            <span class="spec-tag"><i class="fa-solid fa-arrows-left-right"></i> Tri-Axial Elastic</span>
+                            <span class="spec-tag"><i class="fa-solid fa-shield-halved"></i> Deslizadores Metal</span>
+                            <span class="spec-tag"><i class="fa-solid fa-motorcycle"></i> Piel Vacuna Tutu</span>
+                        </div>
+                        <button class="btn-articulo-accion" onclick="abrirCotizador('Dainese Laguna Seca 5 2Pcs', '$5.500.000 COP', 'https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/traje_dainese.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL3RyYWplX2RhaW5lc2UucG5nIiwiaWF0IjoxNzc3MDg5MDg1LCJleHAiOjE3Nzc2OTM4ODV9.cO4Nf2i0_Z0a9u3L4_xM_D8a2fL5mNf7U-2L3wH8gYw')">
+                            <i class="fa-solid fa-cart-shopping"></i> ME INTERESA
+                        </button>
+                    </div>
+                </article>
+
+                <!-- GUANTES DAINESE -->
+                <article class="card-articulo" data-categoria="guantes">
+                    <div class="articulo-banner">
+                        <img src="https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/guantes_dainese.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL2d1YW50ZXNfZGFpbmVzZS5wbmciLCJpYXQiOjE3NzcwODkxMTUsImV4cCI6MTc3NzY5MzkxNX0.eO4Nf2i0_Z0a9u3L4_xM_D8a2fL5mNf7U-2L3wH8gYw" alt="Guantes Dainese" class="articulo-img">
+                        <span class="badge-tipo badge-guantes">GUANTES</span>
+                        <span class="badge-precio">$1.400.000 COP</span>
+                    </div>
+                    <div class="articulo-cuerpo">
+                        <span class="articulo-marca">DAINESE</span>
+                        <h3 class="articulo-nombre">FULL METAL 6 GLOVES</h3>
+                        <p class="articulo-descripcion">
+                            Guantes de pista profesionales. Utilizan inserciones de titanio y fibra de carbono en los nudillos y el dorso, con costuras de hilo de aramida para máxima fricción.
+                        </p>
+                        <div class="articulo-specs">
+                            <span class="spec-tag"><i class="fa-solid fa-shield"></i> Titanio y Carbono</span>
+                            <span class="spec-tag"><i class="fa-solid fa-fingerprint"></i> Kevlar Stitches</span>
+                            <span class="spec-tag"><i class="fa-solid fa-hand"></i> Palma Reforzada</span>
+                        </div>
+                        <button class="btn-articulo-accion" onclick="abrirCotizador('Dainese Full Metal 6 Gloves', '$1.400.000 COP', 'https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/guantes_dainese.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL2d1YW50ZXNfZGFpbmVzZS5wbmciLCJpYXQiOjE3NzcwODkxMTUsImV4cCI6MTc3NzY5MzkxNX0.eO4Nf2i0_Z0a9u3L4_xM_D8a2fL5mNf7U-2L3wH8gYw')">
+                            <i class="fa-solid fa-cart-shopping"></i> ME INTERESA
+                        </button>
+                    </div>
+                </article>
+
+                <!-- VISERA IRIDIO -->
+                <article class="card-articulo" data-categoria="guantes">
+                    <div class="articulo-banner">
+                        <img src="https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/visera_agv.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL3Zpc2VyYV9hZ3YucG5nIiwiaWF0IjoxNzc3MDg5MTU1LCJleHAiOjE3Nzc2OTM5NTV9.fO4Nf2i0_Z0a9u3L4_xM_D8a2fL5mNf7U-2L3wH8gYw" alt="Visera AGV" class="articulo-img">
+                        <span class="badge-tipo badge-guantes">VISERA</span>
+                        <span class="badge-precio">$350.000 COP</span>
+                    </div>
+                    <div class="articulo-cuerpo">
+                        <span class="articulo-marca">AGV OPTICS</span>
+                        <h3 class="articulo-nombre">VISERA IRIDIO PISTA GP R/RR</h3>
+                        <p class="articulo-descripcion">
+                            Visera de carreras espejo antirrayas. Preparada para láminas Tear-Off y Pinlock 120 MaxVision. Incrementa el contraste en días de sol intenso.
+                        </p>
+                        <div class="articulo-specs">
+                            <span class="spec-tag"><i class="fa-solid fa-eye"></i> Antirrayas</span>
+                            <span class="spec-tag"><i class="fa-solid fa-circle-notch"></i> Pinlock Ready</span>
+                            <span class="spec-tag"><i class="fa-solid fa-sun"></i> UV Protection</span>
+                        </div>
+                        <button class="btn-articulo-accion" onclick="abrirCotizador('Visera Iridio AGV Pista GP R/RR', '$350.000 COP', 'https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/visera_agv.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL3Zpc2VyYV9hZ3YucG5nIiwiaWF0IjoxNzc3MDg5MTU1LCJleHAiOjE3Nzc2OTM5NTV9.fO4Nf2i0_Z0a9u3L4_xM_D8a2fL5mNf7U-2L3wH8gYw')">
+                            <i class="fa-solid fa-cart-shopping"></i> ME INTERESA
+                        </button>
+                    </div>
+                </article>
+
+                <!-- ACCESORIO CALENTADORES -->
+                <article class="card-articulo" data-categoria="accesorios">
+                    <div class="articulo-banner">
+                        <img src="https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/calentadores_capit.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL2NhbGVudGFkb3Jlc19jYXBpdC5wbmciLCJpYXQiOjE3NzcwODkxOTAsImV4cCI6MTc3NzY5Mzk5MH0.gO4Nf2i0_Z0a9u3L4_xM_D8a2fL5mNf7U-2L3wH8gYw" alt="Calentadores de Neumáticos" class="articulo-img">
+                        <span class="badge-tipo badge-accesorios">ACCESORIO PISTA</span>
+                        <span class="badge-precio">$1.800.000 COP</span>
+                    </div>
+                    <div class="articulo-cuerpo">
+                        <span class="articulo-marca">CAPIT ITALIA</span>
+                        <h3 class="articulo-nombre">CALENTADORES CAPIT MAXIMA</h3>
+                        <p class="articulo-descripcion">
+                            Calentadores de neumáticos profesionales. Permiten alcanzar una temperatura uniforme de 85°C en menos de 40 minutos, esenciales para garantizar agarre desde la primera curva.
+                        </p>
+                        <div class="articulo-specs">
+                            <span class="spec-tag"><i class="fa-solid fa-fire-flame-curved"></i> 85°C Constantes</span>
+                            <span class="spec-tag"><i class="fa-solid fa-bolt"></i> 220V / 110V</span>
+                            <span class="spec-tag"><i class="fa-solid fa-gears"></i> TNT Technology</span>
+                        </div>
+                        <button class="btn-articulo-accion" onclick="abrirCotizador('Calentadores Capit Maxima', '$1.800.000 COP', 'https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/calentadores_capit.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL2NhbGVudGFkb3Jlc19jYXBpdC5wbmciLCJpYXQiOjE3NzcwODkxOTAsImV4cCI6MTc3NzY5Mzk5MH0.gO4Nf2i0_Z0a9u3L4_xM_D8a2fL5mNf7U-2L3wH8gYw')">
+                            <i class="fa-solid fa-cart-shopping"></i> ME INTERESA
+                        </button>
+                    </div>
+                </article>
+
+                <!-- MODIFICACIÓN ESCAPE -->
+                <article class="card-articulo" data-categoria="modificaciones">
+                    <div class="articulo-banner">
+                        <img src="https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/escape_akrapovic.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL2VzY2FwZV9ha3JhcG92aWMucG5nIiwiaWF0IjoxNzc3MDg5MjIyLCJleHAiOjE3Nzc2OTQwMjJ9.hO4Nf2i0_Z0a9u3L4_xM_D8a2fL5mNf7U-2L3wH8gYw" alt="Escape Akrapovic" class="articulo-img">
+                        <span class="badge-tipo badge-modificaciones">MODIFICACIÓN</span>
+                        <span class="badge-precio">$6.500.000 COP</span>
+                    </div>
+                    <div class="articulo-cuerpo">
+                        <span class="articulo-marca">AKRAPOVIČ</span>
+                        <h3 class="articulo-nombre">SISTEMA EVOLUTION TITANIO</h3>
+                        <p class="articulo-descripcion">
+                            Sistema de escape completo de titanio de alto rendimiento. Optimiza el flujo de gases de salida, aumenta la potencia útil y reduce dramáticamente el peso total.
+                        </p>
+                        <div class="articulo-specs">
+                            <span class="spec-tag"><i class="fa-solid fa-gauge-high"></i> +8.2 HP</span>
+                            <span class="spec-tag"><i class="fa-solid fa-scale-balanced"></i> -4.8 kg</span>
+                            <span class="spec-tag"><i class="fa-solid fa-music"></i> Sonido Racing</span>
+                        </div>
+                        <button class="btn-articulo-accion" onclick="abrirCotizador('Sistema Akrapovič Evolution Titanio', '$6.500.000 COP', 'https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/escape_akrapovic.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL2VzY2FwZV9ha3JhcG92aWMucG5nIiwiaWF0IjoxNzc3MDg5MjIyLCJleHAiOjE3Nzc2OTQwMjJ9.hO4Nf2i0_Z0a9u3L4_xM_D8a2fL5mNf7U-2L3wH8gYw')">
+                            <i class="fa-solid fa-screwdriver-wrench"></i> COTIZAR MODIFICACIÓN
+                        </button>
+                    </div>
+                </article>
+
+                <!-- MODIFICACIÓN SUSPENSIÓN -->
+                <article class="card-articulo" data-categoria="modificaciones">
+                    <div class="articulo-banner">
+                        <img src="https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/amortiguador_ohlins.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL2Ftb3J0aWd1YWRvcl9vaGxpbnMucG5nIiwiaWF0IjoxNzc3MDg5MjUwLCJleHAiOjE3Nzc2OTQwNTB9.iO4Nf2i0_Z0a9u3L4_xM_D8a2fL5mNf7U-2L3wH8gYw" alt="Suspensión Ohlins" class="articulo-img">
+                        <span class="badge-tipo badge-modificaciones">SUSPENSIÓN</span>
+                        <span class="badge-precio">$9.800.000 COP</span>
+                    </div>
+                    <div class="articulo-cuerpo">
+                        <span class="articulo-marca">ÖHLINS RACING</span>
+                        <h3 class="articulo-nombre">ÖHLINS FGRT 200 FRONT FORKS</h3>
+                        <p class="articulo-descripcion">
+                            Horquillas delanteras con tecnología TTX25 de cartucho presurizado. Ofrecen retroalimentación de pista inmejorable, estabilidad al frenar y control superior.
+                        </p>
+                        <div class="articulo-specs">
+                            <span class="spec-tag"><i class="fa-solid fa-compress"></i> TTX Technology</span>
+                            <span class="spec-tag"><i class="fa-solid fa-arrows-up-down"></i> Precarga y Rebote</span>
+                            <span class="spec-tag"><i class="fa-solid fa-road-spikes"></i> Pista y Calle</span>
+                        </div>
+                        <button class="btn-articulo-accion" onclick="abrirCotizador('Öhlins FGRT 200 Front Forks', '$9.800.000 COP', 'https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/amortiguador_ohlins.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL2Ftb3J0aWd1YWRvcl9vaGxpbnMucG5nIiwiaWF0IjoxNzc3MDg5MjUwLCJleHAiOjE3Nzc2OTQwNTB9.iO4Nf2i0_Z0a9u3L4_xM_D8a2fL5mNf7U-2L3wH8gYw')">
+                            <i class="fa-solid fa-screwdriver-wrench"></i> COTIZAR MODIFICACIÓN
+                        </button>
+                    </div>
+                </article>
+
+                <!-- PUBLICIDAD DUNLOP -->
+                <article class="card-articulo" data-categoria="anuncios">
+                    <div class="articulo-banner">
+                        <img src="https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/ad_dunlop.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL2FkX2R1bmxvcC5wbmciLCJpYXQiOjE3NzcwODkyNzgsImV4cCI6MTc3NzY5NDA3OH0.jO4Nf2i0_Z0a9u3L4_xM_D8a2fL5mNf7U-2L3wH8gYw" alt="Dunlop Tires" class="articulo-img">
+                        <span class="badge-tipo badge-anuncios">PATROCINADO</span>
+                        <span class="badge-publicidad">PUBLICIDAD</span>
+                    </div>
+                    <div class="articulo-cuerpo">
+                        <span class="articulo-marca">DUNLOP COLOMBIA</span>
+                        <h3 class="articulo-nombre">DUNLOP KR SLICK SERIES</h3>
+                        <p class="articulo-descripcion">
+                            Llantas slicks oficiales para pilotos exigentes. Diseñadas para un agarre insuperable en curvas rápidas e inclinaciones extremas. ¡Compra tu juego de llantas en pista con 15% OFF!
+                        </p>
+                        <div class="articulo-specs">
+                            <span class="spec-tag"><i class="fa-solid fa-percent"></i> 15% Descuento</span>
+                            <span class="spec-tag"><i class="fa-solid fa-flag-checkered"></i> Oficial GP COL</span>
+                            <span class="spec-tag"><i class="fa-solid fa-circle-nodes"></i> KR106 / KR108</span>
+                        </div>
+                        <button class="btn-articulo-accion btn-ad-visitar" onclick="abrirAnuncio('Dunlop KR Slick Series', 'Dunlop Moto Colombia')">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> VISITAR DISTRIBUIDOR
+                        </button>
+                    </div>
+                </article>
+
+                <!-- PUBLICIDAD MOTUL -->
+                <article class="card-articulo" data-categoria="anuncios">
+                    <div class="articulo-banner">
+                        <img src="https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/ad_motul.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL2FkX21vdHVsLnBuZyIsImlhdCI6MTc3NzA4OTMwMSwiZXhwIjoxNzc3Njk0MTAxfQ.kO4Nf2i0_Z0a9u3L4_xM_D8a2fL5mNf7U-2L3wH8gYw" alt="Motul Oil" class="articulo-img">
+                        <span class="badge-tipo badge-anuncios">PATROCINADO</span>
+                        <span class="badge-publicidad">PUBLICIDAD</span>
+                    </div>
+                    <div class="articulo-cuerpo">
+                        <span class="articulo-marca">MOTUL LUBRICANTES</span>
+                        <h3 class="articulo-nombre">MOTUL 300V FACTORY LINE</h3>
+                        <p class="articulo-descripcion">
+                            Lubricante 100% sintético para motos de carreras con tecnología ESTER Core®. Aumenta la potencia, protege la transmisión y mantiene la presión del aceite estable a altas RPM.
+                        </p>
+                        <div class="articulo-specs">
+                            <span class="spec-tag"><i class="fa-solid fa-oil-can"></i> 10W-40 / 15W-50</span>
+                            <span class="spec-tag"><i class="fa-solid fa-trophy"></i> Ester Core Tech</span>
+                            <span class="spec-tag"><i class="fa-solid fa-temperature-arrow-up"></i> Resistencia Térmica</span>
+                        </div>
+                        <button class="btn-articulo-accion btn-ad-visitar" onclick="abrirAnuncio('Motul 300V Factory Line', 'Motul Lubricantes Colombia')">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> VER CATÁLOGO OFICIAL
+                        </button>
+                    </div>
+                </article>
+
+                <!-- PUBLICIDAD MOTOTECH -->
+                <article class="card-articulo" data-categoria="anuncios">
+                    <div class="articulo-banner">
+                        <img src="https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/ad_mototech.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL2FkX21vdG90ZWNoLnBuZyIsImlhdCI6MTc3NzA4OTMyNywiZXhwIjoxNzc3Njk0MTI3fQ.lO4Nf2i0_Z0a9u3L4_xM_D8a2fL5mNf7U-2L3wH8gYw" alt="MotoTech Workshop" class="articulo-img">
+                        <span class="badge-tipo badge-anuncios">PATROCINADO</span>
+                        <span class="badge-publicidad">PUBLICIDAD</span>
+                    </div>
+                    <div class="articulo-cuerpo">
+                        <span class="articulo-marca">MOTOTECH PERFORMANCE</span>
+                        <h3 class="articulo-nombre">TALLER & PREPARACIÓN DE PISTA</h3>
+                        <p class="articulo-descripcion">
+                            Especialistas en reprogramación de ECUs, puesta a punto de suspensiones y armado de motores de carreras. Descuento exclusivo para competidores registrados en GP Colombia.
+                        </p>
+                        <div class="articulo-specs">
+                            <span class="spec-tag"><i class="fa-solid fa-wrench"></i> Mecánica Competición</span>
+                            <span class="spec-tag"><i class="fa-solid fa-laptop-code"></i> Remap ECUs</span>
+                            <span class="spec-tag"><i class="fa-solid fa-percent"></i> 10% Descuento Pilotos</span>
+                        </div>
+                        <button class="btn-articulo-accion btn-ad-visitar" onclick="abrirAnuncio('Taller & Preparación de Pista', 'MotoTech Performance Bogotá')">
+                            <i class="fa-solid fa-calendar-days"></i> AGENDAR ASESORÍA
+                        </button>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- SIN RESULTADOS -->
+            <div id="sinArticulos" class="estado-sin-articulos" style="display:none;">
+                <i class="fa-solid fa-box-open"></i>
+                <h3>NO HAY ARTÍCULOS EN ESTA CATEGORÍA</h3>
+                <p>Pronto agregaremos más productos e indumentaria en esta sección.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MODAL COTIZADOR / CONTACTAR -->
+    <div class="modal-overlay-custom" id="modalCotizadorOverlay" onclick="cerrarCotizador()">
+        <div class="modal-custom" onclick="event.stopPropagation()">
+            <button class="modal-cerrar-custom" onclick="cerrarCotizador()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="modal-header-custom">
+                <div class="modal-badge-custom"><i class="fa-solid fa-motorcycle"></i></div>
+                <div>
+                    <h2 class="modal-titulo-custom">SOLICITUD DE COTIZACIÓN</h2>
+                    <span class="modal-subtitulo-custom">GP COLOMBIA SHOP</span>
+                </div>
+            </div>
+            <div class="modal-linea-custom"></div>
+
+            <!-- RESUMEN DEL PRODUCTO -->
+            <div class="item-resumen-compra">
+                <img src="" alt="Producto" id="resumenImg" class="item-resumen-img">
+                <div class="item-resumen-detalles">
+                    <h4 id="resumenNombre">—</h4>
+                    <p id="resumenPrecio">—</p>
+                </div>
+            </div>
+
+            <!-- FORMULARIO -->
+            <form id="formCotizacion" onsubmit="enviarSolicitud(event)" class="form-custom">
+                <div class="form-group-custom">
+                    <label for="inputNombre">NOMBRE COMPLETO</label>
+                    <input type="text" id="inputNombre" required placeholder="Escribe tu nombre">
+                </div>
+                <div class="form-group-custom">
+                    <label for="inputCorreo">CORREO ELECTRÓNICO</label>
+                    <input type="email" id="inputCorreo" required placeholder="tuemail@ejemplo.com">
+                </div>
+                <div class="form-group-custom">
+                    <label for="inputTelefono">TELÉFONO DE CONTACTO</label>
+                    <input type="text" id="inputTelefono" required placeholder="Ej: 300 123 4567">
+                </div>
+                <div class="form-group-custom">
+                    <label for="inputMoto">MARCA Y MODELO DE TU MOTO</label>
+                    <input type="text" id="inputMoto" placeholder="Ej: Yamaha R6 2022">
+                </div>
+                <div class="form-group-custom">
+                    <label for="inputNotas">NOTAS / REQUERIMIENTOS ESPECIALES</label>
+                    <textarea id="inputNotas" rows="3" placeholder="Talla, color, o detalles de la modificación..."></textarea>
+                </div>
+                <button type="submit" class="btn-enviar-custom">
+                    <i class="fa-solid fa-paper-plane"></i> ENVIAR SOLICITUD
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SWEETALERT & JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/static/js/customizacion.js"></script>
+
+</body>
+{% include 'footer.html' %}
+</html>
