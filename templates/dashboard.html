@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GP COLOMBIA | MI CUENTA</title>
+    <link rel="shortcut icon" href="https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/LOGO_GP.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL0xPR09fR1AuanBnIiwiaWF0IjoxNzczNDMwNjcyLCJleHAiOjE3NzYwMjI2NzJ9.rGW5gWAV-TiyZc_YoVGOFQQL4-XKS8xqxPCz2iA2ceM" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --rojo: #e10600;
+            --rojo-dim: rgba(225,6,0,0.12);
+            --fondo: #080808;
+            --card: #0f0f0f;
+            --borde: rgba(255,255,255,0.07);
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--fondo);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+        .dash-header {
+            background: #0b0b0b;
+            border-bottom: 3px solid var(--rojo);
+            padding: 14px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .dash-logo {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .dash-logo-main {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            letter-spacing: 4px;
+            color: #fff;
+        }
+
+        .dash-logo-sub {
+            font-size: 10px;
+            color: var(--rojo);
+            letter-spacing: 5px;
+            font-weight: 700;
+        }
+
+        .dash-header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .user-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--borde);
+            padding: 6px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #bbb;
+        }
+
+        .user-chip i { color: var(--rojo); }
+
+        .btn-logout {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: transparent;
+            border: 1px solid rgba(225,6,0,0.4);
+            color: var(--rojo);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-logout:hover {
+            background: var(--rojo);
+            color: #fff;
+            border-color: var(--rojo);
+        }
+
+        /* HERO */
+        .dash-hero {
+            background:
+                linear-gradient(135deg, rgba(225,6,0,0.08) 0%, transparent 60%),
+                #0a0a0a;
+            border-bottom: 1px solid var(--borde);
+            padding: 50px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dash-hero::after {
+            content: '';
+            position: absolute;
+            right: -5%;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 200px;
+            color: rgba(255,255,255,0.025);
+            letter-spacing: -10px;
+            pointer-events: none;
+            line-height: 1;
+        }
+
+        .hero-inner {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .hero-label {
+            font-size: 11px;
+            letter-spacing: 4px;
+            color: var(--rojo);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .hero-nombre {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(36px, 5vw, 64px);
+            letter-spacing: 4px;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .hero-correo {
+            font-size: 14px;
+            color: #555;
+            letter-spacing: 1px;
+        }
+
+        /* NÚMERO DE COMPETIDOR */
+        .numero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--rojo);
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+            padding: 6px 24px;
+            margin-top: 18px;
+        }
+
+        .numero-label {
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .numero-valor {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            line-height: 1;
+        }
+
+        /* CONTENIDO */
+        .dash-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 40px;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 18px;
+            letter-spacing: 4px;
+            color: #555;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--borde);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i { color: var(--rojo); }
+
+        /* GRIDS DE DATOS */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
+            margin-bottom: 36px;
+        }
+
+        .info-card {
+            background: var(--card);
+            border: 1px solid var(--borde);
+            padding: 16px 18px;
+            transition: border-color 0.2s;
+        }
+
+        .info-card:hover {
+            border-color: rgba(225,6,0,0.3);
+        }
+
+        .info-card-label {
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: #555;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .info-card-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: #eee;
+            letter-spacing: 0.5px;
+            word-break: break-all;
+        }
+
+        .info-card-icon {
+            color: var(--rojo);
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+
+        /* BADGE EXPERIENCIA */
+        .badge-si {
+            background: rgba(0,200,80,0.1);
+            border: 1px solid rgba(0,200,80,0.3);
+            color: #44dd88;
+            padding: 3px 10px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .badge-no {
+            background: rgba(255,100,0,0.1);
+            border: 1px solid rgba(255,100,0,0.25);
+            color: #ff9955;
+            padding: 3px 10px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* MOTO HIGHLIGHT */
+        .moto-card {
+            background: var(--card);
+            border: 1px solid var(--borde);
+            border-left: 3px solid var(--rojo);
+            padding: 20px 24px;
+            margin-bottom: 36px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .moto-icon {
+            font-size: 40px;
+            color: rgba(225,6,0,0.3);
+        }
+
+        .moto-info {
+            flex: 1;
+        }
+
+        .moto-marca {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            letter-spacing: 3px;
+            line-height: 1;
+        }
+
+        .moto-modelo {
+            font-size: 14px;
+            color: #666;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        .moto-cc {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            color: var(--rojo);
+            letter-spacing: 2px;
+        }
+
+        /* FOOTER DASH */
+        .dash-footer {
+            text-align: center;
+            padding: 30px;
+            color: #2a2a2a;
+            font-size: 12px;
+            letter-spacing: 2px;
+            border-top: 1px solid rgba(255,255,255,0.03);
+        }
+
+        @media (max-width: 768px) {
+            .dash-header  { padding: 12px 20px; flex-wrap: wrap; gap: 10px; }
+            .dash-hero    { padding: 30px 20px; }
+            .dash-content { padding: 0 20px; margin: 28px auto; }
+            .info-grid    { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="dash-header">
+        <a href="/" style="text-decoration:none;">
+            <div class="dash-logo">
+                <span class="dash-logo-main">GP'C</span>
+                <span class="dash-logo-sub">COLOMBIA</span>
+            </div>
+        </a>
+        <div class="dash-header-right">
+            <div class="user-chip">
+                <i class="fa-solid fa-user"></i>
+                {{ usuario.correo }}
+            </div>
+            <a href="/logout" class="btn-logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                CERRAR SESIÓN
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="dash-hero">
+        <div class="hero-inner">
+            <div class="hero-label"><i class="fa-solid fa-flag-checkered"></i> &nbsp; PERFIL DEL PILOTO</div>
+            <h1 class="hero-nombre">{{ competidor.nombre_completo }}</h1>
+            <div class="hero-correo">{{ usuario.correo }}</div>
+            {% if competidor %}
+            <div class="numero-badge">
+                <span class="numero-label">Nº COMPETIDOR</span>
+                <span class="numero-valor">{{ competidor.numero_competidor }}</span>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- CONTENIDO -->
+    <main class="dash-content">
+
+        {% if competidor %}
+
+        <!-- MOTOCICLETA -->
+        <div class="section-title"><i class="fa-solid fa-motorcycle"></i> MI MOTOCICLETA</div>
+        <div class="moto-card">
+            <div class="moto-icon"><i class="fa-solid fa-motorcycle"></i></div>
+            <div class="moto-info">
+                <div class="moto-marca">{{ competidor.marca_motocicleta | upper }}</div>
+                <div class="moto-modelo">{{ competidor.modelo_motocicleta }}</div>
+            </div>
+            <div class="moto-cc">{{ competidor.cilindraje_motor }} CC</div>
+        </div>
+
+        <!-- DATOS PERSONALES -->
+        <div class="section-title"><i class="fa-solid fa-user"></i> MIS DATOS PERSONALES</div>
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-card-icon"><i class="fa-solid fa-id-card"></i></div>
+                <div class="info-card-label">TIPO DE DOCUMENTO</div>
+                <div class="info-card-value">{{ competidor.tipo_documento | upper }}</div>
+            </div>
+            <div class="info-card">
+                <div class="info-card-icon"><i class="fa-solid fa-hashtag"></i></div>
+                <div class="info-card-label">NÚMERO DE DOCUMENTO</div>
+                <div class="info-card-value">{{ competidor.numero_documento }}</div>
+            </div>
+            <div class="info-card">
+                <div class="info-card-icon"><i class="fa-solid fa-cake-candles"></i></div>
+                <div class="info-card-label">FECHA DE NACIMIENTO</div>
+                <div class="info-card-value">{{ competidor.fecha_nacimiento }}</div>
+            </div>
+            <div class="info-card">
+                <div class="info-card-icon"><i class="fa-solid fa-city"></i></div>
+                <div class="info-card-label">CIUDAD</div>
+                <div class="info-card-value">{{ competidor.ciudad }}</div>
+            </div>
+            <div class="info-card">
+                <div class="info-card-icon"><i class="fa-solid fa-phone"></i></div>
+                <div class="info-card-label">TELÉFONO</div>
+                <div class="info-card-value">{{ competidor.telefono }}</div>
+            </div>
+            <div class="info-card">
+                <div class="info-card-icon"><i class="fa-solid fa-trophy"></i></div>
+                <div class="info-card-label">EXPERIENCIA EN CARRERAS</div>
+                <div class="info-card-value">
+                    {% if competidor.experiencia == 'si' %}
+                    <span class="badge-si"><i class="fa-solid fa-check"></i> SÍ TENGO</span>
+                    {% else %}
+                    <span class="badge-no"><i class="fa-solid fa-xmark"></i> AÚN NO</span>
+                    {% endif %}
+                </div>
+            </div>
+            {% if competidor.equipo %}
+            <div class="info-card">
+                <div class="info-card-icon"><i class="fa-solid fa-users"></i></div>
+                <div class="info-card-label">EQUIPO / ESCUDERÍA</div>
+                <div class="info-card-value">{{ competidor.equipo }}</div>
+            </div>
+            {% endif %}
+        </div>
+
+        {% else %}
+        <div style="text-align:center; padding:60px; color:#444;">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size:48px; margin-bottom:16px; display:block;"></i>
+            <p style="letter-spacing:2px;">NO SE ENCONTRÓ INFORMACIÓN DE COMPETIDOR VINCULADA A ESTA CUENTA.</p>
+        </div>
+        {% endif %}
+
+    </main>
+
+    <footer class="dash-footer">
+        GP COLOMBIA &nbsp;·&nbsp; TODOS LOS DERECHOS RESERVADOS &nbsp;·&nbsp; 2026
+    </footer>
+
+</body>
+</html>
