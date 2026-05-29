@@ -7,26 +7,106 @@
     <link rel="shortcut icon" href="https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/LOGO_GP.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL0xPR09fR1AuanBnIiwiaWF0IjoxNzczNDMwNjcyLCJleHAiOjE3NzYwMjI2NzJ9.rGW5gWAV-TiyZc_YoVGOFQQL4-XKS8xqxPCz2iA2ceM" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/styles.css">
+    <!-- Estilos extra para los campos de contraseña -->
+    <style>
+        .password-wrap {
+            position: relative;
+        }
+        .password-wrap input {
+            padding-right: 44px;
+        }
+        .toggle-pass-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 15px;
+            transition: color 0.2s;
+            padding: 0;
+        }
+        .toggle-pass-btn:hover { color: #e10600; }
+
+        .pass-strength {
+            height: 3px;
+            border-radius: 2px;
+            margin-top: 6px;
+            transition: all 0.3s;
+            background: #222;
+        }
+        .pass-strength.debil   { background: #e10600; width: 33%; }
+        .pass-strength.media   { background: #ffa500; width: 66%; }
+        .pass-strength.fuerte  { background: #00c850; width: 100%; }
+
+        .pass-strength-label {
+            font-size: 11px;
+            letter-spacing: 1px;
+            margin-top: 3px;
+            color: #666;
+        }
+
+        /* Sección de credenciales con borde destacado */
+        .credentials-section {
+            background: rgba(225,6,0,0.05);
+            border: 1px solid rgba(225,6,0,0.25);
+            border-left: 3px solid #e10600;
+            padding: 20px 16px;
+            margin-top: 8px;
+        }
+        .credentials-section h4 {
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: #e10600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .login-link-banner {
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.07);
+            padding: 12px 16px;
+            margin-top: 10px;
+            font-size: 13px;
+            color: #666;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+        .login-link-banner a {
+            color: #e10600;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .login-link-banner a:hover { color: #ff4422; }
+    </style>
 </head>
 
 <body>
 <div class="container">
     <div class="left-section">
-        <!-- IMAGEN PRINCIPAL -->
         <img 
         src="https://gofwqvawkqvvypddvmop.supabase.co/storage/v1/object/sign/GP_COL_IMG/PUBLI_GP.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZTk5NGFhYS01ODQ2LTQ4NWMtOGIzNy1iZDE1NjU1Zjg1MDAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJHUF9DT0xfSU1HL1BVQkxJX0dQLmpwZWciLCJpYXQiOjE3NzM0Mjc5OTYsImV4cCI6MTc3NjAxOTk5Nn0.YyLvprGXi-XB-qva1hfchtiLrLrP7Ao2o5csCBvOL7M"
         alt="IMAGEN GP COLOMBIA"
         class="main-image">
-
     </div>
-    <!-- SECCIÓN DERECHA -->
+
     <div class="right-section">
         <h1 class="title">GP COLOMBIA</h1>
         <p class="description">
             Campeonato nacional de motociclismo donde los mejores pilotos 
             compiten por la gloria en las pistas de Colombia.
         </p>
-        <form action="/register" method="POST" class="form">
+
+        <!-- BANNER PARA QUIENES YA TIENEN CUENTA -->
+        <div class="login-link-banner">
+            ¿Ya tienes cuenta? &nbsp;<a href="/login">INICIA SESIÓN AQUÍ</a>
+        </div>
+
+        <form action="/register" method="POST" class="form" id="formRegistro">
+
             <div class="form-group">
                 <label>NOMBRE COMPLETO</label>
                 <input type="text" name="full_name" required>
@@ -63,11 +143,6 @@
             </div>
 
             <div class="form-group">
-                <label>CORREO ELECTRÓNICO</label>
-                <input type="email" name="email" required>
-            </div>
-
-            <div class="form-group">
                 <label>NOMBRE DEL EQUIPO O LA ESCUDERÍA</label>
                 <input type="text" name="team">
             </div>
@@ -101,6 +176,56 @@
                 <input type="number" name="competitor_number" required>
             </div>
 
+            <!-- ═══════════════════════════════════════════
+                 SECCIÓN DE CREDENCIALES DE ACCESO
+                 ═══════════════════════════════════════════ -->
+            <div class="credentials-section">
+                <h4>🔐 CREDENCIALES DE TU CUENTA</h4>
+
+                <div class="form-group">
+                    <label>CORREO ELECTRÓNICO</label>
+                    <input type="email" name="email" id="emailInput" required>
+                </div>
+
+                <div class="form-group">
+                    <label>CONTRASEÑA</label>
+                    <div class="password-wrap">
+                        <input
+                            type="password"
+                            name="password"
+                            id="passInput"
+                            required
+                            minlength="8"
+                            placeholder="MÍNIMO 8 CARACTERES"
+                            oninput="evaluarContraseña(this.value)"
+                        >
+                        <button type="button" class="toggle-pass-btn" onclick="togglePass('passInput', this)">
+                            👁
+                        </button>
+                    </div>
+                    <div class="pass-strength" id="passStrength"></div>
+                    <div class="pass-strength-label" id="passLabel"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>CONFIRMAR CONTRASEÑA</label>
+                    <div class="password-wrap">
+                        <input
+                            type="password"
+                            name="confirm_password"
+                            id="confirmPassInput"
+                            required
+                            placeholder="REPITE TU CONTRASEÑA"
+                        >
+                        <button type="button" class="toggle-pass-btn" onclick="togglePass('confirmPassInput', this)">
+                            👁
+                        </button>
+                    </div>
+                    <div class="pass-strength-label" id="confirmLabel" style="color:#e10600;"></div>
+                </div>
+            </div>
+            <!-- ═══════════════════════════════════════════ -->
+
             <div class="terms-box">
                 <h3>TÉRMINOS Y CONDICIONES</h3>
                 <p>
@@ -108,23 +233,130 @@
                     acepta las normas del campeonato GP Colombia y asume la responsabilidad
                     de cumplir las reglas deportivas y de seguridad establecidas por los organizadores.
                 </p>
-
                 <div class="terms-check">
                     <input type="checkbox" name="terms" required>
                     <label>ACEPTO LOS TÉRMINOS Y CONDICIONES</label>
                 </div>
-
             </div>
 
-            <button type="submit" class="submit-btn">
-                REGISTRARME
+            <button type="submit" class="submit-btn" id="btnRegistro">
+                CREAR MI CUENTA Y REGISTRARME
             </button>
 
         </form>
-
     </div>
-
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // ─── Mostrar / ocultar contraseña ───
+    function togglePass(inputId, btn) {
+        const input = document.getElementById(inputId);
+        if (input.type === "password") {
+            input.type = "text";
+            btn.textContent = "🙈";
+        } else {
+            input.type = "password";
+            btn.textContent = "👁";
+        }
+    }
+
+    // ─── Indicador de fortaleza ───
+    function evaluarContraseña(valor) {
+        const bar   = document.getElementById("passStrength");
+        const label = document.getElementById("passLabel");
+        bar.className = "pass-strength";
+        if (!valor) { label.textContent = ""; return; }
+
+        const tiene_mayus = /[A-Z]/.test(valor);
+        const tiene_num   = /[0-9]/.test(valor);
+        const tiene_esp   = /[^A-Za-z0-9]/.test(valor);
+        const largo       = valor.length >= 8;
+
+        const puntos = [largo, tiene_mayus, tiene_num, tiene_esp].filter(Boolean).length;
+
+        if (puntos <= 1) {
+            bar.classList.add("debil");
+            label.textContent = "CONTRASEÑA DÉBIL";
+            label.style.color = "#e10600";
+        } else if (puntos <= 3) {
+            bar.classList.add("media");
+            label.textContent = "CONTRASEÑA MEDIA";
+            label.style.color = "#ffa500";
+        } else {
+            bar.classList.add("fuerte");
+            label.textContent = "CONTRASEÑA FUERTE ✓";
+            label.style.color = "#00c850";
+        }
+    }
+
+    // ─── Validar que las contraseñas coincidan antes de enviar ───
+    document.getElementById("formRegistro").addEventListener("submit", function(e) {
+        const pass    = document.getElementById("passInput").value;
+        const confirm = document.getElementById("confirmPassInput").value;
+        const label   = document.getElementById("confirmLabel");
+
+        if (pass !== confirm) {
+            e.preventDefault();
+            label.textContent = "⚠ LAS CONTRASEÑAS NO COINCIDEN";
+            document.getElementById("confirmPassInput").focus();
+            return;
+        }
+
+        if (pass.length < 8) {
+            e.preventDefault();
+            Swal.fire({
+                title: "CONTRASEÑA MUY CORTA",
+                text: "La contraseña debe tener al menos 8 caracteres.",
+                icon: "warning",
+                confirmButtonColor: "#e10600",
+                background: "#111",
+                color: "#fff"
+            });
+            return;
+        }
+
+        label.textContent = "";
+    });
+
+    // Verificar en tiempo real
+    document.getElementById("confirmPassInput").addEventListener("input", function() {
+        const pass    = document.getElementById("passInput").value;
+        const label   = document.getElementById("confirmLabel");
+        if (this.value && this.value !== pass) {
+            label.textContent = "⚠ LAS CONTRASEÑAS NO COINCIDEN";
+        } else if (this.value && this.value === pass) {
+            label.textContent = "✓ CONTRASEÑAS COINCIDEN";
+            label.style.color = "#00c850";
+        } else {
+            label.textContent = "";
+        }
+    });
+
+    // ─── Alertas desde query params ───
+    const params = new URLSearchParams(window.location.search);
+    const error  = params.get("error");
+
+    const mensajes = {
+        cedula_existente:           { title: "DOCUMENTO YA REGISTRADO",       text: "Ya existe un participante con ese número de documento.",        icon: "warning" },
+        numero_competidor_existente:{ title: "NÚMERO DE COMPETIDOR OCUPADO",  text: "Ese número de competidor ya está asignado. Elige otro.",         icon: "warning" },
+        nombre_existente:           { title: "NOMBRE YA REGISTRADO",          text: "Ya existe un participante registrado con ese nombre completo.",   icon: "warning" },
+        correo_existente:           { title: "CORREO YA REGISTRADO",          text: "Ya existe una cuenta con ese correo electrónico. Inicia sesión.", icon: "warning" },
+        passwords_no_coinciden:     { title: "CONTRASEÑAS NO COINCIDEN",      text: "Las contraseñas ingresadas no son iguales. Verifica.",            icon: "error"   },
+        password_muy_corta:         { title: "CONTRASEÑA MUY CORTA",          text: "La contraseña debe tener al menos 8 caracteres.",                 icon: "error"   },
+    };
+
+    if (error && mensajes[error]) {
+        const m = mensajes[error];
+        Swal.fire({ title: m.title, text: m.text, icon: m.icon,
+            confirmButtonText: "ENTENDIDO", confirmButtonColor: "#e10600",
+            background: "#111", color: "#fff"
+        }).then(() => {
+            const url = new URL(window.location.href);
+            url.searchParams.delete("error");
+            window.history.replaceState({}, document.title, url.pathname);
+        });
+    }
+</script>
 </body>
 </html>
