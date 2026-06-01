@@ -3,6 +3,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from sqlmodel import Session, select
+from typing import Optional
 from starlette.responses import JSONResponse
 from database import create_db_and_tables, get_session
 from models import Competidor, Usuario, Carrera, InscripcionCarrera
@@ -106,7 +107,7 @@ def registrar_competidor(
     motorcycle_model:  str  = Form(...),
     engine_cc:         int  = Form(...),
     competitor_number: int  = Form(...),
-    terms:             bool = Form(...),
+    terms: Optional[bool] = Form(default=False),
     session: Session = Depends(get_session)
 ):
     if password != confirm_password:
@@ -116,7 +117,10 @@ def registrar_competidor(
     if categoria not in CATEGORIAS_ORDEN:
         categoria = "novato"
 
-    fecha_convertida = datetime.strptime(birth_date, "%Y-%m-%d").date()
+    try:
+        fecha_convertida = datetime.strptime(birth_date, "%Y-%m-%d").date()
+    except ValueError:
+        return RedirectResponse(url="/?error=fecha_invalida", status_code=303)
 
     if session.exec(select(Competidor.id).where(Competidor.numero_documento == document_number)).first():
         return RedirectResponse(url="/?error=cedula_existente", status_code=303)
