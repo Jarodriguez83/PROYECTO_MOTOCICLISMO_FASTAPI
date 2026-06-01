@@ -1,9 +1,9 @@
 /**
  * ============================================================
  * ADMIN PANEL JS — GP COLOMBIA
- * NOTA: carreras.js se carga primero y maneja la tabla de
- * competidores. Este archivo SOLO maneja lo exclusivo del
- * panel admin: tabs, carreras CRUD, y extensiones del modal.
+ * FIX: Botones de carrera ahora usan data-attributes en lugar
+ * de parámetros inline en onclick, evitando errores JS con
+ * caracteres especiales en nombres de carreras.
  * ============================================================
  */
 
@@ -14,23 +14,23 @@ console.log("admin_panel.js cargado correctamente.");
 // ============================================================
 document.addEventListener("DOMContentLoaded", function () {
 
-    // ── Reasignar click de botones ver/editar para usar
-    //    nuestra versión extendida (con categoría y stats)
+    // ── Interceptar clicks de botones VER / EDITAR con capture=true
+    //    para ejecutarse ANTES que carreras.js
     document.addEventListener("click", function (e) {
 
         // BOTÓN VER → modal extendido con categoría + stats
         const btnVer = e.target.closest(".btn-ver");
         if (btnVer) {
-            e.stopImmediatePropagation(); // evitar que carreras.js lo maneje también
+            e.stopImmediatePropagation();
             const competidores = obtenerCompetidores();
             const c = competidores.find(x => x.id === parseInt(btnVer.dataset.id));
             if (c) abrirModalVerAdmin(c);
             return;
         }
 
-        // BOTÓN EDITAR → modal extendido con campo categoría
+        // BOTÓN EDITAR en tabla
         const btnEditar = e.target.closest(".btn-editar");
-        if (btnEditar) {
+        if (btnEditar && !btnEditar.classList.contains("btn-editar-desde-detalle")) {
             e.stopImmediatePropagation();
             abrirModalEditarAdmin(btnEditar.dataset.id);
             return;
@@ -43,7 +43,27 @@ document.addEventListener("DOMContentLoaded", function () {
             abrirModalEditarAdmin(btnDesdeDetalle.dataset.id);
             return;
         }
-    }, true); // capture: true para interceptar antes que carreras.js
+
+        // ── BOTONES DE CARRERAS — usan data-attributes ──
+
+        // TOGGLE ACTIVO/INACTIVO
+        const btnToggle = e.target.closest(".btn-toggle-carrera");
+        if (btnToggle) {
+            const id = parseInt(btnToggle.dataset.carreraId);
+            if (id) toggleCarrera(id, btnToggle);
+            return;
+        }
+
+        // ELIMINAR CARRERA
+        const btnEliminarCarrera = e.target.closest(".btn-eliminar-carrera");
+        if (btnEliminarCarrera) {
+            const id     = parseInt(btnEliminarCarrera.dataset.carreraId);
+            const nombre = btnEliminarCarrera.dataset.carreraNombre || "esta carrera";
+            if (id) eliminarCarrera(id, nombre);
+            return;
+        }
+
+    }, true); // capture: true → se ejecuta antes que carreras.js
 
 });
 
@@ -54,6 +74,7 @@ function obtenerCompetidores() {
     try {
         return JSON.parse(document.getElementById("datosCompetidores").textContent);
     } catch (e) {
+        console.error("Error parseando competidores:", e);
         return [];
     }
 }
@@ -64,7 +85,6 @@ function obtenerCompetidores() {
 function cambiarTab(nombre, btnEl) {
     document.querySelectorAll(".admin-tab").forEach(t => t.classList.remove("activo"));
     document.querySelectorAll(".admin-nav-btn").forEach(b => b.classList.remove("activo"));
-
     const tab = document.getElementById("tab-" + nombre);
     if (tab) tab.classList.add("activo");
     if (btnEl) btnEl.classList.add("activo");
@@ -97,14 +117,14 @@ function abrirModalVerAdmin(c) {
     document.getElementById("modalCC").textContent        = c.cilindraje_motor + " CC";
     document.getElementById("modalExperiencia").textContent = c.experiencia === "si" ? "✅ SÍ" : "❌ NO";
 
-    var carrerasEl = document.getElementById("modalCarreras");
-    var puntosEl   = document.getElementById("modalPuntos");
-    var podiosEl   = document.getElementById("modalPodios");
+    const carrerasEl = document.getElementById("modalCarreras");
+    const puntosEl   = document.getElementById("modalPuntos");
+    const podiosEl   = document.getElementById("modalPodios");
     if (carrerasEl) carrerasEl.textContent = c.carreras_completadas != null ? c.carreras_completadas : 0;
     if (puntosEl)   puntosEl.textContent   = c.puntos_totales != null ? c.puntos_totales : 0;
     if (podiosEl)   podiosEl.textContent   = c.podios != null ? c.podios : 0;
 
-    var btnEditar = document.getElementById("btnEditarDesdeDetalle");
+    const btnEditar = document.getElementById("btnEditarDesdeDetalle");
     if (btnEditar) btnEditar.dataset.id = c.id;
 
     document.getElementById("modalOverlay").classList.add("activo");
@@ -136,12 +156,12 @@ function abrirModalEditarAdmin(id) {
     document.getElementById("editarModelo").value       = c.modelo_motocicleta;
     document.getElementById("editarCC").value           = c.cilindraje_motor;
 
-    var catEl = document.getElementById("editarCategoria");
+    const catEl = document.getElementById("editarCategoria");
     if (catEl) catEl.value = c.categoria || "novato";
 
     // Limpiar errores visuales
-    document.querySelectorAll(".editar-error").forEach(function(el) { el.textContent = ""; });
-    document.querySelectorAll(".editar-input").forEach(function(el) { el.classList.remove("input-invalido"); });
+    document.querySelectorAll(".editar-error").forEach(el => { el.textContent = ""; });
+    document.querySelectorAll(".editar-input").forEach(el => { el.classList.remove("input-invalido"); });
 
     // Cerrar modal de ver si estaba abierto
     document.getElementById("modalOverlay").classList.remove("activo");
@@ -154,7 +174,7 @@ function abrirModalEditarAdmin(id) {
 // MODAL NUEVA CARRERA — ABRIR / CERRAR
 // ============================================================
 function abrirModalNuevaCarrera() {
-    var overlay = document.getElementById("modalNuevaCarreraOverlay");
+    const overlay = document.getElementById("modalNuevaCarreraOverlay");
     if (overlay) {
         overlay.classList.add("activo");
         document.body.style.overflow = "hidden";
@@ -162,39 +182,34 @@ function abrirModalNuevaCarrera() {
 }
 
 function cerrarModalNuevaCarrera() {
-    var overlay = document.getElementById("modalNuevaCarreraOverlay");
+    const overlay = document.getElementById("modalNuevaCarreraOverlay");
     if (!overlay) return;
-
     overlay.classList.remove("activo");
     document.body.style.overflow = "";
 
-    // Resetear formulario
-    var form = document.getElementById("formNuevaCarrera");
+    const form = document.getElementById("formNuevaCarrera");
     if (!form) return;
-
-    form.querySelectorAll("input[type=text], input[type=url], input[type=time]").forEach(function(el) {
-        el.value = "";
+    form.querySelectorAll("input[type=text], input[type=url], input[type=time]").forEach(el => { el.value = ""; });
+    form.querySelectorAll("textarea").forEach(el => { el.value = ""; });
+    form.querySelectorAll("input[type=date]").forEach(el => { el.value = ""; });
+    form.querySelectorAll("input[type=number]").forEach(el => {
+        const defaults = { cupos_totales: "30", puntos_primer_lugar: "25", puntos_segundo_lugar: "18", puntos_tercer_lugar: "15" };
+        el.value = defaults[el.name] !== undefined ? defaults[el.name] : "";
     });
-    form.querySelectorAll("textarea").forEach(function(el) { el.value = ""; });
-    form.querySelectorAll("input[type=date]").forEach(function(el) { el.value = ""; });
-    form.querySelectorAll("input[type=number]").forEach(function(el) {
-        var defaults = { cupos_totales: "30", puntos_primer_lugar: "25", puntos_segundo_lugar: "18", puntos_tercer_lugar: "15" };
-        el.value = defaults[el.name] || "";
-    });
-    form.querySelectorAll("select").forEach(function(el) { el.selectedIndex = 0; });
+    form.querySelectorAll("select").forEach(el => { el.selectedIndex = 0; });
 }
 
 // ============================================================
 // GUARDAR NUEVA CARRERA
 // ============================================================
 async function guardarNuevaCarrera() {
-    var form = document.getElementById("formNuevaCarrera");
+    const form = document.getElementById("formNuevaCarrera");
     if (!form) return;
 
-    var nombre      = (document.getElementById("nc_nombre")?.value || "").trim();
-    var descripcion = (document.getElementById("nc_descripcion")?.value || "").trim();
-    var ubicacion   = (document.getElementById("nc_ubicacion")?.value || "").trim();
-    var fecha       = (document.getElementById("nc_fecha")?.value || "").trim();
+    const nombre      = (document.getElementById("nc_nombre")?.value || "").trim();
+    const descripcion = (document.getElementById("nc_descripcion")?.value || "").trim();
+    const ubicacion   = (document.getElementById("nc_ubicacion")?.value || "").trim();
+    const fecha       = (document.getElementById("nc_fecha")?.value || "").trim();
 
     if (!nombre || !descripcion || !ubicacion || !fecha) {
         Swal.fire({
@@ -209,21 +224,16 @@ async function guardarNuevaCarrera() {
         return;
     }
 
-    var btn = document.querySelector("#modalNuevaCarrera .btn-guardar-editar");
+    const btn = document.querySelector("#modalNuevaCarrera .btn-guardar-editar");
     if (btn) {
         btn.disabled = true;
         btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> CREANDO...';
     }
 
     try {
-        var formData = new FormData(form);
-
-        var res = await fetch("/admin/carrera", {
-            method: "POST",
-            body: formData
-        });
-
-        var data = await res.json();
+        const formData = new FormData(form);
+        const res = await fetch("/admin/carrera", { method: "POST", body: formData });
+        const data = await res.json();
 
         if (res.ok && data.success) {
             cerrarModalNuevaCarrera();
@@ -260,16 +270,16 @@ async function guardarNuevaCarrera() {
 }
 
 // ============================================================
-// TOGGLE ACTIVO / INACTIVO
+// TOGGLE ACTIVO / INACTIVO — llamado desde event listener
 // ============================================================
 async function toggleCarrera(id, btnEl) {
     try {
-        var res  = await fetch("/admin/carrera/" + id + "/toggle", { method: "PATCH" });
-        var data = await res.json();
+        const res  = await fetch("/admin/carrera/" + id + "/toggle", { method: "PATCH" });
+        const data = await res.json();
 
         if (res.ok && data.success) {
-            var card        = btnEl.closest(".card-carrera-admin");
-            var badgeEstado = card ? card.querySelector(".badge-estado") : null;
+            const card        = btnEl.closest(".card-carrera-admin");
+            const badgeEstado = card ? card.querySelector(".badge-estado") : null;
 
             if (data.activa) {
                 btnEl.classList.remove("btn-activar");
@@ -288,15 +298,16 @@ async function toggleCarrera(id, btnEl) {
             throw new Error("Error al cambiar estado");
         }
     } catch (err) {
-        Swal.fire({ title: "ERROR", text: "No se pudo cambiar el estado.", icon: "error", confirmButtonColor: "#e10600", background: "#111", color: "#fff" });
+        console.error(err);
+        Swal.fire({ title: "ERROR", text: "No se pudo cambiar el estado de la carrera.", icon: "error", confirmButtonColor: "#e10600", background: "#111", color: "#fff" });
     }
 }
 
 // ============================================================
-// ELIMINAR CARRERA
+// ELIMINAR CARRERA — llamado desde event listener
 // ============================================================
 async function eliminarCarrera(id, nombre) {
-    var result = await Swal.fire({
+    const result = await Swal.fire({
         title: "¿ELIMINAR CARRERA?",
         html: "Esta acción eliminará permanentemente <strong>" + nombre + "</strong> y todas sus inscripciones.",
         icon: "warning",
@@ -313,8 +324,8 @@ async function eliminarCarrera(id, nombre) {
     if (!result.isConfirmed) return;
 
     try {
-        var res  = await fetch("/admin/carrera/" + id, { method: "DELETE" });
-        var data = await res.json();
+        const res  = await fetch("/admin/carrera/" + id, { method: "DELETE" });
+        const data = await res.json();
 
         if (res.ok && data.success) {
             await Swal.fire({
@@ -331,79 +342,80 @@ async function eliminarCarrera(id, nombre) {
             throw new Error("Error al eliminar");
         }
     } catch (err) {
+        console.error(err);
         Swal.fire({ title: "ERROR", text: "No se pudo eliminar la carrera.", icon: "error", confirmButtonColor: "#e10600", background: "#111", color: "#fff" });
     }
 }
 
 // ============================================================
-// FILTRAR COMPETIDORES — SOBREESCRIBE la de carreras.js
-// añadiendo el filtro de categoría
+// FILTRAR COMPETIDORES — sobreescribe la de carreras.js
+// añadiendo el filtro de categoría exclusivo del admin
 // ============================================================
 function filtrarCompetidores() {
-    var busqueda  = (document.getElementById("inputBusqueda")?.value || "").trim().toLowerCase();
-    var filtroCil = (document.getElementById("filtroCilindraje")?.value || "").toLowerCase();
-    var filtroCC  = document.getElementById("filtroCC")?.value || "";
-    var filtroDoc = (document.getElementById("filtroDocumento")?.value || "").toLowerCase();
-    var filtroExp = (document.getElementById("filtroExperiencia")?.value || "").toLowerCase();
-    var filtroCat = (document.getElementById("filtroCategoria")?.value || "").toLowerCase();
+    const busqueda  = (document.getElementById("inputBusqueda")?.value || "").trim().toLowerCase();
+    const filtroCil = (document.getElementById("filtroCilindraje")?.value || "").toLowerCase();
+    const filtroCC  = document.getElementById("filtroCC")?.value || "";
+    const filtroDoc = (document.getElementById("filtroDocumento")?.value || "").toLowerCase();
+    const filtroExp = (document.getElementById("filtroExperiencia")?.value || "").toLowerCase();
+    const filtroCat = (document.getElementById("filtroCategoria")?.value || "").toLowerCase();
 
-    var filas    = document.querySelectorAll("#cuerpoTabla .fila-competidor");
-    var visibles = 0;
+    const filas    = document.querySelectorAll("#cuerpoTabla .fila-competidor");
+    let visibles = 0;
 
-    filas.forEach(function(fila) {
-        var id    = fila.dataset.id    || "";
-        var nombre= fila.dataset.nombre|| "";
-        var tel   = fila.dataset.telefono || "";
-        var num   = fila.dataset.numero   || "";
-        var marca = fila.dataset.marca    || "";
-        var cc    = parseInt(fila.dataset.cc) || 0;
-        var doc   = fila.dataset.documento   || "";
-        var exp   = fila.dataset.experiencia || "";
-        var cat   = fila.dataset.categoria   || "";
+    filas.forEach(fila => {
+        const id    = fila.dataset.id    || "";
+        const nombre= fila.dataset.nombre|| "";
+        const tel   = fila.dataset.telefono || "";
+        const num   = fila.dataset.numero   || "";
+        const marca = fila.dataset.marca    || "";
+        const cc    = parseInt(fila.dataset.cc) || 0;
+        const doc   = fila.dataset.documento   || "";
+        const exp   = fila.dataset.experiencia || "";
+        const cat   = fila.dataset.categoria   || "";
 
-        var okBusqueda = !busqueda  || id.includes(busqueda) || tel.includes(busqueda) || num.includes(busqueda) || nombre.includes(busqueda);
-        var okMarca    = !filtroCil || marca === filtroCil;
-        var okDoc      = !filtroDoc || doc   === filtroDoc;
-        var okExp      = !filtroExp || exp   === filtroExp;
-        var okCat      = !filtroCat || cat   === filtroCat;
+        const okBusqueda = !busqueda  || id.includes(busqueda) || tel.includes(busqueda) || num.includes(busqueda) || nombre.includes(busqueda);
+        const okMarca    = !filtroCil || marca === filtroCil;
+        const okDoc      = !filtroDoc || doc   === filtroDoc;
+        const okExp      = !filtroExp || exp   === filtroExp;
+        const okCat      = !filtroCat || cat   === filtroCat;
 
-        var okCC = true;
+        let okCC = true;
         if (filtroCC) {
             if (filtroCC === "1001 +") { okCC = cc > 1000; }
-            else { var parts = filtroCC.split("-").map(Number); okCC = cc >= parts[0] && cc <= parts[1]; }
+            else { const parts = filtroCC.split("-").map(Number); okCC = cc >= parts[0] && cc <= parts[1]; }
         }
 
-        var mostrar = okBusqueda && okMarca && okCC && okDoc && okExp && okCat;
+        const mostrar = okBusqueda && okMarca && okCC && okDoc && okExp && okCat;
         fila.style.display = mostrar ? "" : "none";
         if (mostrar) visibles++;
     });
 
-    var contEl = document.getElementById("contadorVisible");
+    const contEl = document.getElementById("contadorVisible");
     if (contEl) contEl.textContent = visibles;
 
-    var sinRes = document.getElementById("sinResultados");
+    const sinRes = document.getElementById("sinResultados");
     if (sinRes) sinRes.style.display = visibles === 0 ? "flex" : "none";
 }
 
 function limpiarBusqueda() {
-    var el = document.getElementById("inputBusqueda");
+    const el = document.getElementById("inputBusqueda");
     if (el) el.value = "";
     filtrarCompetidores();
 }
 
 function resetearFiltros() {
-    ["inputBusqueda","filtroCilindraje","filtroCC","filtroDocumento","filtroExperiencia","filtroCategoria"].forEach(function(id) {
-        var el = document.getElementById(id);
+    ["inputBusqueda","filtroCilindraje","filtroCC","filtroDocumento","filtroExperiencia","filtroCategoria"].forEach(id => {
+        const el = document.getElementById(id);
         if (el) el.value = "";
     });
     filtrarCompetidores();
 }
 
 // ============================================================
-// ESTILOS ADICIONALES QUE FALTAN EN EL CSS
+// ESTILOS ADICIONALES INYECTADOS
 // ============================================================
 (function() {
-    var style = document.createElement("style");
+    const style = document.createElement("style");
     style.textContent = [
         ".badge-categoria { display:inline-block; font-size:10px; font-weight:700; letter-spacing:2px; padding:4px 10px; text-transform:uppercase; }",
         ".badge-cat-novato     { background:rgba(78,163,255,0.15); color:#4ea3ff; border:1px solid rgba(78,163,255,0.3); }",
@@ -420,8 +432,8 @@ function resetearFiltros() {
 })();
 
 // ============================================================
-// ESC cierra modal nueva carrera
+// ESC cierra modales
 // ============================================================
-document.addEventListener("keydown", function(e) {
+document.addEventListener("keydown", e => {
     if (e.key === "Escape") cerrarModalNuevaCarrera();
 });
