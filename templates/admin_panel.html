@@ -63,7 +63,6 @@
             <span class="admin-stat-lbl">CARRERAS 2026</span>
         </div>
         <div class="admin-stat-div"></div>
-        <!-- Categorías -->
         <div class="admin-stat admin-stat-cats">
             {% for cat, count in por_categoria.items() %}
             <div class="cat-mini">
@@ -82,7 +81,6 @@
 <div class="seccion-panel">
     <div class="contenedor-panel">
 
-        <!-- BARRA DE HERRAMIENTAS -->
         <div class="barra-herramientas">
             <div class="bloque-busqueda">
                 <div class="input-busqueda-wrapper">
@@ -142,7 +140,6 @@
             </div>
         </div>
 
-        <!-- BARRA RESULTADOS -->
         <div class="barra-resultados">
             <span class="resultado-texto">
                 MOSTRANDO <span id="contadorVisible" class="resultado-numero">{{ competidores | length }}</span> DE
@@ -157,7 +154,6 @@
             </div>
         </div>
 
-        <!-- TABLA -->
         <div class="contenedor-tabla">
             {% if competidores %}
             <table class="tabla-competidores" id="tablaCompetidores">
@@ -228,7 +224,7 @@
                             <button class="btn-editar" data-id="{{ c.id }}" title="Editar">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </button>
-                            <button class="btn-eliminar" data-id="{{ c.id }}" data-nombre="{{ c.nombre_completo }}" title="Eliminar">
+                            <button class="btn-eliminar" data-id="{{ c.id }}" data-nombre="{{ c.nombre_completo | e }}" title="Eliminar">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </td>
@@ -262,7 +258,6 @@
 <div class="seccion-panel">
     <div class="contenedor-panel">
 
-        <!-- BOTÓN AGREGAR CARRERA -->
         <div class="barra-carreras-admin">
             <h2 class="titulo-tab-carrera">GESTIÓN DE <span class="rojo-txt">CARRERAS 2026</span></h2>
             <button class="btn-nueva-carrera" onclick="abrirModalNuevaCarrera()">
@@ -273,7 +268,7 @@
         {% if carreras %}
         <div class="grid-carreras-admin">
             {% for c in carreras %}
-            <div class="card-carrera-admin {% if not c.activa %}carrera-inactiva{% endif %}">
+            <div class="card-carrera-admin {% if not c.activa %}carrera-inactiva{% endif %}" data-carrera-id="{{ c.id }}">
                 <div class="cca-header">
                     <div class="cca-fecha">
                         <span class="cca-dia">{{ c.fecha.strftime('%d') }}</span>
@@ -316,17 +311,19 @@
                     <p class="cca-desc">{{ c.descripcion }}</p>
                 </div>
                 <div class="cca-acciones">
+                    {# FIX: usar data-attributes en lugar de parámetros inline con comillas #}
                     <button class="btn-toggle-carrera {% if c.activa %}btn-desactivar{% else %}btn-activar{% endif %}"
-                        data-id="{{ c.id }}"
-                        onclick="toggleCarrera({{ c.id }}, this)">
+                        data-carrera-id="{{ c.id }}"
+                        data-activa="{{ 'true' if c.activa else 'false' }}">
                         {% if c.activa %}
                         <i class="fa-solid fa-eye-slash"></i> DESACTIVAR
                         {% else %}
                         <i class="fa-solid fa-eye"></i> ACTIVAR
                         {% endif %}
                     </button>
-                    <button class="btn-eliminar-carrera" data-id="{{ c.id }}" data-nombre="{{ c.nombre | e }}"
-                        onclick="eliminarCarrera({{ c.id }}, &quot;{{ c.nombre | escapejs }}&quot;)">
+                    <button class="btn-eliminar-carrera"
+                        data-carrera-id="{{ c.id }}"
+                        data-carrera-nombre="{{ c.nombre | e }}">
                         <i class="fa-solid fa-trash"></i> ELIMINAR
                     </button>
                 </div>
@@ -547,7 +544,7 @@
 
 <!-- DATOS JSON PARA JS -->
 <script id="datosCompetidores" type="application/json">
-[{% for c in competidores %}{"id":{{ c.id }},"nombre_completo":"{{ c.nombre_completo }}","tipo_documento":"{{ c.tipo_documento }}","numero_documento":"{{ c.numero_documento }}","fecha_nacimiento":"{{ c.fecha_nacimiento }}","ciudad":"{{ c.ciudad }}","telefono":"{{ c.telefono }}","correo":"{{ c.correo }}","equipo":"{{ c.equipo if c.equipo else '' }}","experiencia":"{{ c.experiencia }}","categoria":"{{ c.categoria }}","marca_motocicleta":"{{ c.marca_motocicleta }}","modelo_motocicleta":"{{ c.modelo_motocicleta }}","cilindraje_motor":{{ c.cilindraje_motor }},"numero_competidor":{{ c.numero_competidor }},"carreras_completadas":{{ c.carreras_completadas }},"puntos_totales":{{ c.puntos_totales }},"podios":{{ c.podios }}}{% if not loop.last %},{% endif %}{% endfor %}]
+[{% for c in competidores %}{"id":{{ c.id }},"nombre_completo":"{{ c.nombre_completo | escapejs }}","tipo_documento":"{{ c.tipo_documento }}","numero_documento":"{{ c.numero_documento }}","fecha_nacimiento":"{{ c.fecha_nacimiento }}","ciudad":"{{ c.ciudad | escapejs }}","telefono":"{{ c.telefono }}","correo":"{{ c.correo | escapejs }}","equipo":"{{ (c.equipo if c.equipo else '') | escapejs }}","experiencia":"{{ c.experiencia }}","categoria":"{{ c.categoria }}","marca_motocicleta":"{{ c.marca_motocicleta | escapejs }}","modelo_motocicleta":"{{ c.modelo_motocicleta | escapejs }}","cilindraje_motor":{{ c.cilindraje_motor }},"numero_competidor":{{ c.numero_competidor }},"carreras_completadas":{{ c.carreras_completadas }},"puntos_totales":{{ c.puntos_totales }},"podios":{{ c.podios }}}{% if not loop.last %},{% endif %}{% endfor %}]
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
