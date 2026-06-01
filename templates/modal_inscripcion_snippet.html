@@ -1,0 +1,114 @@
+<!-- ============================================================
+     MODAL INSCRIPCIÓN — REEMPLAZA el modal existente en carreras_publico.html
+     Pegar completo en lugar del bloque:
+     <div class="modal-overlay-pub" id="modalInscripcionOverlay" ...> ... </div>
+============================================================ -->
+
+<div class="modal-overlay-pub" id="modalInscripcionOverlay" onclick="cerrarModalInscripcion()">
+    <div class="modal-inscripcion" onclick="event.stopPropagation()">
+        <button class="modal-cerrar-pub" onclick="cerrarModalInscripcion()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <!-- HEADER DEL MODAL -->
+        <div class="modal-inscripcion-header">
+            <div class="modal-inscripcion-badge" id="modalHeaderIcon">
+                <i class="fa-solid fa-flag-checkered"></i>
+            </div>
+            <div>
+                <h2 class="modal-inscripcion-titulo" id="modalTituloTexto">INSCRIPCIÓN</h2>
+                <span class="modal-inscripcion-nombre" id="modalNombreCarrera">—</span>
+            </div>
+        </div>
+        <div class="modal-linea-roja-pub"></div>
+
+        <!-- ═══════════════════════════════════════════════
+             PASO 1: FORMULARIO DE LOGIN
+        ═══════════════════════════════════════════════ -->
+        <div id="pasoLogin" class="bloque-auth">
+            <div class="auth-icono"><i class="fa-solid fa-user-lock"></i></div>
+            <h3>VERIFICA TU IDENTIDAD</h3>
+            <p>Ingresa tus credenciales para confirmar la inscripción a esta carrera.</p>
+
+            <!-- ALERTA DE ERROR LOGIN -->
+            <div id="loginError" class="inscripcion-alerta-error" style="display:none;">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span id="loginErrorMsg">Error</span>
+            </div>
+
+            <div class="inscripcion-form-login">
+                <div class="inscripcion-campo">
+                    <label class="inscripcion-label"><i class="fa-solid fa-envelope"></i> CORREO ELECTRÓNICO</label>
+                    <input
+                        type="email"
+                        id="inscripcionEmail"
+                        class="inscripcion-input"
+                        placeholder="tucorreo@ejemplo.com"
+                        autocomplete="email"
+                    >
+                </div>
+                <div class="inscripcion-campo">
+                    <label class="inscripcion-label"><i class="fa-solid fa-lock"></i> CONTRASEÑA</label>
+                    <div class="inscripcion-pass-wrap">
+                        <input
+                            type="password"
+                            id="inscripcionPassword"
+                            class="inscripcion-input"
+                            placeholder="••••••••"
+                            autocomplete="current-password"
+                        >
+                        <button type="button" class="inscripcion-toggle-pass" onclick="toggleInscripcionPass()">
+                            <i class="fa-solid fa-eye" id="iconoTogglePass"></i>
+                        </button>
+                    </div>
+                </div>
+                <button
+                    class="btn-confirmar-inscripcion"
+                    id="btnVerificarLogin"
+                    onclick="verificarYInscribir()"
+                >
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    <span id="btnLoginTexto">VERIFICAR E INSCRIBIRME</span>
+                </button>
+            </div>
+
+            <div class="auth-info" style="margin-top:16px;">
+                <i class="fa-solid fa-circle-info"></i>
+                ¿No tienes cuenta?
+                <a href="/registro" style="color:#e10600; font-weight:700; text-decoration:none; margin-left:4px;">
+                    REGÍSTRATE AQUÍ
+                </a>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════
+             PASO 2: CONFIRMACIÓN EXITOSA
+        ═══════════════════════════════════════════════ -->
+        <div id="pasoExito" class="bloque-auth" style="display:none;">
+            <div class="exito-icono-wrap">
+                <div class="exito-icono">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+            </div>
+            <h3 class="exito-titulo">¡INSCRIPCIÓN CONFIRMADA!</h3>
+            <div class="exito-piloto-card">
+                <div class="exito-numero-badge" id="exitoNumeroPiloto">46</div>
+                <div class="exito-datos">
+                    <span class="exito-nombre" id="exitoNombrePiloto">—</span>
+                    <span class="exito-categoria" id="exitoCategoriaPiloto">—</span>
+                </div>
+            </div>
+            <div class="exito-carrera-info" id="exitoNombreCarrera">—</div>
+            <div class="exito-cupos-info" id="exitoCuposRestantes"></div>
+            <div class="exito-acciones">
+                <button class="btn-exito-dashboard" onclick="window.location.href='/dashboard'">
+                    <i class="fa-solid fa-gauge-high"></i> VER MI DASHBOARD
+                </button>
+                <button class="btn-exito-cerrar" onclick="cerrarModalInscripcion()">
+                    CERRAR
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
