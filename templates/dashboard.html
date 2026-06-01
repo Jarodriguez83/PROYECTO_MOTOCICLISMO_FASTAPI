@@ -16,6 +16,7 @@
             --fondo: #080808;
             --card: #0f0f0f;
             --borde: rgba(255,255,255,0.07);
+            --surface: #111;
         }
 
         body {
@@ -25,7 +26,7 @@
             min-height: 100vh;
         }
 
-        /* HEADER */
+        /* ── HEADER ── */
         .dash-header {
             background: #0b0b0b;
             border-bottom: 3px solid var(--rojo);
@@ -38,71 +39,35 @@
             z-index: 100;
         }
 
-        .dash-logo {
-            display: flex;
-            flex-direction: column;
-            line-height: 1;
-        }
+        .dash-logo { display: flex; flex-direction: column; line-height: 1; }
+        .dash-logo-main { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 4px; color: #fff; }
+        .dash-logo-sub  { font-size: 10px; color: var(--rojo); letter-spacing: 5px; font-weight: 700; }
 
-        .dash-logo-main {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 36px;
-            letter-spacing: 4px;
-            color: #fff;
-        }
-
-        .dash-logo-sub {
-            font-size: 10px;
-            color: var(--rojo);
-            letter-spacing: 5px;
-            font-weight: 700;
-        }
-
-        .dash-header-right {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
+        .dash-header-right { display: flex; align-items: center; gap: 16px; }
 
         .user-chip {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            display: flex; align-items: center; gap: 8px;
             background: rgba(255,255,255,0.04);
             border: 1px solid var(--borde);
             padding: 6px 14px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            color: #bbb;
+            font-size: 13px; font-weight: 600; letter-spacing: 1px; color: #bbb;
         }
-
         .user-chip i { color: var(--rojo); }
 
         .btn-logout {
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            display: flex; align-items: center; gap: 6px;
             padding: 8px 16px;
             background: transparent;
             border: 1px solid rgba(225,6,0,0.4);
             color: var(--rojo);
             font-family: 'Rajdhani', sans-serif;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            cursor: pointer;
-            text-decoration: none;
+            font-size: 12px; font-weight: 700; letter-spacing: 2px;
+            cursor: pointer; text-decoration: none;
             transition: all 0.2s;
         }
+        .btn-logout:hover { background: var(--rojo); color: #fff; border-color: var(--rojo); }
 
-        .btn-logout:hover {
-            background: var(--rojo);
-            color: #fff;
-            border-color: var(--rojo);
-        }
-
-        /* HERO */
+        /* ── HERO ── */
         .dash-hero {
             background:
                 linear-gradient(135deg, rgba(225,6,0,0.08) 0%, transparent 60%),
@@ -113,217 +78,334 @@
             overflow: hidden;
         }
 
-        .dash-hero::after {
-            content: '';
-            position: absolute;
-            right: -5%;
-            top: 50%;
-            transform: translateY(-50%);
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 200px;
-            color: rgba(255,255,255,0.025);
-            letter-spacing: -10px;
-            pointer-events: none;
-            line-height: 1;
-        }
+        .hero-inner { max-width: 1200px; margin: auto; }
+        .hero-label { font-size: 11px; letter-spacing: 4px; color: var(--rojo); font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+        .hero-nombre { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 5vw, 64px); letter-spacing: 4px; line-height: 1; margin-bottom: 8px; }
+        .hero-correo { font-size: 14px; color: #555; letter-spacing: 1px; }
 
-        .hero-inner {
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .hero-label {
-            font-size: 11px;
-            letter-spacing: 4px;
-            color: var(--rojo);
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .hero-nombre {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(36px, 5vw, 64px);
-            letter-spacing: 4px;
-            line-height: 1;
-            margin-bottom: 8px;
-        }
-
-        .hero-correo {
-            font-size: 14px;
-            color: #555;
-            letter-spacing: 1px;
-        }
-
-        /* NÚMERO DE COMPETIDOR */
         .numero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
+            display: inline-flex; align-items: center; gap: 12px;
             background: var(--rojo);
             clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
-            padding: 6px 24px;
-            margin-top: 18px;
+            padding: 6px 24px; margin-top: 18px;
         }
+        .numero-label { font-size: 11px; letter-spacing: 3px; color: rgba(255,255,255,0.7); }
+        .numero-valor { font-family: 'Bebas Neue', sans-serif; font-size: 32px; line-height: 1; }
 
-        .numero-label {
+        /* ── BARRA DE PROGRESO CATEGORÍA ── */
+        .categoria-wrap {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-width: 400px;
+        }
+        .categoria-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .categoria-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 14px;
             font-size: 11px;
-            letter-spacing: 3px;
-            color: rgba(255,255,255,0.7);
+            font-weight: 700;
+            letter-spacing: 2px;
         }
+        .cat-novato     { background: rgba(78,163,255,0.2); border: 1px solid rgba(78,163,255,0.4); color: #4ea3ff; }
+        .cat-intermedio { background: rgba(255,168,0,0.2);  border: 1px solid rgba(255,168,0,0.4);  color: #ffa800; }
+        .cat-experto    { background: rgba(225,6,0,0.2);    border: 1px solid rgba(225,6,0,0.4);    color: #ff6666; }
+        .cat-elite      { background: rgba(212,175,55,0.2); border: 1px solid rgba(212,175,55,0.4); color: #d4af37; }
 
-        .numero-valor {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 32px;
-            line-height: 1;
-        }
+        .progreso-barra-wrap { height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+        .progreso-fill       { height: 100%; background: var(--rojo); border-radius: 2px; transition: width 0.8s ease; }
+        .progreso-texto      { font-size: 11px; color: #555; letter-spacing: 1px; }
 
-        /* CONTENIDO */
-        .dash-content {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 40px;
-        }
+        /* ── CONTENIDO PRINCIPAL ── */
+        .dash-content { max-width: 1200px; margin: 40px auto; padding: 0 40px; }
 
         .section-title {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 18px;
-            letter-spacing: 4px;
-            color: #555;
-            margin-bottom: 16px;
-            padding-bottom: 10px;
+            font-size: 18px; letter-spacing: 4px; color: #555;
+            margin-bottom: 16px; padding-bottom: 10px;
             border-bottom: 1px solid var(--borde);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            display: flex; align-items: center; justify-content: space-between;
         }
+        .section-title i { color: var(--rojo); margin-right: 8px; }
 
-        .section-title i { color: var(--rojo); }
+        /* ── BOTÓN EDITAR PERFIL ── */
+        .btn-editar-perfil {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 7px 16px;
+            background: transparent;
+            border: 1px solid rgba(225,6,0,0.4);
+            color: var(--rojo);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 11px; font-weight: 700; letter-spacing: 2px;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .btn-editar-perfil:hover { background: var(--rojo); color: #fff; border-color: var(--rojo); }
 
-        /* GRIDS DE DATOS */
+        /* ── INFO CARDS ── */
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 12px;
-            margin-bottom: 36px;
+            gap: 12px; margin-bottom: 36px;
         }
-
         .info-card {
             background: var(--card);
             border: 1px solid var(--borde);
-            padding: 16px 18px;
-            transition: border-color 0.2s;
+            padding: 16px 18px; transition: border-color 0.2s;
         }
+        .info-card:hover { border-color: rgba(225,6,0,0.3); }
+        .info-card-label { font-size: 10px; letter-spacing: 3px; color: #555; font-weight: 700; margin-bottom: 6px; }
+        .info-card-value { font-size: 16px; font-weight: 700; color: #eee; letter-spacing: 0.5px; word-break: break-all; }
+        .info-card-icon  { color: var(--rojo); font-size: 11px; margin-bottom: 10px; }
 
-        .info-card:hover {
-            border-color: rgba(225,6,0,0.3);
-        }
+        .badge-si { background: rgba(0,200,80,0.1);  border: 1px solid rgba(0,200,80,0.3);  color: #44dd88; padding: 3px 10px; font-size: 12px; font-weight: 700; letter-spacing: 1px; }
+        .badge-no { background: rgba(255,100,0,0.1); border: 1px solid rgba(255,100,0,0.25); color: #ff9955; padding: 3px 10px; font-size: 12px; font-weight: 700; letter-spacing: 1px; }
 
-        .info-card-label {
-            font-size: 10px;
-            letter-spacing: 3px;
-            color: #555;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-
-        .info-card-value {
-            font-size: 16px;
-            font-weight: 700;
-            color: #eee;
-            letter-spacing: 0.5px;
-            word-break: break-all;
-        }
-
-        .info-card-icon {
-            color: var(--rojo);
-            font-size: 11px;
-            margin-bottom: 10px;
-        }
-
-        /* BADGE EXPERIENCIA */
-        .badge-si {
-            background: rgba(0,200,80,0.1);
-            border: 1px solid rgba(0,200,80,0.3);
-            color: #44dd88;
-            padding: 3px 10px;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .badge-no {
-            background: rgba(255,100,0,0.1);
-            border: 1px solid rgba(255,100,0,0.25);
-            color: #ff9955;
-            padding: 3px 10px;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        /* MOTO HIGHLIGHT */
+        /* ── MOTO ── */
         .moto-card {
             background: var(--card);
             border: 1px solid var(--borde);
             border-left: 3px solid var(--rojo);
-            padding: 20px 24px;
+            padding: 20px 24px; margin-bottom: 36px;
+            display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+        }
+        .moto-icon   { font-size: 40px; color: rgba(225,6,0,0.3); }
+        .moto-info   { flex: 1; }
+        .moto-marca  { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 3px; line-height: 1; }
+        .moto-modelo { font-size: 14px; color: #666; letter-spacing: 1px; margin-top: 2px; }
+        .moto-cc     { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--rojo); letter-spacing: 2px; }
+
+        /* ── ESTADÍSTICAS ── */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
             margin-bottom: 36px;
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            flex-wrap: wrap;
         }
-
-        .moto-icon {
-            font-size: 40px;
-            color: rgba(225,6,0,0.3);
-        }
-
-        .moto-info {
-            flex: 1;
-        }
-
-        .moto-marca {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 28px;
-            letter-spacing: 3px;
-            line-height: 1;
-        }
-
-        .moto-modelo {
-            font-size: 14px;
-            color: #666;
-            letter-spacing: 1px;
-            margin-top: 2px;
-        }
-
-        .moto-cc {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 22px;
-            color: var(--rojo);
-            letter-spacing: 2px;
-        }
-
-        /* FOOTER DASH */
-        .dash-footer {
+        .stat-card {
+            background: var(--card);
+            border: 1px solid var(--borde);
+            border-top: 2px solid var(--rojo);
+            padding: 20px;
             text-align: center;
-            padding: 30px;
-            color: #2a2a2a;
-            font-size: 12px;
-            letter-spacing: 2px;
+        }
+        .stat-num   { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--rojo); line-height: 1; }
+        .stat-label { font-size: 11px; letter-spacing: 2px; color: #666; margin-top: 4px; }
+
+        /* ── HISTORIAL DE INSCRIPCIONES ── */
+        .historial-lista { display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
+
+        .historial-item {
+            background: var(--card);
+            border: 1px solid var(--borde);
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 20px;
+            align-items: center;
+            padding: 16px 20px;
+            transition: border-color 0.2s;
+        }
+        .historial-item:hover { border-color: rgba(225,6,0,0.3); }
+
+        .historial-fecha {
+            display: flex; flex-direction: column; align-items: center;
+            padding: 8px 14px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            min-width: 80px;
+        }
+        .historial-fecha-dia  { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--rojo); line-height: 1; }
+        .historial-fecha-mes  { font-size: 10px; letter-spacing: 2px; color: #666; }
+
+        .historial-info { display: flex; flex-direction: column; gap: 4px; }
+        .historial-nombre   { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px; }
+        .historial-meta     { display: flex; gap: 12px; flex-wrap: wrap; }
+        .historial-meta span { font-size: 12px; color: #666; display: flex; align-items: center; gap: 4px; }
+        .historial-meta i   { color: var(--rojo); font-size: 11px; }
+
+        .historial-estado { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+
+        .badge-estado-inscripcion {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 4px 12px;
+            font-size: 10px; font-weight: 700; letter-spacing: 2px;
+        }
+        .estado-pendiente   { background: rgba(255,168,0,0.15); border: 1px solid rgba(255,168,0,0.3);  color: #ffa800; }
+        .estado-confirmada  { background: rgba(78,163,255,0.15); border: 1px solid rgba(78,163,255,0.3); color: #4ea3ff; }
+        .estado-participo   { background: rgba(0,200,80,0.12);   border: 1px solid rgba(0,200,80,0.3);   color: #44dd88; }
+        .estado-ausente     { background: rgba(225,6,0,0.12);    border: 1px solid rgba(225,6,0,0.3);    color: #ff6666; }
+
+        .historial-puntos { font-family: 'Bebas Neue', sans-serif; font-size: 14px; color: #555; letter-spacing: 1px; }
+        .historial-puntos span { color: var(--rojo); }
+
+        .historial-vacio {
+            text-align: center; padding: 60px 20px;
+            background: var(--card); border: 1px solid var(--borde);
+            color: #444;
+        }
+        .historial-vacio i { font-size: 48px; margin-bottom: 16px; display: block; color: #222; }
+        .historial-vacio p { letter-spacing: 1px; font-size: 13px; margin-bottom: 16px; }
+        .historial-vacio a { color: var(--rojo); text-decoration: none; font-weight: 700; }
+        .historial-vacio a:hover { text-decoration: underline; }
+
+        /* ── MODAL EDITAR DATOS ── */
+        .modal-overlay-dash {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.88);
+            z-index: 2000;
+            align-items: center; justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(4px);
+        }
+        .modal-overlay-dash.activo { display: flex; animation: fadeInDash 0.2s ease; }
+
+        @keyframes fadeInDash {
+            from { opacity: 0; } to { opacity: 1; }
+        }
+
+        .modal-editar-dash {
+            background: var(--surface);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-top: 3px solid var(--rojo);
+            max-width: 700px; width: 100%;
+            position: relative;
+            animation: slideUpDash 0.25s ease;
+            max-height: 92vh;
+            overflow-y: auto;
+        }
+
+        @keyframes slideUpDash {
+            from { transform: translateY(20px); opacity: 0; }
+            to   { transform: translateY(0);    opacity: 1; }
+        }
+
+        .modal-header-dash {
+            display: flex; align-items: center; gap: 16px;
+            padding: 24px 24px 0;
+        }
+        .modal-badge-dash {
+            width: 56px; height: 56px;
+            background: rgba(225,6,0,0.12);
+            border: 1px solid rgba(225,6,0,0.3);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px; color: var(--rojo); flex-shrink: 0;
+        }
+        .modal-titulo-dash   { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 3px; line-height: 1; }
+        .modal-subtitulo-dash{ font-size: 12px; color: #666; letter-spacing: 1px; display: block; margin-top: 4px; }
+        .modal-linea-dash    { height: 2px; background: linear-gradient(90deg, var(--rojo), transparent); margin: 14px 8px; }
+        .modal-cerrar-dash   {
+            position: absolute; top: 14px; right: 14px;
+            background: rgba(255,255,255,0.06); border: none; color: #ccc;
+            width: 30px; height: 30px; cursor: pointer; font-size: 14px;
+            display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+        }
+        .modal-cerrar-dash:hover { background: var(--rojo); color: #fff; }
+
+        /* FORM DENTRO DEL MODAL */
+        .form-editar-dash { padding: 0 24px 24px; }
+
+        .editar-grid-dash {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+        .editar-grupo-dash { display: flex; flex-direction: column; gap: 5px; }
+        .editar-grupo-dash.full { grid-column: 1 / -1; }
+
+        .editar-label-dash {
+            font-size: 10px; letter-spacing: 2px; color: #666; font-weight: 700; text-transform: uppercase;
+        }
+        .req { color: var(--rojo); }
+
+        .editar-input-dash {
+            width: 100%;
+            padding: 11px 14px;
+            background: #1a1a1a;
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 14px; font-weight: 600; letter-spacing: 0.5px;
+            outline: none; transition: border-color 0.2s;
+        }
+        .editar-input-dash:focus { border-color: var(--rojo); background: #1f1f1f; }
+        .editar-input-dash::placeholder { color: #444; }
+
+        .editar-error-dash { font-size: 11px; color: var(--rojo); letter-spacing: 1px; font-weight: 700; min-height: 14px; }
+        .input-invalido-dash { border-color: var(--rojo) !important; background: rgba(225,6,0,0.05) !important; }
+
+        .seccion-titulo-form {
+            font-size: 11px; letter-spacing: 3px; color: var(--rojo);
+            margin: 20px 0 12px; font-weight: 700;
+            display: flex; align-items: center; gap: 6px;
+        }
+
+        .editar-acciones-dash {
+            display: flex; gap: 12px;
+            margin-top: 24px; padding-top: 18px;
+            border-top: 1px solid rgba(255,255,255,0.07);
+        }
+        .btn-cancelar-dash {
+            flex: 1; padding: 12px;
+            background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #888;
+            font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .btn-cancelar-dash:hover { border-color: rgba(255,255,255,0.3); color: #fff; }
+
+        .btn-guardar-dash {
+            flex: 2; padding: 12px;
+            background: var(--rojo); border: none; color: #fff;
+            font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px;
+            cursor: pointer; transition: background 0.2s;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .btn-guardar-dash:hover { background: #ff2200; }
+        .btn-guardar-dash:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* MENSAJE DE ÉXITO / ERROR INLINE */
+        .alert-inline {
+            padding: 12px 16px; margin-bottom: 16px;
+            font-size: 13px; letter-spacing: 0.5px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .alert-success { background: rgba(0,200,80,0.08); border: 1px solid rgba(0,200,80,0.25); border-left: 3px solid #00c850; color: #44dd88; }
+        .alert-error   { background: rgba(225,6,0,0.08);  border: 1px solid rgba(225,6,0,0.3);   border-left: 3px solid var(--rojo); color: #ff8888; }
+
+        /* ── FOOTER ── */
+        .dash-footer {
+            text-align: center; padding: 30px;
+            color: #2a2a2a; font-size: 12px; letter-spacing: 2px;
             border-top: 1px solid rgba(255,255,255,0.03);
         }
 
+        /* ── RESPONSIVE ── */
         @media (max-width: 768px) {
             .dash-header  { padding: 12px 20px; flex-wrap: wrap; gap: 10px; }
             .dash-hero    { padding: 30px 20px; }
             .dash-content { padding: 0 20px; margin: 28px auto; }
             .info-grid    { grid-template-columns: 1fr 1fr; }
+            .stats-grid   { grid-template-columns: 1fr 1fr 1fr; }
+            .historial-item { grid-template-columns: auto 1fr; }
+            .historial-estado { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: space-between; }
+            .editar-grid-dash { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .info-grid  { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .historial-item { grid-template-columns: 1fr; }
+            .historial-fecha { flex-direction: row; gap: 8px; align-items: center; width: 100%; }
         }
 
-        @media (max-width: 480px) {
-            .info-grid { grid-template-columns: 1fr; }
-        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--rojo); }
     </style>
 </head>
 <body>
@@ -351,13 +433,37 @@
     <!-- HERO -->
     <section class="dash-hero">
         <div class="hero-inner">
-            <div class="hero-label"><i class="fa-solid fa-flag-checkered"></i> &nbsp; PERFIL DEL PILOTO</div>
-            <h1 class="hero-nombre">{{ competidor.nombre_completo }}</h1>
+            <div class="hero-label"><i class="fa-solid fa-flag-checkered"></i> PERFIL DEL PILOTO</div>
+            <h1 class="hero-nombre">{{ competidor.nombre_completo if competidor else "—" }}</h1>
             <div class="hero-correo">{{ usuario.correo }}</div>
             {% if competidor %}
             <div class="numero-badge">
                 <span class="numero-label">Nº COMPETIDOR</span>
                 <span class="numero-valor">{{ competidor.numero_competidor }}</span>
+            </div>
+
+            <!-- BARRA DE PROGRESO CATEGORÍA -->
+            <div class="categoria-wrap">
+                <div class="categoria-top">
+                    <span class="categoria-badge cat-{{ competidor.categoria }}">
+                        {% if competidor.categoria == 'novato' %}🏁
+                        {% elif competidor.categoria == 'intermedio' %}⚡
+                        {% elif competidor.categoria == 'experto' %}🏆
+                        {% else %}👑{% endif %}
+                        {{ categorias_label.get(competidor.categoria, competidor.categoria | upper) }}
+                    </span>
+                    {% if umbral_siguiente %}
+                    <span class="progreso-texto">{{ competidor.carreras_completadas }} / {{ umbral_siguiente }} CARRERAS</span>
+                    {% else %}
+                    <span class="progreso-texto">NIVEL MÁXIMO</span>
+                    {% endif %}
+                </div>
+                <div class="progreso-barra-wrap">
+                    <div class="progreso-fill" style="width: {{ progreso_pct }}%"></div>
+                </div>
+                {% if umbral_siguiente %}
+                <span class="progreso-texto">Faltan {{ umbral_siguiente - competidor.carreras_completadas }} carrera(s) para subir de categoría</span>
+                {% endif %}
             </div>
             {% endif %}
         </div>
@@ -368,8 +474,25 @@
 
         {% if competidor %}
 
-        <!-- MOTOCICLETA -->
-        <div class="section-title"><i class="fa-solid fa-motorcycle"></i> MI MOTOCICLETA</div>
+        <!-- ── ESTADÍSTICAS RÁPIDAS ── -->
+        <div class="section-title"><span><i class="fa-solid fa-chart-line"></i> MIS ESTADÍSTICAS</span></div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-num">{{ competidor.carreras_completadas }}</div>
+                <div class="stat-label">CARRERAS COMPLETADAS</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">{{ competidor.puntos_totales }}</div>
+                <div class="stat-label">PUNTOS ACUMULADOS</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">{{ competidor.podios }}</div>
+                <div class="stat-label">PODIOS OBTENIDOS</div>
+            </div>
+        </div>
+
+        <!-- ── MOTOCICLETA ── -->
+        <div class="section-title"><span><i class="fa-solid fa-motorcycle"></i> MI MOTOCICLETA</span></div>
         <div class="moto-card">
             <div class="moto-icon"><i class="fa-solid fa-motorcycle"></i></div>
             <div class="moto-info">
@@ -379,8 +502,13 @@
             <div class="moto-cc">{{ competidor.cilindraje_motor }} CC</div>
         </div>
 
-        <!-- DATOS PERSONALES -->
-        <div class="section-title"><i class="fa-solid fa-user"></i> MIS DATOS PERSONALES</div>
+        <!-- ── DATOS PERSONALES ── -->
+        <div class="section-title">
+            <span><i class="fa-solid fa-user"></i> MIS DATOS PERSONALES</span>
+            <button class="btn-editar-perfil" onclick="abrirModalEditar()">
+                <i class="fa-solid fa-pen-to-square"></i> EDITAR DATOS
+            </button>
+        </div>
         <div class="info-grid">
             <div class="info-card">
                 <div class="info-card-icon"><i class="fa-solid fa-id-card"></i></div>
@@ -427,6 +555,65 @@
             {% endif %}
         </div>
 
+        <!-- ── HISTORIAL DE INSCRIPCIONES ── -->
+        <div class="section-title">
+            <span><i class="fa-solid fa-calendar-check"></i> MIS INSCRIPCIONES</span>
+        </div>
+        {% if historial and historial | length > 0 %}
+        <div class="historial-lista">
+            {% for item in historial %}
+            {% set insc   = item.inscripcion %}
+            {% set carrera = item.carrera %}
+            <div class="historial-item">
+                <div class="historial-fecha">
+                    <span class="historial-fecha-dia">{{ carrera.fecha.strftime('%d') }}</span>
+                    <span class="historial-fecha-mes">{{ carrera.fecha.strftime('%b %Y') | upper }}</span>
+                </div>
+                <div class="historial-info">
+                    <div class="historial-nombre">{{ carrera.nombre }}</div>
+                    <div class="historial-meta">
+                        <span><i class="fa-solid fa-location-dot"></i> {{ carrera.ubicacion }}</span>
+                        {% if carrera.circuito %}
+                        <span><i class="fa-solid fa-road"></i> {{ carrera.circuito }}</span>
+                        {% endif %}
+                        <span><i class="fa-solid fa-layer-group"></i> {{ carrera.categoria_minima | upper }}+</span>
+                        {% if insc.tiempo_carrera %}
+                        <span><i class="fa-solid fa-stopwatch"></i> {{ insc.tiempo_carrera }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="historial-estado">
+                    {% if insc.estado == 'pendiente' %}
+                    <span class="badge-estado-inscripcion estado-pendiente"><i class="fa-solid fa-clock"></i> PENDIENTE</span>
+                    {% elif insc.estado == 'confirmada' %}
+                    <span class="badge-estado-inscripcion estado-confirmada"><i class="fa-solid fa-circle-check"></i> CONFIRMADA</span>
+                    {% elif insc.estado == 'participó' %}
+                    <span class="badge-estado-inscripcion estado-participo"><i class="fa-solid fa-flag-checkered"></i> PARTICIPÓ</span>
+                    {% else %}
+                    <span class="badge-estado-inscripcion estado-ausente"><i class="fa-solid fa-ban"></i> NO ASISTIÓ</span>
+                    {% endif %}
+
+                    {% if insc.posicion_final %}
+                    <span class="historial-puntos">
+                        POS: <span>#{{ insc.posicion_final }}</span>
+                        &nbsp;|&nbsp;
+                        PTS: <span>{{ insc.puntos_obtenidos }}</span>
+                    </span>
+                    {% elif insc.puntos_obtenidos > 0 %}
+                    <span class="historial-puntos">PTS: <span>{{ insc.puntos_obtenidos }}</span></span>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="historial-vacio">
+            <i class="fa-solid fa-calendar-xmark"></i>
+            <p>AÚN NO TE HAS INSCRITO EN NINGUNA CARRERA.</p>
+            <a href="/carreras">VER CALENDARIO Y COMPETENCIAS DISPONIBLES →</a>
+        </div>
+        {% endif %}
+
         {% else %}
         <div style="text-align:center; padding:60px; color:#444;">
             <i class="fa-solid fa-triangle-exclamation" style="font-size:48px; margin-bottom:16px; display:block;"></i>
@@ -440,5 +627,271 @@
         GP COLOMBIA &nbsp;·&nbsp; TODOS LOS DERECHOS RESERVADOS &nbsp;·&nbsp; 2026
     </footer>
 
+
+    <!-- ============================================================
+         MODAL EDITAR DATOS PERSONALES
+    ============================================================ -->
+    {% if competidor %}
+    <div class="modal-overlay-dash" id="modalEditarOverlay" onclick="cerrarModalEditar()">
+        <div class="modal-editar-dash" onclick="event.stopPropagation()">
+            <button class="modal-cerrar-dash" onclick="cerrarModalEditar()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="modal-header-dash">
+                <div class="modal-badge-dash"><i class="fa-solid fa-pen-to-square"></i></div>
+                <div>
+                    <h2 class="modal-titulo-dash">EDITAR MI PERFIL</h2>
+                    <span class="modal-subtitulo-dash">Actualiza tus datos personales de piloto</span>
+                </div>
+            </div>
+            <div class="modal-linea-dash"></div>
+
+            <div class="form-editar-dash">
+                <!-- Alert inline (oculto por defecto) -->
+                <div id="alertaInline" class="alert-inline" style="display:none;"></div>
+
+                <!-- DATOS PERSONALES -->
+                <div class="seccion-titulo-form"><i class="fa-solid fa-user"></i> DATOS PERSONALES</div>
+                <div class="editar-grid-dash">
+                    <div class="editar-grupo-dash full">
+                        <label class="editar-label-dash">NOMBRE COMPLETO <span class="req">*</span></label>
+                        <input type="text" id="upd_nombre" class="editar-input-dash" value="{{ competidor.nombre_completo }}" required>
+                        <span class="editar-error-dash" id="upd_err_nombre"></span>
+                    </div>
+                    <div class="editar-grupo-dash">
+                        <label class="editar-label-dash">TIPO DE DOCUMENTO <span class="req">*</span></label>
+                        <select id="upd_tipo_doc" class="editar-input-dash" required>
+                            <option value="cc" {% if competidor.tipo_documento == 'cc' %}selected{% endif %}>C.C</option>
+                            <option value="ce" {% if competidor.tipo_documento == 'ce' %}selected{% endif %}>C.E</option>
+                            <option value="passport" {% if competidor.tipo_documento == 'passport' %}selected{% endif %}>PASAPORTE</option>
+                        </select>
+                    </div>
+                    <div class="editar-grupo-dash">
+                        <label class="editar-label-dash">NÚMERO DE DOCUMENTO <span class="req">*</span></label>
+                        <input type="text" id="upd_num_doc" class="editar-input-dash" value="{{ competidor.numero_documento }}" required>
+                        <span class="editar-error-dash" id="upd_err_num_doc"></span>
+                    </div>
+                    <div class="editar-grupo-dash">
+                        <label class="editar-label-dash">FECHA DE NACIMIENTO <span class="req">*</span></label>
+                        <input type="date" id="upd_fecha" class="editar-input-dash" value="{{ competidor.fecha_nacimiento }}" required>
+                        <span class="editar-error-dash" id="upd_err_fecha"></span>
+                    </div>
+                    <div class="editar-grupo-dash">
+                        <label class="editar-label-dash">CIUDAD <span class="req">*</span></label>
+                        <input type="text" id="upd_ciudad" class="editar-input-dash" value="{{ competidor.ciudad }}" required>
+                        <span class="editar-error-dash" id="upd_err_ciudad"></span>
+                    </div>
+                    <div class="editar-grupo-dash">
+                        <label class="editar-label-dash">TELÉFONO <span class="req">*</span></label>
+                        <input type="text" id="upd_telefono" class="editar-input-dash" value="{{ competidor.telefono }}" required>
+                        <span class="editar-error-dash" id="upd_err_telefono"></span>
+                    </div>
+                    <div class="editar-grupo-dash full">
+                        <label class="editar-label-dash">CORREO ELECTRÓNICO <span class="req">*</span></label>
+                        <input type="email" id="upd_correo" class="editar-input-dash" value="{{ competidor.correo }}" required>
+                        <span class="editar-error-dash" id="upd_err_correo"></span>
+                    </div>
+                </div>
+
+                <!-- COMPETENCIA -->
+                <div class="seccion-titulo-form"><i class="fa-solid fa-flag-checkered"></i> INFORMACIÓN DE COMPETIDOR</div>
+                <div class="editar-grid-dash">
+                    <div class="editar-grupo-dash">
+                        <label class="editar-label-dash">EQUIPO / ESCUDERÍA</label>
+                        <input type="text" id="upd_equipo" class="editar-input-dash" value="{{ competidor.equipo if competidor.equipo else '' }}" placeholder="Opcional">
+                    </div>
+                    <div class="editar-grupo-dash">
+                        <label class="editar-label-dash">EXPERIENCIA EN CARRERAS <span class="req">*</span></label>
+                        <select id="upd_experiencia" class="editar-input-dash" required>
+                            <option value="si" {% if competidor.experiencia == 'si' %}selected{% endif %}>SÍ</option>
+                            <option value="no" {% if competidor.experiencia == 'no' %}selected{% endif %}>NO</option>
+                        </select>
+                    </div>
+                    <div class="editar-grupo-dash">
+                        <label class="editar-label-dash">Nº COMPETIDOR <span class="req">*</span></label>
+                        <input type="number" id="upd_num_comp" class="editar-input-dash" value="{{ competidor.numero_competidor }}" min="1" required>
+                        <span class="editar-error-dash" id="upd_err_num_comp"></span>
+                    </div>
+                </div>
+
+                <!-- MOTOCICLETA -->
+                <div class="seccion-titulo-form"><i class="fa-solid fa-motorcycle"></i> MOTOCICLETA</div>
+                <div class="editar-grid-dash">
+                    <div class="editar-grupo-dash">
+                        <label class="editar-label-dash">MARCA <span class="req">*</span></label>
+                        <input type="text" id="upd_marca" class="editar-input-dash" value="{{ competidor.marca_motocicleta }}" required>
+                        <span class="editar-error-dash" id="upd_err_marca"></span>
+                    </div>
+                    <div class="editar-grupo-dash">
+                        <label class="editar-label-dash">MODELO <span class="req">*</span></label>
+                        <input type="text" id="upd_modelo" class="editar-input-dash" value="{{ competidor.modelo_motocicleta }}" required>
+                        <span class="editar-error-dash" id="upd_err_modelo"></span>
+                    </div>
+                    <div class="editar-grupo-dash">
+                        <label class="editar-label-dash">CILINDRAJE (CC) <span class="req">*</span></label>
+                        <input type="number" id="upd_cc" class="editar-input-dash" value="{{ competidor.cilindraje_motor }}" min="1" required>
+                        <span class="editar-error-dash" id="upd_err_cc"></span>
+                    </div>
+                </div>
+
+                <div class="editar-acciones-dash">
+                    <button type="button" class="btn-cancelar-dash" onclick="cerrarModalEditar()">
+                        <i class="fa-solid fa-xmark"></i> CANCELAR
+                    </button>
+                    <button type="button" class="btn-guardar-dash" id="btnGuardarPerfil" onclick="guardarCambiosPerfil()">
+                        <i class="fa-solid fa-floppy-disk"></i> GUARDAR CAMBIOS
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- ID del competidor para JS -->
+    <script>
+        const COMPETIDOR_ID = {{ competidor.id if competidor else 'null' }};
+        const CATEGORIA_ACTUAL = "{{ competidor.categoria if competidor else '' }}";
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    // ============================================================
+    // MODAL EDITAR DATOS PERSONALES
+    // ============================================================
+    function abrirModalEditar() {
+        document.getElementById("modalEditarOverlay").classList.add("activo");
+        document.body.style.overflow = "hidden";
+        limpiarErroresDash();
+        const alerta = document.getElementById("alertaInline");
+        if (alerta) alerta.style.display = "none";
+    }
+
+    function cerrarModalEditar() {
+        document.getElementById("modalEditarOverlay").classList.remove("activo");
+        document.body.style.overflow = "";
+    }
+
+    function limpiarErroresDash() {
+        document.querySelectorAll(".editar-error-dash").forEach(el => { el.textContent = ""; });
+        document.querySelectorAll(".editar-input-dash").forEach(el => { el.classList.remove("input-invalido-dash"); });
+    }
+
+    function marcarErrorDash(inputId, errorId, mensaje) {
+        const input = document.getElementById(inputId);
+        const error = document.getElementById(errorId);
+        if (input) input.classList.add("input-invalido-dash");
+        if (error) error.textContent = mensaje;
+    }
+
+    function validarFormularioDash() {
+        limpiarErroresDash();
+        let ok = true;
+
+        const nombre   = document.getElementById("upd_nombre").value.trim();
+        const numDoc   = document.getElementById("upd_num_doc").value.trim();
+        const fecha    = document.getElementById("upd_fecha").value;
+        const ciudad   = document.getElementById("upd_ciudad").value.trim();
+        const telefono = document.getElementById("upd_telefono").value.trim();
+        const correo   = document.getElementById("upd_correo").value.trim();
+        const numComp  = document.getElementById("upd_num_comp").value;
+        const marca    = document.getElementById("upd_marca").value.trim();
+        const modelo   = document.getElementById("upd_modelo").value.trim();
+        const cc       = document.getElementById("upd_cc").value;
+
+        if (nombre.length < 3)                               { marcarErrorDash("upd_nombre",   "upd_err_nombre",   "MÍNIMO 3 CARACTERES"); ok = false; }
+        if (numDoc.length < 4)                               { marcarErrorDash("upd_num_doc",  "upd_err_num_doc",  "DOCUMENTO INVÁLIDO");  ok = false; }
+        if (!fecha) {
+            marcarErrorDash("upd_fecha", "upd_err_fecha", "SELECCIONA UNA FECHA"); ok = false;
+        } else {
+            const edad = new Date().getFullYear() - new Date(fecha).getFullYear();
+            if (edad < 16 || edad > 100) { marcarErrorDash("upd_fecha", "upd_err_fecha", "EDAD ENTRE 16 Y 100 AÑOS"); ok = false; }
+        }
+        if (ciudad.length < 2)                               { marcarErrorDash("upd_ciudad",   "upd_err_ciudad",   "CIUDAD INVÁLIDA"); ok = false; }
+        if (!/^\d{7,15}$/.test(telefono))                   { marcarErrorDash("upd_telefono", "upd_err_telefono", "SOLO DÍGITOS (7-15 CARACTERES)"); ok = false; }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo))    { marcarErrorDash("upd_correo",   "upd_err_correo",   "CORREO INVÁLIDO"); ok = false; }
+        if (!numComp || parseInt(numComp) < 1)              { marcarErrorDash("upd_num_comp", "upd_err_num_comp", "DEBE SER MAYOR A 0"); ok = false; }
+        if (marca.length < 2)                                { marcarErrorDash("upd_marca",    "upd_err_marca",    "MARCA INVÁLIDA"); ok = false; }
+        if (modelo.length < 1)                               { marcarErrorDash("upd_modelo",   "upd_err_modelo",   "MODELO INVÁLIDO"); ok = false; }
+        if (!cc || parseInt(cc) < 1)                        { marcarErrorDash("upd_cc",        "upd_err_cc",        "DEBE SER MAYOR A 0"); ok = false; }
+
+        return ok;
+    }
+
+    async function guardarCambiosPerfil() {
+        if (!validarFormularioDash()) {
+            Swal.fire({
+                title: "CAMPOS INVÁLIDOS",
+                text: "Corrige los campos marcados antes de continuar.",
+                icon: "warning",
+                confirmButtonText: "ENTENDIDO",
+                confirmButtonColor: "#e10600",
+                background: "#111",
+                color: "#fff"
+            });
+            return;
+        }
+
+        const btn = document.getElementById("btnGuardarPerfil");
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> GUARDANDO...';
+
+        // Construir FormData con los mismos campos que espera el endpoint PUT /competidor/{id}
+        const fd = new FormData();
+        fd.append("full_name",         document.getElementById("upd_nombre").value.trim());
+        fd.append("document_type",     document.getElementById("upd_tipo_doc").value);
+        fd.append("document_number",   document.getElementById("upd_num_doc").value.trim());
+        fd.append("birth_date",        document.getElementById("upd_fecha").value);
+        fd.append("city",              document.getElementById("upd_ciudad").value.trim());
+        fd.append("phone",             document.getElementById("upd_telefono").value.trim());
+        fd.append("email",             document.getElementById("upd_correo").value.trim());
+        fd.append("team",              document.getElementById("upd_equipo").value.trim());
+        fd.append("experience",        document.getElementById("upd_experiencia").value);
+        fd.append("categoria",         CATEGORIA_ACTUAL);
+        fd.append("competitor_number", document.getElementById("upd_num_comp").value);
+        fd.append("motorcycle_brand",  document.getElementById("upd_marca").value.trim());
+        fd.append("motorcycle_model",  document.getElementById("upd_modelo").value.trim());
+        fd.append("engine_cc",         document.getElementById("upd_cc").value);
+
+        try {
+            const res  = await fetch("/api/perfil", { method: "PUT", body: fd });
+            const data = await res.json();
+
+            if (res.ok && data.success) {
+                cerrarModalEditar();
+                await Swal.fire({
+                    title: "¡DATOS ACTUALIZADOS!",
+                    text: "Tu perfil fue actualizado correctamente.",
+                    icon: "success",
+                    confirmButtonText: "CONTINUAR",
+                    confirmButtonColor: "#e10600",
+                    background: "#111",
+                    color: "#fff"
+                });
+                window.location.reload();
+            } else {
+                throw new Error(data.detail || "Error al actualizar");
+            }
+        } catch (err) {
+            console.error(err);
+            Swal.fire({
+                title: "ERROR",
+                text: "No se pudieron guardar los cambios. Intenta nuevamente.",
+                icon: "error",
+                confirmButtonText: "CERRAR",
+                confirmButtonColor: "#e10600",
+                background: "#111",
+                color: "#fff"
+            });
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> GUARDAR CAMBIOS';
+        }
+    }
+
+    // ESC cierra el modal
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape") cerrarModalEditar();
+    });
+    </script>
 </body>
 </html>
