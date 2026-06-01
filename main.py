@@ -672,3 +672,218 @@ def show_seguros(request: Request):
 def show_mecanica(request: Request):
     # Redirige a home si no existe la plantilla
     return RedirectResponse(url="/", status_code=302)
+
+
+# ============================================================
+# ENDPOINT AJAX — LOGIN + INSCRIPCIÓN EN UN SOLO PASO
+# Añadir este bloque al main.py existente
+# ============================================================
+
+@app.post("/api/inscribirse")
+async def api_inscribirse(
+    request: Request,
+    session: Session = Depends(get_session)
+):
+    """
+    Endpoint AJAX para inscripción desde la página pública de carreras.
+    Acepta JSON: { email, password, carrera_id }
+    Retorna JSON con resultado.
+    """
+    try:
+        body = await request.json()
+        email      = body.get("email", "").strip()
+        password   = body.get("password", "")
+        carrera_id = int(body.get("carrera_id", 0))
+    except Exception:
+        return JSONResponse(
+            status_code=400,
+            content={"success": False, "error": "datos_invalidos", "message": "Datos inválidos"}
+        )
+
+    # 1. Validar credenciales
+    usuario = session.exec(select(Usuario).where(Usuario.correo == email)).first()
+    if not usuario or not verify_password(password, usuario.password_hash):
+        return JSONResponse(
+            status_code=401,
+            content={"success": False, "error": "credenciales_invalidas", "message": "Correo o contraseña incorrectos"}
+        )
+    if not usuario.activo:
+        return JSONResponse(
+            status_code=403,
+            content={"success": False, "error": "cuenta_inactiva", "message": "Tu cuenta está inactiva"}
+        )
+
+    # 2. Obtener competidor
+    competidor = session.exec(
+        select(Competidor).where(Competidor.id == usuario.competidor_id)
+    ).first()
+    if not competidor:
+        return JSONResponse(
+            status_code=404,
+            content={"success": False, "error": "sin_perfil", "message": "No tienes perfil de competidor"}
+        )
+
+    # 3. Validar que la carrera exista y esté activa
+    carrera = session.get(Carrera, carrera_id)
+    if not carrera or not carrera.activa:
+        return JSONResponse(
+            status_code=404,
+            content={"success": False, "error": "carrera_no_existe", "message": "La carrera no existe o no está disponible"}
+        )
+
+    # 4. Validar categoría del competidor vs categoría mínima de la carrera
+    CATEGORIAS_ORDEN_LOCAL = ["novato", "intermedio", "experto", "elite"]
+    idx_comp   = CATEGORIAS_ORDEN_LOCAL.index(competidor.categoria) if competidor.categoria in CATEGORIAS_ORDEN_LOCAL else 0
+    idx_minimo = CATEGORIAS_ORDEN_LOCAL.index(carrera.categoria_minima) if carrera.categoria_minima in CATEGORIAS_ORDEN_LOCAL else 0
+
+    if idx_comp < idx_minimo:
+        cats_label = {"novato": "NOVATO", "intermedio": "INTERMEDIO", "experto": "EXPERTO", "elite": "ÉLITE"}
+        return JSONResponse(
+            status_code=403,
+            content={
+                "success": False,
+                "error": "categoria_insuficiente",
+                "message": f"Tu categoría actual es {cats_label.get(competidor.categoria, competidor.categoria.upper())}. Esta carrera requiere mínimo {cats_label.get(carrera.categoria_minima, carrera.categoria_minima.upper())}."
+            }
+        )
+
+    # 5. Verificar cupos disponibles
+    if carrera.inscritos >= carrera.cupos_totales:
+        return JSONResponse(
+            status_code=409,
+            content={"success": False, "error": "sin_cupos", "message": "Los cupos para esta carrera ya están agotados"}
+        )
+
+    # 6. Verificar si ya está inscrito
+    ya_inscrito = session.exec(
+        select(InscripcionCarrera)
+        .where(InscripcionCarrera.competidor_id == competidor.id)
+        .where(InscripcionCarrera.carrera_id == carrera_id)
+    ).first()
+    if ya_inscrito:
+        return JSONResponse(
+            status_code=409,
+            content={"success": False, "error": "ya_inscrito", "message": "Ya estás inscrito en esta carrera"}
+        )
+
+    # 7. Crear inscripción
+    nueva = InscripcionCarrera(
+        competidor_id = competidor.id,
+        carrera_id    = carrera_id,
+        estado        = "pendiente",
+    )
+    session.add(nueva)
+    carrera.inscritos += 1
+    session.add(carrera)
+    session.commit()
+
+    # 8. Actualizar último acceso del usuario
+    usuario.ultimo_acceso = datetime.utcnow()
+    session.add(usuario)
+    session.commit()
+
+    return JSONResponse(content={
+        "success": True,
+        "message": f"¡Inscripción exitosa! Bienvenido {competidor.nombre_completo}",
+        "piloto": competidor.nombre_completo,
+        "numero": competidor.numero_competidor,
+        "categoria": competidor.categoria,
+        "carrera": carrera.nombre,
+        "cupos_restantes": carrera.cupos_totales - carrera.inscritos,
+    })
+
+
+# ============================================================
+# ENDPOINT AJAX — VERIFICAR SESIÓN ACTIVA
+# ============================================================
+@app.get("/api/sesion")
+def api_verificar_sesion(
+    request: Request,
+    session: Session = Depends(get_session)
+):
+    """Verifica si hay sesión activa y retorna datos del competidor."""
+    access_token = request.cookies.get("access_token")
+    if not access_token:
+        return JSONResponse(content={"autenticado": False})
+
+    try:
+        from auth import decode_token
+        payload = decode_token(access_token)
+        if payload.get("role") != "user":
+            return JSONResponse(content={"autenticado": False})
+
+        user_id = int(payload.get("sub"))
+        usuario = session.get(Usuario, user_id)
+        if not usuario or not usuario.activo:
+            return JSONResponse(content={"autenticado": False})
+
+        competidor = session.exec(
+            select(Competidor).where(Competidor.id == usuario.competidor_id)
+        ).first()
+        if not competidor:
+            return JSONResponse(content={"autenticado": False})
+
+        return JSONResponse(content={
+            "autenticado": True,
+            "nombre": competidor.nombre_completo,
+            "categoria": competidor.categoria,
+            "numero": competidor.numero_competidor,
+            "correo": usuario.correo,
+        })
+
+    except Exception:
+        return JSONResponse(content={"autenticado": False})
+
+
+# ============================================================
+# ENDPOINT AJAX — CARRERAS INSCRITAS DEL USUARIO
+# ============================================================
+@app.get("/api/mis-inscripciones")
+def api_mis_inscripciones(
+    request: Request,
+    session: Session = Depends(get_session)
+):
+    """Retorna las carreras en las que el usuario autenticado está inscrito."""
+    access_token = request.cookies.get("access_token")
+    if not access_token:
+        return JSONResponse(status_code=401, content={"error": "no_autenticado"})
+
+    try:
+        from auth import decode_token
+        payload = decode_token(access_token)
+        user_id = int(payload.get("sub"))
+        usuario = session.get(Usuario, user_id)
+        if not usuario:
+            return JSONResponse(status_code=401, content={"error": "no_autenticado"})
+
+        competidor = session.exec(
+            select(Competidor).where(Competidor.id == usuario.competidor_id)
+        ).first()
+        if not competidor:
+            return JSONResponse(status_code=404, content={"error": "sin_perfil"})
+
+        inscripciones = session.exec(
+            select(InscripcionCarrera)
+            .where(InscripcionCarrera.competidor_id == competidor.id)
+        ).all()
+
+        resultado = []
+        for insc in inscripciones:
+            carrera = session.get(Carrera, insc.carrera_id)
+            if carrera:
+                resultado.append({
+                    "inscripcion_id":  insc.id,
+                    "estado":          insc.estado,
+                    "carrera_id":      carrera.id,
+                    "nombre":          carrera.nombre,
+                    "fecha":           str(carrera.fecha),
+                    "ubicacion":       carrera.ubicacion,
+                    "categoria":       carrera.categoria_minima,
+                    "posicion_final":  insc.posicion_final,
+                    "puntos":          insc.puntos_obtenidos,
+                })
+
+        return JSONResponse(content={"inscripciones": resultado})
+
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
